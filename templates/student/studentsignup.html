@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Registration</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/beslms.png" class="resize"  rel="icon">
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: TheEvent - v4.7.0
+  * Template URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+ 
+</head>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../static/assets/img/ex.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px;
+}
+a {
+	color: #F9A569;
+}
+.container{
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  perspective: 2700px;
+}
+.container .cover{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 50%;
+  z-index: 98;
+  transition: all 1s ease;
+  transform-origin: left;
+  transform-style: preserve-3d;
+}
+ .container .cover .front{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.container .cover::before{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #F9A569;
+  background-image: url("../static/PNG/logo1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1.0;
+  z-index: 12;
+}
+.container .cover img{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 10;
+}
+.container .forms{
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+.container .form-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-content .login-form,
+.form-content .signup-form{
+  width: calc(100% / 2 - 25px);
+}
+.forms .form-content .title{
+  position: relative;
+  font-size: 24px;
+  font-weight: 500;
+  color:darkblue;
+}
+.forms .form-content .title:before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 25px;
+  background: darkblue;
+}
+.forms .signup-form  .title:before{
+  width: 20px;
+}
+.forms .form-content .input-boxes{
+  margin-top: 30px;
+}
+.forms .form-content .input-box{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+.form-content .input-box input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.form-content .input-box input:focus,
+.form-content .input-box input:valid{
+  border-color: #7d2ae8;
+}
+.form-content .input-box i{
+  position: absolute;
+  color: #7d2ae8;
+  font-size: 17px;
+}
+.forms .form-content .text{
+  font-size: 14px;
+  font-weight: 500;
+  color: darkblue;
+}
+.forms .form-content .text a{
+  text-decoration: none;
+}
+.forms .form-content .text a:hover{
+  text-decoration: underline;
+}
+.forms .form-content .button{
+  color: #fff;
+  margin-top: 40px;
+}
+.forms .form-content .button input{
+  color: #fff;
+  background: darkblue;
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.forms .form-content .button input:hover{
+  background: #5b13b9;
+}
+.forms .form-content .login-text,
+.forms .form-content .sign-up-text{
+  text-align: center;
+  margin-top: 25px;
+}
+@media (max-width: 730px) {
+  .container .cover{
+    display: none;
+  }
+  .form-content .login-form,
+  .form-content .signup-form{
+    width: 100%;
+  }
+  .form-content .signup-form{
+    display: none;
+  }
+  .container #flip:checked ~ .forms .signup-form{
+    display: block;
+  }
+  .container #flip:checked ~ .forms .login-form{
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+	<header id="header" class="d-flex align-items-center ">
+		<div class="container-fluid container-xxl d-flex align-items-center">
+	
+		  <div id="logo" class="me-auto">
+			<a href=" " class="scrollto"><img src="../static/PNG/logo1.png"><img src="../static/assets/img/beslms.png" alt="" title=""><img src="../static/PNG/logo2.png"></a>
+		  </div>
+		</div>
+	</header>
+	<div class="container">
+    <div class="cover">
+      <div class="front">
+        <img src="../static/PNG/logo1.png" alt="">
+      </div>
+    </div>
+		<div class="forms">
+			<div class="form-content">
+				<div class="signup-form">
+					<div class="title">Student Signup Form</div>
+				  <form method="POST" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+					  <div class="input-boxes">
+						<div class="input-box">
+						  <i class="fas fa-user"></i>
+						  <label for="first_name" required></label>
+              {% render_field userForm.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}
+						</div>
+						<div class="input-box">
+						  <i class="fas fa-envelope"></i>
+						  <label for="last_name"></label>
+          {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
+						</div>
+						<div class="input-box">
+						  <i class="fas fa-lock"></i>
+              <label for="mobile"></label>
+              {% render_field studentForm.mobile|attr:'required:true'  class="form-control" placeholder="Contact Number" %}
+						</div>
+						<div class="input-box">
+							<i class="fas fa-lock"></i>
+							<label for="address"></label>
+          {% render_field studentForm.address|attr:'required:true'  class="form-control" placeholder="Address" %}
+						</div>
+            <div class="input-box">
+							<i class="fas fa-lock"></i>
+							<label for="username"></label>
+              {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="Username" %}
+						</div>
+            <div class="input-box">
+							<i class="fas fa-lock"></i>
+							<label for="inputPassword4"></label>
+          {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="Password" %}
+						</div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="profile_pic">Profile Picture</label>
+                {% render_field studentForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
+              </div>
+              <button type="submit" class="btn btn-success" style="border-radius: 0%;">Sign Up</button>
+					  </div>
+					</form>
+			  	</div>
+			</div>
+		  </div>
+		</div>
+	</body>
+</html>
+

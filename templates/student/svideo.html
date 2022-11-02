@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% include 'student/template.html' %}
+<html lang="en">
+
+    <head>
+      <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
+
+      <style>
+        #overlayText
+        {
+        position:absolute;
+        top:0;
+        left:0;
+        z-index:1;
+        }
+
+        #topText
+        {
+          color: black;
+          font-size: 20px;
+          align-self: center;
+        }
+      </style>
+    </head>
+
+<body>
+    <br><br><br><br>
+    <div class="container-fluid page-body-wrapper">
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <h3 class="page-title">
+                  <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-video"></i>
+                  </span> Video
+                </h3>
+                <nav aria-label="breadcrumb">
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                      <span>Overview</span> <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                  </ul>
+                </nav>
+              
+              <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <form class="d-flex align-items-center h-20" action="#">
+                        <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects" class="mdi mdi-magnify">
+                      </form>
+
+                    <div class="container">
+                      <div class="row">
+
+                        {% for v in video %}
+                        <div class="col-4 pe-1">
+                          <video width="320" height="240" controls>
+                            <source src="{{v.video.url}}" type="video/mp4"/>
+                          </video>
+                          <div class="overlayText">
+                            <p id="topText">{{v.caption}}</p>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      
+                      <!--  <div class="col-4 pe-1">
+                          <video width="320" height="240" controls>
+                            <source src="../../static/teacher/assets/images/DeeWunn - Mek It Bunx - choreography Coco sui (online-video-cutter.com).mp4" type="video/mp4">
+                          </video>
+                          <div class="overlayText">
+                            <p id="topText">Dance Video</p>
+                          </div>
+                        </div>-->
+                        
+                      </div>
+                    </div>
+
+                    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

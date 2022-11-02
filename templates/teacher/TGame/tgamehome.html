@@ -1,0 +1,57 @@
+{% include 'teacher/template.html' %}
+{% load static %}
+
+{% block content %}
+<!--Simon Says Game-->
+<link rel="stylesheet" href="../../static/gamestyles.css">
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-gamepad"></i>
+        </span> GAMES
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-md-6 grid-margin stretch-card">
+        <div class="card" >
+          <div class="card-body"style ="height: 400px">
+            <a href="https://education.minecraft.net/en-us" target="_blank" rel="noopener noreferrer">
+              <img class= "game" src="../../../static/PNG/minecraft.png" alt="minecraft">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h1 id="level-title"> 
+              <a href="{% url 'SimonSays' %}">SIMON SAYS GAME</a>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- content-wrapper ends -->
+  <!-- partial:../../partials/_footer.html -->
+  <footer class="footer">
+    <div class="container-fluid d-flex justify-content-between">
+      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © B E S M L M S</span>
+      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Banilad Elementary School Mandaue Learning Management System</span>
+    </div>
+  </footer>
+</div>
+{% endblock %}
+<!--**********************************
+    Content body end
+***********************************-->

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% include 'student/template.html' %}
+<html lang="en">
+
+    <head>
+      <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
+
+      <style>
+        #overlayText
+        {
+        position:absolute;
+        top:0;
+        left:0;
+        z-index:1;
+        }
+
+        #topText
+        {
+          color: black;
+          font-size: 20px;
+          align-self: center;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="column" style="padding: 50px">
+        <div class="wrapper pt-5">
+           <div class="container-fluid">
+              <div class="row text-center">
+                 <!-- Circles which indicates the steps of the form: -->
+                 <div class="col step_progress d-flex d-none d-sm-block">
+                    <span class="step bg-white rounded-pill active"></span>
+                    <span class="step bg-white rounded-pill"></span>
+                    <span class="step bg-white rounded-pill"></span>
+                    <span class="step bg-white rounded-pill"></span>
+                    <span class="step bg-white rounded-pill"></span>
+                 </div>
+              </div>
+           </div>
+           <div class="container" data-aos="fade-up" style="padding-top: 50px">
+              <form class="multisteps_form position-relative" id="wizard" method="POST" action="../thankyou/index-2.html">
+                 <!------------------------- Step-1 ----------------------------->
+                 <div class="multisteps_form_panel" style="display: block;">
+                    <!-- Form-content -->
+                    {% for q in questions %} 
+                    <span class="question_number text-uppercase d-flex justify-content-center align-items-center">Question 1</span>
+                    <h1 class="question_title text-center"> {{q.question}} {{q.marks}}</h1>
+                    
+                    <!-- Form-items -->
+                    <div class="form_items d-flex justify-content-center">
+                       <ul class="ps-0">
+                          <li>
+                             <input type="radio" id="id-option1" name="option1" value ={{q.option1}}>
+                             <label for="option1">{{q.option1}}</label>
+                          </li>
+                          <li>
+                             <input type="radio" id="id-option2" name="option2" value ={{q.option2}}>
+                             <label for="option2">{{q.option2}}</label>
+                          </li>
+                          <li>
+                             <input type="radio" id="id-option3" name="option3" value ={{q.option3}}>
+                             <label for="option3">{{q.option3}}</label>
+                          </li>
+                          <li>
+                             <input type="radio" id="id-option4" name="option4" value ={{q.option4}}>
+                             <label for="option4">{{q.option4}}</label>
+                          </li>
+                       </ul>
+                    </div>
+                    {% endfor %}  
+                 </div>
+                 <!---------- Form Button ---------->
+                 <div class="form_btn text-center ms-5 mt-5">
+                    <button type="button" class="f_btn text-uppercase rounded-pill border-0" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Last Question</button>
+                    <button type="button" class="f_btn text-uppercase rounded-pill border-0" id="nextBtn" onclick="nextPrev(1)">Next Question</button>
+                 </div>
+              </form>
+           </div>
+        </div>
+        <!-- jQuery-js include -->
+        <script src="./assets/js/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap-js include -->
+        <script src="./assets/js/bootstrap.min.js"></script>
+        <!-- jQuery-validate-js include -->
+        <script src="./assets/js/jquery.validate.min.js"></script>
+        <!-- Custom-js include -->
+        <script src="./assets/js/script.js"></script>
+     
+     </body>
+
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>BesMLMS</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/beslms.png" class="resize"  rel="icon">
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet">
+
+</head>
+<style>
+    
+  .split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  }
+
+ 
+  .left {
+  left: 0;
+  background-color: green;
+  border-radius:40px 0px 0px 40px;
+  }
+
+
+  .right {
+  right: 0;
+  background-color: orange;
+  border-radius:0px 40px 40px 0px;
+  }
+
+
+  .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  }
+
+
+  .centered img {
+  width: 150px;
+  border-radius: 50%;
+  background-color: white;
+  
+  }
+
+
+  .container{
+      margin: auto;
+      width: 800px;
+      height:500px;
+      border: 5px solid #0A065E;
+      border-radius:50px;
+  }
+
+
+  .button {
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 20px;
+    }
+
+    .button1 {
+      background-color: white; 
+      font-size: 20px;
+      color: orange; 
+      border: 10px solid orange;
+    }
+    
+    .button1:hover {
+      background-color: orange;
+      color: white;
+    }
+    
+
+    .button2 {
+      background-color: white; 
+      color: green; 
+      border: 10px solid green;
+    }
+
+    .button2:hover {
+      background-color: green;
+      color: white;
+    }
+
+
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins" , sans-serif;
+    }
+    body{
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("../static/assets/img/ex.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 30px;
+    }
+
+    a {
+      color: #F9A569;
+    }
+
+    .container{
+      position: relative;
+      max-width: 850px;
+      width: 100%;
+      background: #fff;
+      padding: 40px 30px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      perspective: 2700px;
+    }
+    .container .cover{
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 50%;
+      z-index: 98;
+      transition: all 1s ease;
+      transform-origin: left;
+      transform-style: preserve-3d;
+    }
+    .container #flip:checked ~ .cover{
+      transform: rotateY(-180deg);
+    }
+    .container .cover .front,
+    .container .cover .back{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+    .cover .back{
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+    .container .cover::before,
+    .container .cover::after{
+      content: '';
+      position: center;
+      height: 100%;
+      width: 100%;
+      background: #F9A569;
+      background-image: url("../static/assets/img/signinbackground.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 1.0;
+      z-index: 12;
+    }
+    .container .cover::after{
+      opacity: 0.3;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+    }
+    .container .cover img{
+      position: absolute;
+      height: 570px;
+      width: 426px;
+      object-fit: fill;
+      z-index: 10;
+    }
+    .container .forms{
+      height: 100%;
+      width: 100%;
+      background: #fff;
+    }
+    .container .form-content{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-content .login-form,
+    .form-content .signup-form{
+      width: calc(100% / 2 - 25px);
+    }
+    .forms .form-content .title{
+      position: relative;
+      font-size: 24px;
+      font-weight: 500;
+      color: #0A065E;
+      font-weight:bold;
+    }
+    .forms .form-content .title:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 25px;
+      background: darkblue;
+    }
+    .forms .signup-form  .title:before{
+      width: 20px;
+    }
+    .forms .form-content .input-boxes{
+      margin-top: 30px;
+    }
+    .forms .form-content .input-box{
+      display: flex;
+      align-items: center;
+      height: 50px;
+      width: 100%;
+      margin: 10px 0;
+      position: relative;
+    }
+    .form-content .input-box input{
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      padding: 0 30px;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 2px solid rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .form-content .input-box input:focus,
+    .form-content .input-box input:valid{
+      border-color: #7d2ae8;
+    }
+    .form-content .input-box i{
+      position: absolute;
+      color: #7d2ae8;
+      font-size: 17px;
+    }
+    .forms .form-content .text{
+      font-size: 14px;
+      font-weight: 500;
+      color: darkblue;
+    }
+    .forms .form-content .text a{
+      text-decoration: none;
+    }
+    .forms .form-content .text a:hover{
+      text-decoration: underline;
+    }
+    .forms .form-content .button{
+      color: #fff;
+      margin-top: 40px;
+    }
+    .forms .form-content .button input{
+      color: #fff;
+      background: darkblue;
+      border-radius: 6px;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+    .forms .form-content .button input:hover{
+      background: #5b13b9;
+    }
+    .forms .form-content .login-text,
+    .forms .form-content .sign-up-text{
+      text-align: center;
+      margin-top: 25px;
+    }
+    @media (max-width: 730px) {
+      .container .cover{
+        display: none;
+      }
+      .form-content .login-form,
+      .form-content .signup-form{
+        width: 100%;
+      }
+      .form-content .signup-form{
+        display: none;
+      }
+      .container #flip:checked ~ .forms .signup-form{
+        display: block;
+      }
+      .container #flip:checked ~ .forms .login-form{
+        display: none;
+      }
+    }
+  .jumbotron {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .jumbotron h1 {
+    text-align: center;
+  }
+
+  .alert {
+    margin: 0px;
+  }
+</style>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center ">
+    <div class="container-fluid container-xxl d-flex align-items-center">
+
+      <div id="logo" class="me-auto">
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <!-- <h1><a href="index.html">The<span>Event</span></a></h1>-->
+        <a href="../" class="scrollto"><img src="../static/PNG/logo1.png" alt=""><img src="../static/assets/img/beslms.png" alt="" title=""><img src="../static/PNG/logo2.png"alt=""></a>
+      </div>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto" href="../">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>          
+          <li><a class="nav-link scrollto" href="#courses">Courses</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'signin'%}">Sign In</a></li>
+          <li><input type="text" placeholder="Search.."></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <body>
+    <div class="container">
+      <div class="forms">
+        <div class="form-content">
+      <div class="jumbotron" style="margin-top: 0px;
+        margin-bottom: 0px;">
+        <h1 class="display-4">Hello {{request.user.first_name}},</h1>
+        <p class="lead" style="color:black">Your Account has not been <b style="color:red">ACTIVATED</b> yet! <br><br>Waiting for approval from the administrator <br><br>and Soon you'll be able to access your Account after approval</p>
+        <hr class="my-4">
+       
+        <p class="lead">
+          <a class="btn btn-danger btn-lg" href="/logout" style="border-radius: 0%;" role="button">Logout Now</a>
+        </p>
+      </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

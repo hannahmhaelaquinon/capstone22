@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+{% include 'student/template.html' %}
+
+<html lang="en">
+ 
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <title>BesMLMS</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+
+        <style>
+
+
+small
+{
+  color: firebrick;
+}
+
+div.checkbox_select
+{
+  width: 200px;
+}
+
+.checkbox_select_anchor
+{
+  display: block;
+  background: firebrick;
+  color: white;
+  cursor: pointer;
+  padding: 10px 5px 5px;
+  position: relative;
+}
+
+.checkbox_select_anchor:after
+{
+  width: 0; 
+	height: 0; 
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid darkred;
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+.expanded .checkbox_select_anchor:after
+{
+	border-top: 0;
+	border-bottom: 10px solid firebrick;
+}
+
+
+.checkbox_select_anchor:hover
+{
+  background: #FF3030 !important;
+}
+
+.expanded .checkbox_select_anchor
+{
+    background: #7C1818;
+}
+
+div.checkbox_select .select_input
+{
+    width: 100%;
+    cursor: pointer;
+}
+
+.checkbox_select_dropdown
+{
+    display: none;
+    background: whitesmoke;
+}
+
+.checkbox_select_dropdown.show
+{
+    display: block;
+}
+
+.checkbox_select_dropdown ul
+{
+    max-height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0;
+  margin: 0;
+      border: 1px solid #999;
+  border-top: 0;
+  border-bottom: 0;
+}
+.checkbox_select_dropdown ul li
+{
+    list-style: none;
+    position: relative;
+    color: #666;
+}
+.checkbox_select_dropdown ul li label
+{
+  position: relative;
+      padding: 10px 5px 5px 40px;
+     display: block;
+  cursor: pointer;
+}
+.checkbox_select_dropdown ul li label:hover
+{
+  background: #cbcbcb;
+  color: white;
+}
+.checkbox_select_dropdown ul li input:checked + label
+{
+  background: #bbb;
+  color: white;
+  text-shadow: 0px 1px 1px rgba(150, 150, 150, 1);
+}
+.checkbox_select_dropdown ul li input
+{
+  position: absolute;
+  left:0;
+  z-index:1;
+  display: inline-block;
+  height: 100%;
+  width: 30px;
+}
+.checkbox_select_search
+{
+    width: 200px;
+    padding: 10px 5px 5px;
+    border: 1px solid #999;
+      border-top: 0;
+    -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+}
+
+.checkbox_select_submit
+{
+    background: #00A600;
+    color: white;
+    padding: 10px 5px 5px;
+    border: 0;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.hide
+{
+    display: none;
+}
+
+        </style>
+        
+    
+    </head>
+
+    <body>
+
+       
+        <header>
+        
+        </header><!-- End Header -->
+        {% block content %}
+        <main id="main">
+
+            <!-- ======= Calendar Section ======= -->
+            <section id="signin" class="section-bg">
+
+            <div class="container" data-aos="fade-up" style="padding-top: 50px">
+                <div class="row">
+                    <div class="column">
+                        <div class="cal-form">
+                            &nbsp;
+                            <form action="/examples/actions/confirmation.php" method="post">
+                                <h2>Calendar</h2>
+                               <center> As of {{ time }}
+                                <br/><br/>
+                               {{ cal|safe }}
+                               <br/><br/><br/><br/>
+                               Copyright (c) {{ current_year }}
+                            </center>
+                                <div class="form-group">
+                                    
+                                </div>
+                            </form>
+                            <div class="text-center"> <a href="../signin2"></a></div>
+                        </div>
+                    </div>
+                    <div class="column" style="padding: 50px">
+                        <h2>Progress</h2>
+                        <div id="progress-wrapper">
+                            <progress id="file" value="32" max="100"> 32% </progress>
+                            <div id="progress-bar" style="background-color: blue; width: 0%;">&nbsp;</div>
+                          </div>
+                          <div>
+                            
+                       <h2  for="subject">Subjects:</h2>
+                        <select  name="subject_name" id="subject_name">
+                          {% for sub in subjects %}
+                        <option value="{{ sub.subject_name}}">
+                          {{ sub.subject_name}}
+                        </option>
+                        {% endfor %}
+                        </select> 
+                        
+                        </div>
+                        </div>
+                        </div>
+                        
+            </div>
+            </section><!-- End Contact Section -->
+
+        <!-- End #main -->
+
+            
+      
+    </main>
+    {% endblock %}
+    </body>
+
+</html>

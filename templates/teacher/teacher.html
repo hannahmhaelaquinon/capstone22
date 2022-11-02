@@ -1,0 +1,188 @@
+{% include 'teacher/template.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    a:link {
+      text-decoration: none;
+    }
+
+    .order-card {
+      color: rgb(255, 255, 255);
+    }
+
+    .bg-c-blue {
+      background: #04868f;
+    }
+
+    .bg-c-green {
+      background:#4C51BF;
+    }
+
+    .bg-c-yellow {
+      background: #F56565;
+    }
+
+    .bg-c-gtx {
+      background:#57717d;
+    }
+
+
+    .card {
+      
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    }
+    header {
+    left: 0px;
+    right: 0px;
+  }
+  </style>
+</head>
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-danger card-img-holder text-white">
+          <div class="card-body">
+            <img src="../../static/teacher/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+            <h4 class="font-weight-normal mb-3">Total Students <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+            </h4>
+            <h2 class="mb-5">{{total_student}}</h2>
+            <h6 class="card-text"></h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-info card-img-holder text-white">
+          <div class="card-body">
+            <img src="../../static/teacher/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+            <h4 class="font-weight-normal mb-3">Total Subjects<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+            </h4>
+            <h2 class="mb-5">{{total_course}}</h2>
+            <h6 class="card-text"></h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-success card-img-holder text-white">
+          <div class="card-body">
+            <img src="../../static/teacher/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+            <h4 class="font-weight-normal mb-3">Total Questions<i class="mdi mdi-diamond mdi-24px float-right"></i>
+            </h4>
+            <h2 class="mb-5">{{total_question}}</h2>
+            <h6 class="card-text"></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="row tab-content">
+        <div id="list-view" class="tab-pane fade active show col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Student List  </h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                <thead>
+                  <tr>
+                          <th scope="col" style = 'text-align:center;'> Student ID</th>
+                          <th scope="col" style = 'text-align:center;'> Firstname</th>
+                          <th scope="col" style = 'text-align:center;'> Lastname</th>
+                          <th scope="col" style = 'text-align:center;'> Section</th>
+                          <th scope="col" style = 'text-align:center;'> Subject</th>
+                          <th scope="col" style = 'text-align:center;'> Action</th>
+                  </tr>
+                </thead>
+                <tbody>              
+                  {% for s in students %}   
+          
+                  <tr>
+                          <td>{{ s.student_id }}</td>   
+                          <td>{{ s.firstname }}</td>   
+                          <td>{{ s.lastname }}</td>
+                          <td>{{ s.section }}</td>
+                          {% for sub in subjects %} 
+                          <td>{{ sub.subject_name }}</td>
+                          {% endfor %}
+                          <td>
+                            <a type="button" class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#newModal-{{s.id}}">
+                                <i class="mdi mdi-border-color"></i>
+                            </a>
+            
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal-{{s.id}}">
+                                <i class="mdi mdi-delete"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+  <!-- content-wrapper ends -->
+  <!-- partial:../../partials/_footer.html -->
+  <footer class="footer">
+    <div class="container-fluid d-flex justify-content-between">
+      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © B E S M L M S</span>
+      <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Banilad Elementary School Mandaue Learning Management System</span>
+    </div>
+  </footer>
+</div>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+{% endblock %}
+<!--**********************************
+    Content body end
+***********************************-->
