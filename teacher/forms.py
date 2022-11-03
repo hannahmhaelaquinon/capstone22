@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
+from exam import models as QMODEL
 
 class TeacherUserForm(forms.ModelForm):
     class Meta:
