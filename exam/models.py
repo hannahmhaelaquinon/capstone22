@@ -29,7 +29,6 @@ class Result(models.Model):
     date = models.DateTimeField(auto_now=True)
 
 class Video(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
     caption = models.CharField(max_length=100)
     video = models.FileField(upload_to="video/%y", validators=[
                              FileExtensionValidator(allowed_extensions=['mp4', 'mkv', 'avi'])])

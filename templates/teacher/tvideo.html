@@ -1,6 +1,41 @@
 {% extends 'teacher/teacherbase.html' %}
 {% block content %}
 {%load static%}
+<style>
+  .embed-responsive {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden; }
+  .embed-responsive::before {
+    display: block;
+    content: ""; }
+  .embed-responsive .embed-responsive-item,
+  .embed-responsive iframe,
+  .embed-responsive embed,
+  .embed-responsive object,
+  .embed-responsive video {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; }
+
+.embed-responsive-21by9::before {
+  padding-top: 42.8571428571%; }
+
+.embed-responsive-16by9::before {
+  padding-top: 56.25%; }
+
+.embed-responsive-4by3::before {
+  padding-top: 75%; }
+
+.embed-responsive-1by1::before {
+  padding-top: 100%; }
+</style>
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="page-header">
@@ -25,6 +60,15 @@
               <h4 class="card-title">Video</h4>
             </div>
             <div class="card-body">
+              <form action="." method="POSTS" enctype="multipart/form-data">
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects"
+                  class="mdi mdi-magnify">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <a href="../teacher-add-video" type="button" class="btn btn-outline-danger btn-icon-text" >
+                    <i class="mdi mdi-upload btn-icon-prepend" ></i> Upload 
+                  </a>
+              </form>
               <div class="table-responsive">
                 <table class="table table-bordered">
                 <thead>
@@ -40,11 +84,11 @@
               <tr>
                     <td>{{v.caption}}</td>   
                     <td><video class="embed-responsive embed-responsive-16by9" controls="controls">
-                      <source src="{{v.video.url}}" type="video/mp4"/>
-                    </video>
+                        <source src="{{v.video.url}}" type="video/mp4"/>
+                        </video>
                     </td>
                     <td>
-                      <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-exam' s.id  %}">
+                      <a type="button" class="btn btn-sm btn-danger" >
                         <i class="mdi mdi-delete"></i>
                       </a>
                   </td>

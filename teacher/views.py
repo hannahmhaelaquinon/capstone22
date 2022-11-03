@@ -10,8 +10,6 @@ from datetime import date, timedelta
 from exam import models as QMODEL
 from student import models as SMODEL
 from exam import forms as QFORM
-from .forms import *
-from .models import *
 
 
 #for showing signup/login button for teacher
@@ -110,8 +108,23 @@ def teacher_add_question_view(request):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_view_video(request):
-        videos = QMODEL.Video.objects.all()
-        return render(request,'teacher/tvideo.html',{'videos':videos})
+    videos = QMODEL.Video.objects.all()
+    context = {
+        'videos': videos
+    }
+    return render(request, 'teacher/tvideo.html', context)
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_add_video(request):
+    all_video = QMODEL.Video.objects.all()
+    if request.method == "POST":
+        form = QFORM.Video_form(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = QFORM.Video_form()
+    return render(request, 'teacher/teacher_add_video.html', {"form": form, "all": all_video})
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)

@@ -18,8 +18,6 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR=os.path.join(BASE_DIR,'/static/')
-MEDIA_ROOT=os.path.join(BASE_DIR,'/static/')
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
@@ -138,8 +136,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-
 
 LOGIN_REDIRECT_URL='/afterlogin'
 
@@ -156,3 +152,6 @@ EMAIL_HOST_PASSWORD = 'ENTER_PASSWORD' # host email password required
 # otherwise you will get SMTPAuthenticationError at /contactus
 # this process is required because google blocks apps authentication by default
 EMAIL_RECEIVING_USER = ['to@gmail.com'] # email on which you will receive messages sent from website
+
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+MEDIA_URL= '/media/'

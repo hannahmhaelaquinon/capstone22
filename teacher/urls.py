@@ -8,6 +8,7 @@ path('teacherlogin', LoginView.as_view(template_name='teacher/teacherlogin.html'
 path('teachersignup', views.teacher_signup_view,name='teachersignup'),
 path('teacher-dashboard', views.teacher_dashboard_view,name='teacher-dashboard'),
 path('teacher-video/', views.teacher_view_video,name='teacher-view-video'),
+path('teacher-add-video/', views.teacher_add_video,name='teacher-add-video'),
 path('game/SimonSays', views.SimonGame, name='SimonSays'),
 path('game/', views.tgame, name='game'),
 path('library/', views.tlibrary, name='library'),

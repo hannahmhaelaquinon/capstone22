@@ -1,0 +1,36 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+{%load static%}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="page-header">
+        <h3 class="page-title">
+          <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+          </span> Add Video
+        </h3>
+        <nav aria-label="breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+              <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  <h2 style="text-align:center; ">Upload Video</h2>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+
+    <div class="fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}    
+  
+    <button class="btn btn-success btn-lg">Upload</button>
+</form>
+    </div>
+  </div>
+  {% endblock content %}
