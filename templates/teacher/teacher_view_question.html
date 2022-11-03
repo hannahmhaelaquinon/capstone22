@@ -1,55 +1,61 @@
 {% extends 'teacher/teacherbase.html' %}
 {% block content %}
 {%load static%}
-
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
-<br><br>
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Available Questions</h6>
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-help-circle"></i>
+        </span> Question
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <table class="table table-hover table-bordered" id="dev-table">
-      <thead>
-        <tr>
-
-          <th>Course</th>
-          <th>Total Question</th>
-          <th>Total Marks</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      {% for c in courses %}
-      <tr>
-
-        <td> {{c.course_name}}</td>
-        <td>{{c.question_number}}</td>
-        <td>{{c.total_marks}}</td>
-        <td><a class="btn btn-primary btn-sm" style="border-radius: 0%;" href="{% url 'see-question' c.id  %}"><span class="glyphicon glyphicon-eye-open"></span> View Question</a></td>
-        
-      </tr>
-      {% endfor %}
-    </table>
+    <div class="col-lg-12">
+      <div class="row tab-content">
+        <div id="list-view" class="tab-pane fade active show col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Available Questions</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col" style = 'text-align:center;'> Subject</th>
+                    <th scope="col" style = 'text-align:center;'> Total Question</th>
+                    <th scope="col" style = 'text-align:center;'> Total Marks</th>
+                    <th scope="col" style = 'text-align:center;'> Action</th>
+            </tr>
+          </thead>
+          <tbody>              
+            {% for s in courses %}   
+    
+            <tr>
+                    <td>{{s.course_name}}</td>   
+                    <td>{{s.question_number}}</td>   
+                    <td>{{s.total_marks}}</td>
+                    <td>
+                      <a type="button" class="btn btn-sm btn-danger"  href="{% url 'see-question' s.id  %}">
+                        <i class="mdi mdi-border-color"></i>
+                      </a>
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<br><br><br><br><br><br>
+</div>
+</div>
 {% endblock content %}
