@@ -1,29 +1,9 @@
-<!DOCTYPE html>
-{% include 'student/template.html' %}
-<html lang="en">
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
 
-    <head>
-      <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
 
-      <style>
-        #overlayText
-        {
-        position:absolute;
-        top:0;
-        left:0;
-        z-index:1;
-        }
 
-        #topText
-        {
-          color: black;
-          font-size: 20px;
-          align-self: center;
-        }
-      </style>
-    </head>
-
-<body>
     <br><br><br><br>
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
@@ -84,6 +64,5 @@
         </div>
     </div>
 
-</body>
 
-</html>
+{% endblock content %}

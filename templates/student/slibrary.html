@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-{% include 'student/template.html' %}
-<html lang="en">
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
 
     <head>
         <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -63,6 +63,4 @@
               </div>
           </div>
       </div>
-  </body>
-
-</html>
+{% endblock content %}
