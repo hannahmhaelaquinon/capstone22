@@ -3,12 +3,15 @@ from . import forms,models
 from django.db.models import Sum
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
+from django.views.generic import View
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from datetime import date, timedelta
 from exam import models as QMODEL
 from student import models as SMODEL
 from exam import forms as QFORM
+from .forms import *
+from .models import *
 
 
 #for showing signup/login button for teacher
@@ -103,6 +106,32 @@ def teacher_add_question_view(request):
             print("form is invalid")
         return HttpResponseRedirect('/teacher/teacher-view-question')
     return render(request,'teacher/teacher_add_question.html',{'questionForm':questionForm})
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_view_video(request):
+        videos = QMODEL.Video.objects.all()
+        return render(request,'teacher/tvideo.html',{'videos':videos})
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def SimonGame(request):
+    return render(request, 'teacher/TGame/index.html')
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def tgame(request):
+    return render(request, 'teacher/TGame/tgamehome.html')
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def tlibrary(request):
+    return render(request, 'teacher/tlibrary.html')
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def tprofile(request):
+    return render(request, 'teacher/tprofile.html')
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)

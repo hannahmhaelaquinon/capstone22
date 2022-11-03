@@ -1,4 +1,4 @@
-{% include 'teacher/template.html' %}
+{% include 'teacher/teacherbase.html' %}
 {% load static %}
 {% block content %}
         <!-- partial -->
@@ -24,7 +24,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="nav-profile-image">
-                      <img src="../../static/teacher/assets/images/faces/face1.jpg" class="rounded-circle">
+                      <img src="../../../static/teacher/assets/images/faces/face1.jpg" class="rounded-circle">
                     </div>
                     <label class="font-weight-bold mb-2">{{request.user}}</label>
                     <label class="font-weight-bold mb-2">Teacher</label>

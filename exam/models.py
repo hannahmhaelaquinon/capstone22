@@ -1,5 +1,8 @@
 from django.db import models
-
+from unittest.util import _MAX_LENGTH
+from django.db import models
+from .validators import file_size
+from django.core.validators import FileExtensionValidator
 from student.models import Student
 class Course(models.Model):
    course_name = models.CharField(max_length=50)
@@ -24,4 +27,13 @@ class Result(models.Model):
     exam = models.ForeignKey(Course,on_delete=models.CASCADE)
     marks = models.PositiveIntegerField()
     date = models.DateTimeField(auto_now=True)
+
+class Video(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    caption = models.CharField(max_length=100)
+    video = models.FileField(upload_to="video/%y", validators=[
+                             FileExtensionValidator(allowed_extensions=['mp4', 'mkv', 'avi'])])
+
+    def __str__(self):
+        return self.caption
 

@@ -1,9 +1,9 @@
-{% include 'teacher/template.html' %}
+{% include 'teacher/teacherbase.html' %}
 {% load static %}
 
 {% block content %}
 <!--Simon Says Game-->
-<link rel="stylesheet" href="../../static/gamestyles.css">
+<link rel="stylesheet" href="../../../../static/gamestyles.css">
 <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 <!-- partial -->
 <div class="main-panel">
@@ -36,7 +36,7 @@
         <div class="card">
           <div class="card-body">
             <h1 id="level-title"> 
-              <a href="{% url 'SimonSays' %}">SIMON SAYS GAME</a>
+              <a href="SimonSays">SIMON SAYS GAME</a>
             </h1>
           </div>
         </div>
