@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-{% include 'student/template.html' %}
-{% block nav_index%}
-{% endblock %}
-<html lang="en">
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+   {%load static%}
 
     <head>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
         <style>
             img.minecraft {
               display: block;
@@ -19,7 +24,6 @@
     </head>
 
     <body>
-        <a href="https://education.minecraft.net/en-us" target="_blank" rel="noopener noreferrer"><img class="minecraft" src="../static/PNG/minecraft.png" alt="minecraft" style="50%"></a>
+        <a href="https://education.minecraft.net/en-us" target="_blank" rel="noopener noreferrer"><img class="minecraft"  src="../static/PNG/minecraft.png" alt="minecraft"></a>
     </body>
-
-</html>
+{% endblock content %}

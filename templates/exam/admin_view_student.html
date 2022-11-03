@@ -9,13 +9,13 @@
                     <h4>All Student</h4>
                 </div>
             </div>
-            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+           <!--<div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../admin">Home</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0);">Students</a></li>
                     <li class="breadcrumb-item active"><a href="javascript:void(0);">All Students</a></li>
                 </ol>
-            </div>
+            </div>-->
         </div>
         <div class="row">
           <div class="col-lg-12">
@@ -25,6 +25,11 @@
                           <div class="card-header">
                               <h4 class="card-title">All Students  </h4>
                           </div>
+
+                          <div class="card-header">
+                            <h4 class="card-title"> </h4>
+                            <a href = "{% url 'studentsignup' %}" class="btn btn-primary" >+ Add new</a>
+                        </div>
                           
                           <div class="card-header">
                               <button type="button" class="btn btn-rounded btn-danger"><span class="btn-icon-left text-danger"><i class="fa fa-download color-danger" id="btnPDF"></i>

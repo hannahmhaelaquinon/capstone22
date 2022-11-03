@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-{% include 'student/template.html' %}
-<html lang="en">
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
 
-    <head>
-      <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
 
-      <style>
-        #overlayText
-        {
-        position:absolute;
-        top:0;
-        left:0;
-        z-index:1;
-        }
+{%load static%}
 
-        #topText
-        {
-          color: black;
-          font-size: 20px;
-          align-self: center;
-        }
-      </style>
-    </head>
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<body>
+
+</head>
+
+
     <br><br><br><br>
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
@@ -62,15 +52,7 @@
                           </div>
                         </div>
                         {% endfor %}
-                      
-                      <!--  <div class="col-4 pe-1">
-                          <video width="320" height="240" controls>
-                            <source src="../../static/teacher/assets/images/DeeWunn - Mek It Bunx - choreography Coco sui (online-video-cutter.com).mp4" type="video/mp4">
-                          </video>
-                          <div class="overlayText">
-                            <p id="topText">Dance Video</p>
-                          </div>
-                        </div>-->
+                          
                         
                       </div>
                     </div>
@@ -84,6 +66,7 @@
         </div>
     </div>
 
-</body>
 
-</html>
+
+
+{% endblock content %}

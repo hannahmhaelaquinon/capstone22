@@ -117,6 +117,8 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
             <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student' %}active{% endif %} " href="/student/student-dashboard">Home</a></li>
+
+
             <div class="dropdown">
               <li><a class="nav-link scrollto  dropdown-toggle  {% if request.resolver_match.url_name == 'student-quizes' %}active{% endif %} " href="/student/student-exam"   data-toggle="dropdown">Quizes
               <span class="caret"></span></a></li>
@@ -125,7 +127,19 @@
                 <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student-marks' %}active{% endif %} " href="/student/student-marks  ">Marks</a></li>
               </ul>
             </div>
-            <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student' %}active{% endif %} " href="/logout">Logout</a></li>   
+
+            <div class="dropdown">
+              <li><a class="nav-link scrollto  dropdown-toggle "  data-toggle="dropdown" style="color:white;">Video
+              <span class="caret"></span></a></li>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student-video' %}active{% endif %} " href="{% url 'student-video' %}">Video</a></li>
+                <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student-library' %}active{% endif %} " href="{% url 'student-library' %}">Library</a></li>
+                <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student-games' %}active{% endif %} " href="{% url 'student-games' %}">Games</a></li>
+              </ul>
+            </div>
+
+            <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student' %}active{% endif %} " href="/logout">Logout</a></li>    
+           
         </ul>
       </nav> 
     </header>
