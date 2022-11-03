@@ -19,7 +19,7 @@ urlpatterns = [
 
 
 
-    path('adminclick', views.adminclick_view),
+    path('adminclick', views.adminclick_view,name='adminclick'),
     path('adminlogin', LoginView.as_view(template_name='exam/adminlogin.html'),name='adminlogin'),
     path('admin-dashboard', views.admin_dashboard_view,name='admin-dashboard'),
     path('admin-teacher', views.admin_teacher_view,name='admin-teacher'),
