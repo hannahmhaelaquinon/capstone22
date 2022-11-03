@@ -192,7 +192,11 @@ def delete_student_view(request,pk):
 
 @login_required(login_url='adminlogin')
 def admin_course_view(request):
-    return render(request,'exam/admin_course.html')
+    total_subject = models.Course.objects.all().count()
+    context={
+        'total_subject': total_subject,
+    }
+    return render(request,'exam/admin_course.html',context)
 
 
 @login_required(login_url='adminlogin')
