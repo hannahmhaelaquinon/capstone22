@@ -23,8 +23,8 @@ urlpatterns = [
     path('game/SimonSays', views.SimonGame, name='SimonSays'),
     path('student-calculate-bmi', views.studentbmi, name='student-bmi'),
     path('student-profile', views.studentprofile, name='student-profile'),
-    # path('student-update/<int:pk>', views.student_update,
-    #     name='student-update-profile'),
+    path('student-update', views.studentupdate,
+         name='student-update-profile'),
 
 
 

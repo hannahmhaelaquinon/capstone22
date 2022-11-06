@@ -8,6 +8,8 @@ from django.conf import settings
 from datetime import date, timedelta
 from exam import models as QMODEL
 from teacher import models as TMODEL
+from .forms import StudentForm, StudentUserForm
+from django.contrib import messages
 
 
 # for showing signup/login button for student
@@ -167,14 +169,46 @@ def studentbmi(request):
 @login_required(login_url='studetnlogin')
 @user_passes_test(is_student)
 def studentprofile(request):
-    return render(request, 'student/update_student.html')
+    user_form = StudentUserForm(request.POST, instance=request.user)
+    profile_form = StudentForm(
+        request.POST, request.FILES, instance=request.user.student)
+    return render(request, 'student/sprofile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+def studentupdate(request):
+    if request.method == 'POST':
+        user_form = StudentUserForm(request.POST, instance=request.user)
+        profile_form = StudentForm(
+            request.POST, request.FILES, instance=request.user.student)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='update_student')
+
+    else:
+        user_form = StudentUserForm(instance=request.user)
+        profile_form = StudentForm(instance=request.user.student)
+
+    return render(request, 'student/update_student.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 '''@login_required(login_url='studetnlogin')
 @user_passes_test(is_student)
-def student_update(request, pk):
-    student = forms.StudentForm.objects.get(id=pk)
-    user = forms.User.objects.get(id=student.user_id)
+def studentupdate(request):
+    student = request.user.student
+    userForm = forms.StudentForm(instance=student)
+    context = {'userForm': userForm}
+    return render(request, 'student/update_student.html', context)
+
+
+
+@login_required(login_url='studetnlogin')
+@user_passes_test(is_student)
+def studentupdate(request, pk):
+    student = models.Student.objects.get(id=pk)
+    user = models.User.objects.get(id=student.user_id)
     userForm = forms.StudentUserForm(instance=user)
     studentForm = forms.StudentForm(request.FILES, instance=student)
     mydict = {'userForm': userForm, 'studentForm': studentForm}
@@ -187,6 +221,6 @@ def student_update(request, pk):
             user.set_password(user.password)
             user.save()
             studentForm.save()
-            return redirect('')
+            return redirect('update_student')
     return render(request, 'student/update_student.html', context=mydict)
 '''
