@@ -258,6 +258,11 @@ a {
 						  <label for="last_name"></label>
           {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
 						</div>
+            <div class="input-box">
+						  <i class="fas fa-message"></i>
+						  <label for="eamil"></label>
+          {% render_field userForm.email|attr:'required:true'  class="form-control" placeholder="Email" %}
+						</div>
 						<div class="input-box">
 						  <i class="fas fa-lock"></i>
               <label for="mobile"></label>

@@ -1,27 +1,28 @@
 {% extends 'exam/adminbase.html' %}
 {% load widget_tweaks %}
 {% block content %}
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-       <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  a:link {
-        text-decoration: none;
-      }
-    
-  </style>
-</head>
-<h2 style="text-align:center;">Add Course</h2>
+
+<div class="content-body">
+  <div class="container-fluid">            
+      <div class="row page-titles mx-0">
+          <div class="col-sm-6 p-md-0">
+              <div class="welcome-text">
+                  <h4>Subject</h4>
+              </div>
+          </div>
+          <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../admin-dashboard">Home</a></li>
+                  <li class="breadcrumb-item active"><a href="../admin-course">Subject</a></li>
+                  <li class="breadcrumb-item active"><a href="javascript:void(0);">Add Subject</a></li>
+              </ol>
+          </div>
+      </div>
+<h2 style="text-align:center;">Add Subject</h2>
 <form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
     {%csrf_token%}
     <div class="form-group">
-      <label for="course_name">Course Name</label>
+      <label for="course_name">Subject Name</label>
       {% render_field courseForm.course_name class="form-control" placeholder="Example: Software Engineering" %}
 
       <label for="question_number">Total Question</label>
@@ -32,7 +33,10 @@
     </div>
     
 
-    <button type="submit" class="btn btn-success" style="border-radius:0px;">Add Course Info</button>
+    <button type="submit" class="btn btn-success" style="border-radius:0px;">Add Subject Details</button>
   </form>
+  </div>
+  </div>
+
 <br><br><br>
 {% endblock content %}

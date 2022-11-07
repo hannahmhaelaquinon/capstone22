@@ -1,26 +1,21 @@
 {% extends 'exam/adminbase.html' %}
 {% block content %}
 {%load static%}
-
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
+<div class="content-body">
+  <div class="container-fluid">            
+      <div class="row page-titles mx-0">
+          <div class="col-sm-6 p-md-0">
+              <div class="welcome-text">
+                  <h4>Questions</h4>
+              </div>
+          </div>
+          <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="../admin-dashboard">Home</a></li>
+                  <li class="breadcrumb-item active"><a href="../admin-course">Questions</a></li>
+              </ol>
+          </div>
+      </div>
 <br><br>
 <div class="container">
   <div class="panel panel-primary">
@@ -50,6 +45,9 @@
     </table>
   </div>
 </div>
+</div>
+</div>
+
 
 <br><br><br><br><br><br>
 {% endblock content %}
