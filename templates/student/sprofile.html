@@ -1,7 +1,8 @@
 {% extends 'student/studentbase.html' %}
 {% load widget_tweaks %}
-{% block content %}
 
+{% load static%}
+{% block content %}
     <head>
   
        <style>
@@ -59,6 +60,7 @@
         }
        </style>
     </head>
+  
 
   <body>
     <div class="container">
@@ -71,18 +73,21 @@
         </span> Profile
       </h3>
             <!-- /Breadcrumb -->
-      
+           
             <div class="row gutters-sm">
               <div class="col-md-4 mb-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="175">
+                  
+                    
+                      <img class="rounded-circle account-img" src="{{ user.student.profile_pic.url }} "alt="student" class="rounded-circle" width="175">
                       <div class="mt-3">
+                        
                         <h4>{{request.user.first_name}}  {{request.user.last_name}}</h4>
                         <p class="text-secondary mb-1">Full Stack Developer</p>
                         <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-
+                        
                       </div>
                     </div>
                   </div>
@@ -134,6 +139,7 @@
                       <div class="col-sm-9 text-secondary">
                         Bay Area, San Francisco, CA
                       </div>
+                      
                     </div>
                     <hr>
                     <div class="row">
@@ -145,7 +151,9 @@
                 </div>
               </div>
             </div>
-  
+           
           </div>
       </div>
-{% endblock %}
+      
+
+{% endblock content %}

@@ -169,10 +169,8 @@ def studentbmi(request):
 @login_required(login_url='studetnlogin')
 @user_passes_test(is_student)
 def studentprofile(request):
-    user_form = StudentUserForm(request.POST, instance=request.user)
-    profile_form = StudentForm(
-        request.POST, request.FILES, instance=request.user.student)
-    return render(request, 'student/sprofile.html', {'user_form': user_form, 'profile_form': profile_form})
+    students = models.Student.objects.all()
+    return render(request, 'student/sprofile.html',  {'students': students})
 
 
 def studentupdate(request):
