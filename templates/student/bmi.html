@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'student/studentbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +13,7 @@
     body{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(to right, #063636, #044d20);
+    background:#011F3F;
 }
 span{
     color: red;
@@ -52,8 +54,11 @@ button{
         <p>Weight in KG:
             <input type="text" id="weight"><br><span id="weight_error"></span>
         </p>
-
+        <div>
+        <button style="float:right;">Clear</button>
         <button id="btn">Calculate</button>
+        
+        </div>
         <p id="output"></p>
     </div>
 
@@ -96,5 +101,6 @@ button.addEventListener('click', () => {
     }
 });
  </script>
+ <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
-</html>
+{% endblock %}

@@ -1,42 +1,47 @@
-from django.shortcuts import render,redirect,reverse
-from . import forms,models
+from django.shortcuts import render, redirect, reverse
+from . import forms, models
 from django.db.models import Sum
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required,user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from datetime import date, timedelta
 from exam import models as QMODEL
 from teacher import models as TMODEL
+from .forms import StudentForm, StudentUserForm
+from django.contrib import messages
 
 
-#for showing signup/login button for student
+# for showing signup/login button for student
 def studentclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
-    return render(request,'student/studentclick.html')
+    return render(request, 'student/studentclick.html')
+
 
 def student_signup_view(request):
-    userForm=forms.StudentUserForm()
-    studentForm=forms.StudentForm()
-    mydict={'userForm':userForm,'studentForm':studentForm}
-    if request.method=='POST':
-        userForm=forms.StudentUserForm(request.POST)
-        studentForm=forms.StudentForm(request.POST,request.FILES)
+    userForm = forms.StudentUserForm()
+    studentForm = forms.StudentForm()
+    mydict = {'userForm': userForm, 'studentForm': studentForm}
+    if request.method == 'POST':
+        userForm = forms.StudentUserForm(request.POST)
+        studentForm = forms.StudentForm(request.POST, request.FILES)
         if userForm.is_valid() and studentForm.is_valid():
-            user=userForm.save()
+            user = userForm.save()
             user.set_password(user.password)
             user.save()
-            student=studentForm.save(commit=False)
-            student.user=user
+            student = studentForm.save(commit=False)
+            student.user = user
             student.save()
             my_student_group = Group.objects.get_or_create(name='STUDENT')
             my_student_group[0].user_set.add(user)
         return HttpResponseRedirect('studentlogin')
-    return render(request,'student/studentsignup.html',context=mydict)
+    return render(request, 'student/studentsignup.html', context=mydict)
+
 
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -47,16 +52,14 @@ def student_dashboard_view(request):
     'total_question':QMODEL.Question.objects.all().count(),
     'total_assignment':TMODEL.TeacherAssignment.objects.all().count(),
     }
-    return render(request,'student/student_dashboard.html',context=dict)
+    return render(request, 'student/student_dashboard.html', context=dict)
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
-def student_assignment(request):
-    courses = QMODEL.Course.objects.all()
-    context = {
-        'courses': courses
-    }
-    return render(request, 'student/student_assignment.html', context)
+def student_exam_view(request):
+    courses=QMODEL.Course.objects.all()
+    return render(request,'student/student_exam.html',{'courses':courses})
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -72,30 +75,33 @@ def student_take_assignment(request,pk):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_exam_view(request):
-    courses=QMODEL.Course.objects.all()
-    return render(request,'student/student_exam.html',{'courses':courses})
+    courses = QMODEL.Course.objects.all()
+    return render(request, 'student/student_exam.html', {'courses': courses})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
-def take_exam_view(request,pk):
-    course=QMODEL.Course.objects.get(id=pk)
-    total_questions=QMODEL.Question.objects.all().filter(course=course).count()
-    questions=QMODEL.Question.objects.all().filter(course=course)
-    total_marks=0
+def take_exam_view(request, pk):
+    course = QMODEL.Course.objects.get(id=pk)
+    total_questions = QMODEL.Question.objects.all().filter(course=course).count()
+    questions = QMODEL.Question.objects.all().filter(course=course)
+    total_marks = 0
     for q in questions:
-        total_marks=total_marks + q.marks
-    
-    return render(request,'student/take_exam.html',{'course':course,'total_questions':total_questions,'total_marks':total_marks})
+        total_marks = total_marks + q.marks
+
+    return render(request, 'student/take_exam.html', {'course': course, 'total_questions': total_questions, 'total_marks': total_marks})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
-def start_exam_view(request,pk):
-    course=QMODEL.Course.objects.get(id=pk)
-    questions=QMODEL.Question.objects.all().filter(course=course)
-    if request.method=='POST':
+def start_exam_view(request, pk):
+    course = QMODEL.Course.objects.get(id=pk)
+    questions = QMODEL.Question.objects.all().filter(course=course)
+    if request.method == 'POST':
         pass
-    response= render(request,'student/start_exam.html',{'course':course,'questions':questions})
-    response.set_cookie('course_id',course.id)
+    response = render(request, 'student/start_exam.html',
+                      {'course': course, 'questions': questions})
+    response.set_cookie('course_id', course.id)
     return response
 
 
@@ -104,59 +110,133 @@ def start_exam_view(request,pk):
 def calculate_marks_view(request):
     if request.COOKIES.get('course_id') is not None:
         course_id = request.COOKIES.get('course_id')
-        course=QMODEL.Course.objects.get(id=course_id)
-        
-        total_marks=0
-        questions=QMODEL.Question.objects.all().filter(course=course)
+        course = QMODEL.Course.objects.get(id=course_id)
+
+        total_marks = 0
+        questions = QMODEL.Question.objects.all().filter(course=course)
         for i in range(len(questions)):
-            
+
             selected_ans = request.COOKIES.get(str(i+1))
             actual_answer = questions[i].answer
             if selected_ans == actual_answer:
                 total_marks = total_marks + questions[i].marks
         student = models.Student.objects.get(user_id=request.user.id)
         result = QMODEL.Result()
-        result.marks=total_marks
-        result.exam=course
-        result.student=student
+        result.marks = total_marks
+        result.exam = course
+        result.student = student
         result.save()
 
         return HttpResponseRedirect('view-result')
 
 
-
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def view_result_view(request):
-    courses=QMODEL.Course.objects.all()
-    return render(request,'student/view_result.html',{'courses':courses})
-    
+    courses = QMODEL.Course.objects.all()
+    return render(request, 'student/view_result.html', {'courses': courses})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
-def check_marks_view(request,pk):
-    course=QMODEL.Course.objects.get(id=pk)
+def check_marks_view(request, pk):
+    course = QMODEL.Course.objects.get(id=pk)
     student = models.Student.objects.get(user_id=request.user.id)
-    results= QMODEL.Result.objects.all().filter(exam=course).filter(student=student)
-    return render(request,'student/check_marks.html',{'results':results})
+    results = QMODEL.Result.objects.all().filter(
+        exam=course).filter(student=student)
+    return render(request, 'student/check_marks.html', {'results': results})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_marks_view(request):
-    courses=QMODEL.Course.objects.all()
-    return render(request,'student/student_marks.html',{'courses':courses})
+    courses = QMODEL.Course.objects.all()
+    return render(request, 'student/student_marks.html', {'courses': courses})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_video_view(request):
-    return render (request, 'student/svideo.html')
+    return render(request, 'student/svideo.html')
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_library_view(request):
-    return render (request, 'student/slibrary.html')
+    return render(request, 'student/slibrary.html')
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_games_view(request):
-    return render (request, 'student/sgame.html')
+    return render(request, 'student/SGame/sgamehome.html')
+
+
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def SimonGame(request):
+    return render(request, '/SGame/index.html')
+
+
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def studentbmi(request):
+    return render(request, 'student/bmi.html')
+
+
+@login_required(login_url='studetnlogin')
+@user_passes_test(is_student)
+def studentprofile(request):
+    students = models.Student.objects.all()
+    return render(request, 'student/sprofile.html',  {'students': students})
+
+
+def studentupdate(request):
+    if request.method == 'POST':
+        user_form = StudentUserForm(request.POST, instance=request.user)
+        profile_form = StudentForm(
+            request.POST, request.FILES, instance=request.user.student)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='update_student')
+
+    else:
+        user_form = StudentUserForm(instance=request.user)
+        profile_form = StudentForm(instance=request.user.student)
+
+    return render(request, 'student/update_student.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+'''@login_required(login_url='studetnlogin')
+@user_passes_test(is_student)
+def studentupdate(request):
+    student = request.user.student
+    userForm = forms.StudentForm(instance=student)
+    context = {'userForm': userForm}
+    return render(request, 'student/update_student.html', context)
+
+
+
+@login_required(login_url='studetnlogin')
+@user_passes_test(is_student)
+def studentupdate(request, pk):
+    student = models.Student.objects.get(id=pk)
+    user = models.User.objects.get(id=student.user_id)
+    userForm = forms.StudentUserForm(instance=user)
+    studentForm = forms.StudentForm(request.FILES, instance=student)
+    mydict = {'userForm': userForm, 'studentForm': studentForm}
+    if request.method == 'POST':
+        userForm = forms.StudentUserForm(request.POST, instance=user)
+        studentForm = forms.StudentForm(
+            request.POST, request.FILES, instance=student)
+        if userForm.is_valid() and studentForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            studentForm.save()
+            return redirect('update_student')
+    return render(request, 'student/update_student.html', context=mydict)
+'''

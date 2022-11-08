@@ -2,70 +2,80 @@
 {% load widget_tweaks %}
 {% block content %}
 
+
 {%load static%}
-
 <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
-  
-        <style>
-          #overlayText
-          {
-          position:absolute;
-          top:0;
-          left:0;
-          z-index:1;
-          }
-  
-          #topText
-          {
-            color: black;
-            font-size: 20px;
-            align-self: center;
-          }
-        </style>
-      </head>
-  
-  <body>
-      <br><br><br><br>
-      <div class="container-fluid page-body-wrapper">
-          <div class="main-panel">
-              <div class="content-wrapper">
-                  <h3 class="page-title">
-                    <span class="page-title-icon bg-gradient-primary text-white me-2">
-                      <i class="mdi mdi-library-books"></i>
-                    </span> Library
-                  </h3>
-                  </nav>
-                
-                <div class="row">
-                  <div class="col-12 grid-margin stretch-card">
-                    <div class="card">
-                      <div class="card-body">
-                        <form class="d-flex align-items-center h-20" action="#">
-                          <input type="text" class="form-control bg-transparent border-0" placeholder="Search books" class="mdi mdi-magnify">
-                        </form>
-                      <div class="container">
-                        <div class="row mt-3">
-                          
-                          {% for b in books %}
-                          <div class="col-6 pe-1">
-                            <img src="../../static/PNG/the-three-little-pigs-26.jpg" class="mb-2 mw-50 w-50 rounded" alt="image">
-                            <div class="overlayText">
-                              <p id="topText">Three Little Pig</p>
-                            </div>
-                          {% endfor %}
 
-                          </div>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<link rel="stylesheet" href="../../../../static/gamestyles.css">
+
+<style>
+  #overlayText
+  {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1;
+  }
+
+  #topText
+  {
+    color: black;
+    font-size: 20px;
+    align-self: center;
+  }
+</style>
+</head>
+
+<!-- partial -->
+<br><br>
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-gamepad"></i>
+        </span> Library
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <form class="d-flex align-items-center h-20" action="#">
+              <input type="text" class="form-control bg-transparent border-0" placeholder="Search books" class="mdi mdi-magnify">
+            </form>
+          <div class="container">
+            <div class="row mt-3">
+              
+              
+              <div class="col-6 pe-1">
+                <img src="../../static/PNG/the-three-little-pigs-26.jpg" class="mb-2 mw-50 w-50 rounded" alt="image">
+                <div class="overlayText">
+                  <p id="topText">Three Little Pig</p>
+                </div>
+              
+
               </div>
+              </div>
+            </div>
+            </div>
           </div>
+        </div>
       </div>
-{% endblock content %}
+  
+  <!-- content-wrapper ends -->
+  <!-- partial:../../partials/_footer.html -->
+  <br>
+
+{% endblock %}
+<!--**********************************
+    Content body end
+***********************************-->
