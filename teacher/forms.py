@@ -17,3 +17,11 @@ class TeacherForm(forms.ModelForm):
         model=models.Teacher
         fields=['address','mobile','profile_pic']
 
+class TeacherAssForm(forms.ModelForm):
+    courseID=forms.ModelChoiceField(queryset=models.Course.objects.all(),empty_label="Course Name", to_field_name="id")
+    class Meta:
+        model=models.TeacherAssignment
+        fields=['instruction','upload']
+        widgets = {
+            'assignment': forms.Textarea(attrs={'rows': 3, 'cols': 50})
+        }

@@ -45,8 +45,29 @@ def student_dashboard_view(request):
     
     'total_course':QMODEL.Course.objects.all().count(),
     'total_question':QMODEL.Question.objects.all().count(),
+    'total_assignment':TMODEL.TeacherAssignment.objects.all().count(),
     }
     return render(request,'student/student_dashboard.html',context=dict)
+
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def student_assignment(request):
+    courses = QMODEL.Course.objects.all()
+    context = {
+        'courses': courses
+    }
+    return render(request, 'student/student_assignment.html', context)
+
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def student_take_assignment(request,pk):
+    course=QMODEL.Course.objects.get(id=pk)
+    assignment=TMODEL.TeacherAssignment.objects.all().filter(course=course)
+    if request.method=='POST':
+        pass
+    response= render(request,'student/student_take_assignment.html',{'course':course,'assignment':assignment})
+    response.set_cookie('course_id',course.id)
+    return response
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)

@@ -10,7 +10,8 @@ from datetime import date, timedelta
 from exam import models as QMODEL
 from student import models as SMODEL
 from exam import forms as QFORM
-
+from teacher import forms as TFORM
+from teacher import models as TMODEL
 
 #for showing signup/login button for teacher
 def teacherclick_view(request):
@@ -104,6 +105,32 @@ def teacher_add_question_view(request):
             print("form is invalid")
         return HttpResponseRedirect('/teacher/teacher-view-question')
     return render(request,'teacher/teacher_add_question.html',{'questionForm':questionForm})
+
+@login_required(login_url='adminlogin')
+def teacher_assignment(request):
+    courses = QMODEL.Course.objects.all()
+    assignments = TMODEL.TeacherAssignment.objects.all()
+    context = {
+        'courses': courses,
+        'assignments': assignments
+    }
+    return render(request, 'teacher/teacher_assignment.html', context)
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_add_assignment(request):
+    assignmentForm=TFORM.TeacherAssForm()
+    if request.method=='POST':
+        assignmentForm=TFORM.TeacherAssForm(request.POST, request.FILES)
+        if assignmentForm.is_valid():
+            assignment=assignmentForm.save(commit=False)
+            course=QMODEL.Course.objects.get(id=request.POST.get('courseID'))
+            assignment.course=course
+            assignment.save()       
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/teacher/teacher-assignment')
+    return render(request,'teacher/teacher_add_assignment.html',{'assignmentForm':assignmentForm})
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
