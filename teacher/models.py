@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from exam.models import Course
 
 class Teacher(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -16,3 +17,8 @@ class Teacher(models.Model):
         return self
     def __str__(self):
         return self.user.first_name
+
+class TeacherAssignment(models.Model):
+    course=models.ForeignKey(Course,on_delete=models.CASCADE)
+    instruction= models.CharField(max_length=500)
+    upload =  models.FileField(upload_to='documents/')

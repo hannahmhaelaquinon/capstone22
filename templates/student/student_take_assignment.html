@@ -1,0 +1,55 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+</head>
+
+
+<div class="jumbotron my-4">
+
+  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
+    {% csrf_token %}
+    <h2 style="text-align: center;">Subject: {{course.course_name}}</h2>
+    {% for a in assignment %}
+    <h3 class="text-decoration">Instruction: {{a.instruction}}</h3>
+    <h3 class="text-primary">File: {{a.upload}}</h3>
+    <label for="assignment">Upload</label>
+        {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %}
+        </div>
+        {% endfor %}
+        <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Assignment">  
+    </form>
+  </div>
+
+<script> 
+    function saveAns(){  
+
+        var ele = document.getElementsByTagName('input'); 
+        for(i = 0; i < ele.length; i++) { 
+            if(ele[i].type="radio") { 
+                if(ele[i].checked){        
+                  setCookie(ele[i].name,ele[i].value,3)
+                }
+            } 
+        } 
+          
+    }
+    
+    function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+</script> 
+
+<br><br><br><br><br><br>
+{% endblock content %}

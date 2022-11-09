@@ -35,6 +35,11 @@
      <!-- Template Main CSS File -->
      <link href="../static/assets/css/style.css" rel="stylesheet">
   
+  <style>
+       body {
+        background: #011F3F;
+      }
+  </style>
   
   </head>
 
@@ -53,7 +58,7 @@
       <nav id="navbar" class="navbar order-last order-lg-0" style="margin-right:50px;">
         <ul>
          <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student' %}active{% endif %} " href="/student/student-dashboard">Home</a></li>
-
+            <li><a class="nav-link scrollto {% if request.resolver_match.url_name == 'student' %}active{% endif %} " href="/student/student-assignment">Assignment</a></li>
          <div class="dropdown">
           <li><a class="nav-link scrollto  dropdown-toggle"  data-toggle="dropdown" style="color:white;">Quizes
           <span class="caret"></span></a></li>

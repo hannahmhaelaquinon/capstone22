@@ -46,13 +46,31 @@ def is_student(user):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_dashboard_view(request):
-    dict = {
-
-        'total_course': QMODEL.Course.objects.all().count(),
-        'total_question': QMODEL.Question.objects.all().count(),
+    dict={
+    
+    'total_course':QMODEL.Course.objects.all().count(),
+    'total_question':QMODEL.Question.objects.all().count(),
+    'total_assignment':TMODEL.TeacherAssignment.objects.all().count(),
     }
     return render(request, 'student/student_dashboard.html', context=dict)
 
+
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def student_exam_view(request):
+    courses=QMODEL.Course.objects.all()
+    return render(request,'student/student_exam.html',{'courses':courses})
+
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def student_take_assignment(request,pk):
+    course=QMODEL.Course.objects.get(id=pk)
+    assignment=TMODEL.TeacherAssignment.objects.all().filter(course=course)
+    if request.method=='POST':
+        pass
+    response= render(request,'student/student_take_assignment.html',{'course':course,'assignment':assignment})
+    response.set_cookie('course_id',course.id)
+    return response
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -169,10 +187,8 @@ def studentbmi(request):
 @login_required(login_url='studetnlogin')
 @user_passes_test(is_student)
 def studentprofile(request):
-    user_form = StudentUserForm(request.POST, instance=request.user)
-    profile_form = StudentForm(
-        request.POST, request.FILES, instance=request.user.student)
-    return render(request, 'student/sprofile.html', {'user_form': user_form, 'profile_form': profile_form})
+    students = models.Student.objects.all()
+    return render(request, 'student/sprofile.html',  {'students': students})
 
 
 def studentupdate(request):

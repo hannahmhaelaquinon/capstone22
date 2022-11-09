@@ -1,5 +1,7 @@
 from django.urls import path
 from teacher import views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
 
 urlpatterns = [
@@ -14,6 +16,10 @@ path('game/', views.tgame, name='game'),
 path('library/', views.tlibrary, name='library'),
 path('profile/', views.tprofile, name='profile'),
 
+
+path('teacher-assignment', views.teacher_assignment,name='teacher-assigbnment'),
+path('teacher-add-assignment', views.teacher_add_assignment,name='teacher-add-assignment'),
+
 path('teacher-exam', views.teacher_exam_view,name='teacher-exam'),
 path('teacher-add-exam', views.teacher_add_exam_view,name='teacher-add-exam'),
 path('teacher-view-exam', views.teacher_view_exam_view,name='teacher-view-exam'),
@@ -26,3 +32,7 @@ path('teacher-view-question', views.teacher_view_question_view,name='teacher-vie
 path('see-question/<int:pk>', views.see_question_view,name='see-question'),
 path('remove-question/<int:pk>', views.remove_question_view,name='remove-question'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
