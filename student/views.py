@@ -57,9 +57,9 @@ def student_dashboard_view(request):
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
-def student_exam_view(request):
+def student_assignment(request):
     courses=QMODEL.Course.objects.all()
-    return render(request,'student/student_exam.html',{'courses':courses})
+    return render(request,'student/student_assignment.html',{'courses':courses})
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
