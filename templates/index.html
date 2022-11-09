@@ -42,10 +42,10 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>          
-          <li><a class="nav-link scrollto" href="#courses">Courses</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'home'%}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'about'%}">About</a></li>          
+          <li><a class="nav-link scrollto" href="{% url 'courses'%}">Courses</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'contactus'%}">Contact</a></li>
           <li><a class="nav-link scrollto" href="{% url 'signin'%}">Sign In</a></li>
           <li><a class="nav-link scrollto" href="{% url 'adminclick' %}">Admin</a></li>
           <li><input type="text" placeholder="Search.."></li>
@@ -154,33 +154,25 @@
 
         </div>
 
-        <div class="form">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-              </div>
-              <div class="form-group col-md-6 mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-              </div>
+        <center>
+          <h3 class='alert alert-success'>Please fillup the form in order to contact us</h3>
+      
+          <form method="POST" autocomplete="off">
+            <!-- Very Important csrf Token -->
+            {% csrf_token %}
+            <div class="form-group">
+              <p>
+              <h3>{{ form.as_p }}</h3>
+              </p>
+              <br>
+              <input type="submit" value="Submit" class='btn btn-primary' style="border-radius: 0%;">
             </div>
-            <div class="form-group mt-3">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-            </div>
-            <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-            </div>
-            <div class="my-3">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
-            </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
           </form>
-        </div>
+        </center>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section>
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 

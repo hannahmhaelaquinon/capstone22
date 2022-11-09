@@ -11,12 +11,11 @@ urlpatterns = [
     path('signin/', views.signin, name='signin'),
     path('signup/', views.signup),
 
-
-    path('',views.home_view,name=''),
+    #NAVBAR
+    path('',views.home_view,name='home'),
     path('logout', LogoutView.as_view(template_name='exam/logout.html'),name='logout'),
-    path('contactus', views.contactus_view),
+    path('contactus', views.contactus_view, name='contactus'),
     path('afterlogin', views.afterlogin_view,name='afterlogin'),
-
 
 
     path('adminclick', views.adminclick_view,name='adminclick'),

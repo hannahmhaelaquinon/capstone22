@@ -45,10 +45,10 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>          
-          <li><a class="nav-link scrollto" href="#courses">Courses</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto active" href="./#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="../#about">About</a></li>          
+          <li><a class="nav-link scrollto" href="../#courses">Courses</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'contactus'%}">Contact</a></li>
           <li><a class="nav-link scrollto" href="{% url 'signin'%}">Sign In</a></li>
           <li><a class="nav-link scrollto" href="{% url 'adminclick' %}">Admin</a></li>
           <li><input type="text" placeholder="Search.."></li>
@@ -76,7 +76,7 @@
         <div class="row">
             <div class="item">
               <div class ="before"></div>
-                <div class="map" style="background-image:url(../static/assets/img/map6.JPG)"></div>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1591.7462608247681!2d123.92322669934427!3d10.341665631654061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a998fa15b7b5df%3A0xe6bd97952e71bd7e!2sBanilad%20Elementary%20School!5e0!3m2!1sen!2sus!4v1667989144691!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="split right">
               <h2>About Us</h2>
@@ -120,7 +120,7 @@
     <!--End Courses Section-->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="section-bg">
+    {% comment %} <section id="contact" class="section-bg">
 
       <div class="container" data-aos="fade-up">
 
@@ -183,7 +183,8 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section> {% endcomment %}
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 

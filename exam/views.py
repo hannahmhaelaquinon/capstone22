@@ -310,4 +310,4 @@ def contactus_view(request):
             send_mail(str(name)+' || '+str(email), message, settings.EMAIL_HOST_USER,
                       settings.EMAIL_RECEIVING_USER, fail_silently=False)
             return render(request, 'exam/contactussuccess.html')
-    return render(request, 'exam/contactus.html', {'form': sub})
+    return render(request, 'contactus.html', {'form': sub})
