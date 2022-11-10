@@ -19,16 +19,16 @@
               </nav>
             </div>
             <div class="row">
-              <div class="col-md-3 grid-margin stretch-card">
+              <div class="col-3 grid-margin stretch-card">
                 <div class="row justify-content-center">
                 <div class="card">
                   <div class="card-body">
                     <div class="nav-profile-image">
-                      <img src="../../../static/teacher/assets/images/faces/face1.jpg" class="rounded-circle">
+                      <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ user.teacher.profile_pic.url }}"><span class="font-weight-bold">{{request.user.first_name}}  {{request.user.last_name}}</span><span class="text-black-50">Teacher</span><span> </span></div>
                     </div>
-                    <label class="font-weight-bold mb-2">{{request.user}}</label>
-                    <label class="font-weight-bold mb-2">Teacher</label>
+                    <a href="" class="btn btn-primary">Edit</i></a>
                   </div>
+                  <hr class="my-4">
                 </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="input-email">Email address</label>
-                              <input type="email" id="input-email" class="form-control form-control-alternative" value ="{{request.user.email}}" readonly>
+                              <input type="email" id="input-email" class="form-control form-control-alternative" value ="{{request.user.email}}">
                             </div>
                           </div>
                         </div>
@@ -58,13 +58,13 @@
                           <div class="col-lg-6">
                             <div class="form-group focused">
                               <label class="form-control-label" for="input-firstname">First Name</label>
-                              <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="David" >
+                              <input type="text" id="input-username" class="form-control form-control-alternative"value ="{{request.user.first_name}}">
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label class="form-control-label" for="input-lastname">Last Name</label>
-                              <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Grey">
+                              <input type="email" id="input-email" class="form-control form-control-alternative" value ="{{request.user.last_name}}">
                             </div>
                           </div>
                         </div>
@@ -76,15 +76,15 @@
                           <div class="col-md-12">
                             <div class="form-group focused">
                               <label class="form-control-label" for="input-address">Address</label>
-                              <input id="input-address" class="form-control form-control-alternative" placeholder="Mandaue Cebu" type="text">
+                              <input type="text" id="input-address" class="form-control form-control-alternative" value ="{{request.user.teacher.address}}">
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="form-group focused">
-                              <label class="form-control-label" for="input-city">City</label>
-                              <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="Cebu">
+                              <label class="form-control-label" for="input-city">Mobile</label>
+                              <input type="text" id="input-city" class="form-control form-control-alternative" value ="{{request.user.teacher.mobile}}">
                             </div>
                           </div>
                           <div class="col-lg-4">
@@ -102,19 +102,12 @@
                         </div>
                       </div>
                       <hr class="my-4">
-                      <!-- Description -->
-                      <h6 class="heading-small text-muted mb-4">ABOUT ME</h6>
-                      <div class="pl-lg-4">
-                        <div class="form-group focused">
-                          <label>About Me</label>
-                          <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..."></textarea>
-                        </div>
                     </form>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
-        </div>
         <!-- content-wrapper ends -->
   <!-- partial:../../partials/_footer.html -->
   <footer class="footer">

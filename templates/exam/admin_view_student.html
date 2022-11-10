@@ -55,7 +55,7 @@
                                   <tr>
                                       <td  style = 'text-align:center;'>{{ s.id }}</td>   
                                       <td  style = 'text-align:center;'>{{ s.get_name}}</td>   
-                                      <td> <img src="{% static s.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+                                      <td> <img src="{{ s.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
                                       <td  style = 'text-align:center;'>{{ s.mobile }}</td>
                                       <td  style = 'text-align:center;'>{{ s.address }}</td>
                                       <td  style = 'text-align:center;'>

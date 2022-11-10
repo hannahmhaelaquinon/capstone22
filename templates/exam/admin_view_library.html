@@ -1,0 +1,245 @@
+{% include 'exam/adminbase.html' %}
+{% load static %}
+{% block content %}
+    <!-- row -->
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+  
+<div class="content-body">
+    <div class="container-fluid">
+        
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Library Assets</h4>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0);">Library</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0);">Library Assets</a></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Book List</h4>
+                        <a href="{% url 'admin-add-library-view' %}" class="btn btn-primary">+ Add new</a>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example3" class="display" style="min-width: 845px">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style = 'text-align:center;'> Book ID</th>
+                                        <th scope="col" style = 'text-align:center;'> Title</th>
+                                        <th scope="col" style = 'text-align:center;'> Subject</th>
+                                        <th scope="col" style = 'text-align:center;'> Date</th>
+                                        <!-- <th scope="col" style = 'text-align:center;'> File</th> -->
+                                        <th scope="col" style = 'text-align:center;'> Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>              
+                                    {% for b in books %}   
+                            
+                                    <tr>  
+                                        <td style = 'text-align:center;'>{{ b.id }}</td>   
+                                        <td style = 'text-align:center;'>{{ b.Title }}</td>  
+                                        <td style = 'text-align:center;'>{{ b.Subject }}</td>  
+                                        <td style = 'text-align:center;'>{{ b.Date }}</td>  
+                                        <!-- <td style = 'text-align:center;'><img src="/image{{ b.books.url }}"/> -->
+                                       <!-- <td scope="col" style = 'text-align:center;'></td>-->
+                                        </td>
+                                        <td style = 'text-align:center;'> 
+                                            <a type="button" class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#newModal-{{b.id}}">
+                                                <i class="la la-pencil"></i>
+                                            </a>
+                            
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal-{{b.id}}">
+                                                <i class="la la-trash-o"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Modal VIEW -->
+                                     <div class="modal fade" id="newModal-{{b.id}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header" style="background-color:#6db33f">
+                                                      <h5 class="modal-title", style="font-size: large; font-family: Trirong;">VIEW DETAILS</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <form id="updateForm" method="post"  >
+                                                    {% csrf_token %}
+                                                    <div class="modal-body">
+                                                      <input type="text" name="booking-id" value = {{b.id}} hidden>
+                                                      <div class="row" text-align ="center">
+                                                        <div class="col-12" id="startup-tab-1">
+                                                            
+                                                            <div class="row">
+                                                                <div class="col-xl-12 col-xxl-12 col-sm-12">
+                                                             <div class="card">
+                                                                <div class="card-header">
+                                                                    <!-- <h5 class="card-title">Book Details</h5> -->
+                                                                </div> 
+                                                             <div class = "row" >
+
+                                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Title</label>
+                                                                        <input type="text" class="form-control" name="Title" value="{{b.Title}}">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Subject</label>
+                                                                        <input type="text" class="form-control" name="Subject" value="{{b.Subject}}">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Date</label>
+                                                                        <input type="text" class="form-control" name="Date" value="{{b.Date}}">
+                                                                    </div>
+                                                                </div>
+                                                               
+                                                                
+                                                                 </div>
+                                                             </div>
+                                                             </div>
+
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" id = "btnUpdate" name = "btnUpdate" class="btn btn-primary">UPDATE</button>                             
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>                       
+                                                    </div>
+                                                  </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Modal DELETE-->
+                                    <div class="modal fade" id="exampleModal-{{b.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header" style="background-color:#6db33f">
+                                                <h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="deleteForm" method="post" >
+                                            {% csrf_token %} 
+                                            <div class="modal-body">                       
+                                                <input type="text" name="bbooking-id" value = {{b.id}} hidden>
+                                                Are you sure you want to delete this record?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                                                <button type="submit" id = "btnDelete" name = "btnDelete" class="btn btn-primary">YES</button>
+                                            </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!---->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--**********************************
+Content body end
+***********************************-->
+
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+    var date_input=$('input[name="date"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    };
+    date_input.datepicker(options);
+    })
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"></script>
+<script src="../../static/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../../static/admin/js/plugins-init/datatables.init.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script type="text/javascript">
+$("body").on("click", "#btnPDF", function () {
+    html2canvas($('#example3')[0], {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500
+                }]
+            };
+            pdfMake.createPdf(docDefinition).download("teacher-list.pdf");
+        }
+    });
+});
+</script>
+
+
+<!-- script>
+    $(document).ready(function() {
+$('#example3').DataTable( {
+    dom: 'B<"clear">lfrtip',
+    "searching": true,
+    "paging":true,
+    "order":[[0,"asc"]],
+    "ordering":true,
+    "columnDafs":[{
+        "targets":[3],
+        "orderable": false
+    }],
+    buttons: {
+            name: 'btn btn-primary',
+            buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print']
+            }
+        }); 
+
+} );
+</script-->

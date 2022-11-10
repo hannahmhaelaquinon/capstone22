@@ -149,6 +149,7 @@ def teacher_add_video(request):
         form = QFORM.Video_form(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
+            return redirect('tvideo')
     else:
         form = QFORM.Video_form()
     return render(request, 'teacher/teacher_add_video.html', {"form": form, "all": all_video})

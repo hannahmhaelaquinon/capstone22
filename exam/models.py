@@ -36,3 +36,18 @@ class Video(models.Model):
     def __str__(self):
         return self.caption
 
+class Library(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    booktitle = models.CharField(max_length=150)
+    Subject = models.CharField(max_length=150)
+
+class Library1(models.Model):
+    Title = models.CharField(max_length=150)
+    Subject = models.CharField(max_length=150)
+    Date = models.CharField(max_length=150)
+
+    # book_image = models.ImageField(upload_to='image', blank=True)
+    # file = mo
+    class meta:
+        db_table = 'Library'
+

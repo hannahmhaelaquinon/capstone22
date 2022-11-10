@@ -4,6 +4,7 @@ from exam import views
 from django.contrib.auth.views import LogoutView, LoginView
 from django.conf import settings
 from django.conf.urls.static import static
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -58,8 +59,17 @@ urlpatterns = [
     path('admin-view-question', views.admin_view_question_view,
          name='admin-view-question'),
     path('view-question/<int:pk>', views.view_question_view, name='view-question'),
-    path('delete-question/<int:pk>',
-         views.delete_question_view, name='delete-question'),
+    path('delete-question/<int:pk>',views.delete_question_view, name='delete-question'),
 
+     path('admin-view-video/', views.admin_view_video,name='admin-view-video'),
+     path('admin-add-video/', views.admin_add_video,name='admin-add-video'),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+     
+     path('admin-view-library/', views.admin_all_view_library.as_view(), name='admin-view-library'),
+     path('admin-add-library/', views.admin_add_book.as_view(), name='admin-add-library-view'),
+     path('admin-edit-library/', views.admin_edit_library.as_view(), name='admin-edit-library'),
+
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

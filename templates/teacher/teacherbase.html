@@ -55,7 +55,7 @@
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img src="../../../static/teacher/assets/images/faces/face1.jpg" alt="profile">
+                <img src="{{ user.teacher.profile_pic.url }}" alt="profile">
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>
@@ -106,6 +106,12 @@
             <a class="nav-link" href="/teacher/game">
               <span class="menu-title">Games</span>
               <i class="mdi mdi-gamepad menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/teacher/profile">
+              <span class="menu-title">Profile</span>
+              <i class="mdi mdi-face-profile menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">

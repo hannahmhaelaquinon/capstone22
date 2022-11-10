@@ -31,3 +31,8 @@ class Video_form(forms.ModelForm):
     class Meta:
         model = models.Video
         fields = '__all__'
+
+class LibraryForm(forms.ModelForm):
+    class Meta:
+        model = models.Library1
+        fields = '__all__'

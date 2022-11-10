@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>{{ t.id }}</td>   
                                             <td>{{ t.get_name }}</td>  
-                                            <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+                                            <td> <img src="{{ t.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
                                             <td>{{ t.salary }}</td>  
                                             <td>{{ t.mobile }}</td>
                                         </tr>
