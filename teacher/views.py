@@ -12,6 +12,7 @@ from student import models as SMODEL
 from exam import forms as QFORM
 from teacher import forms as TFORM
 from teacher import models as TMODEL
+from django.contrib import messages
 
 #for showing signup/login button for teacher
 def teacherclick_view(request):
@@ -172,7 +173,22 @@ def tlibrary(request):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def tprofile(request):
-    return render(request, 'teacher/tprofile.html')
+    if request.method == 'POST':
+        user_form = TFORM.TeacherUserForm(request.POST, instance=request.user)
+        profile_form = TFORM.TeacherForm(
+            request.POST, request.FILES, instance=request.user.teacher)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='profile')
+
+    else:
+        user_form = TFORM.TeacherUserForm(instance=request.user)
+        profile_form = TFORM.TeacherForm(instance=request.user.teacher)
+
+    return render(request, 'teacher/tprofile.html', {'user_form': user_form, 'profile_form': profile_form})
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)

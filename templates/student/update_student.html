@@ -1,6 +1,5 @@
 {% extends 'student/studentbase.html' %}
 {% load widget_tweaks %}
-
 {% load static %}
 {% block content %}
 <head>
@@ -70,7 +69,10 @@ label{
         <div class="row">
             <div class="col-md-3 border-right">
              
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="src="{% static "image/student.png" %}" class="profile_image" alt=""><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ user.student.profile_pic.url }}" class="profile_image" alt="">
+                  <span class="font-weight-bold">{{ request.user.first_name }}
+                  {{ request.user.last_name }}
+                </span><span class="text-black-50">{{ request.user.email }}</span><span> </span></div>
             </div>
             <div class="col-md-8 border-right">
                 <div class="p-5 py-5">
@@ -98,9 +100,7 @@ label{
                         </div>
                         <div class="col-md-12"><label class="labels">Email</label>
                           {% render_field user_form.email class="form-control" placeholder="Email" %}
-                        </div>
-                        <div class="col-md-12"><label class="labels">Password</label>
-                          {% render_field user_form.password class="form-control" placeholder="Password" %} <br><br>
+                          <br><br>
                         </div>
                         <div class="col-md-12"><label class="labels">Profile Picture</label>
                           {% render_field profile_form.profile_pic class="form-control" placeholder="Profile Picture" %}
