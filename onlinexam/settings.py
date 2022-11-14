@@ -16,11 +16,11 @@ from pathlib import Path
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
-STATIC_DIR=os.path.join(BASE_DIR,'/static/')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, '/static/')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 # Quick-start development settings - unsuitable for production
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'teacher',
     'student',
     'widget_tweaks',
+    'crispy_forms',
 
 ]
 
@@ -55,18 +56,18 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CSRF_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE = False
 ROOT_URLCONF = 'onlinexam.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,21 +137,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-LOGIN_REDIRECT_URL='/afterlogin'
+LOGIN_REDIRECT_URL = '/afterlogin'
 
-#for contact us give your gmail id and password
-EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# for contact us give your gmail id and password
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jasperabangan@gmail.com' # this email will be used to send emails
-EMAIL_HOST_PASSWORD = 'njlbzeepluiohyfu' # host email password required
+# this email will be used to send emails
+EMAIL_HOST_USER = 'jasperabangan@gmail.com'
+EMAIL_HOST_PASSWORD = 'njlbzeepluiohyfu'  # host email password required
 # now sign in with your host gmail account in your browser
 # open following link and turn it ON
 # https://myaccount.google.com/lesssecureapps
 # otherwise you will get SMTPAuthenticationError at /contactus
 # this process is required because google blocks apps authentication by default
-EMAIL_RECEIVING_USER = ['bakadummytest@gmail.com'] # email on which you will receive messages sent from website
+# email on which you will receive messages sent from website
+EMAIL_RECEIVING_USER = ['bakadummytest@gmail.com']
 
-MEDIA_ROOT = os.path.join(BASE_DIR,"media")
-MEDIA_URL= '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'

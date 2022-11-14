@@ -8,7 +8,7 @@ from django.conf import settings
 from datetime import date, timedelta
 from exam import models as QMODEL
 from teacher import models as TMODEL
-from .forms import StudentForm, StudentUserForm
+from .forms import StudentForm, StudentUserForm, UpdateForm
 from django.contrib import messages
 
 
@@ -46,11 +46,11 @@ def is_student(user):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_dashboard_view(request):
-    dict={
-    
-    'total_course':QMODEL.Course.objects.all().count(),
-    'total_question':QMODEL.Question.objects.all().count(),
-    'total_assignment':TMODEL.TeacherAssignment.objects.all().count(),
+    dict = {
+
+        'total_course': QMODEL.Course.objects.all().count(),
+        'total_question': QMODEL.Question.objects.all().count(),
+        'total_assignment': TMODEL.TeacherAssignment.objects.all().count(),
     }
     return render(request, 'student/student_dashboard.html', context=dict)
 
@@ -58,19 +58,22 @@ def student_dashboard_view(request):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_assignment(request):
-    courses=QMODEL.Course.objects.all()
-    return render(request,'student/student_assignment.html',{'courses':courses})
+    courses = QMODEL.Course.objects.all()
+    return render(request, 'student/student_assignment.html', {'courses': courses})
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
-def student_take_assignment(request,pk):
-    course=QMODEL.Course.objects.get(id=pk)
-    assignment=TMODEL.TeacherAssignment.objects.all().filter(course=course)
-    if request.method=='POST':
+def student_take_assignment(request, pk):
+    course = QMODEL.Course.objects.get(id=pk)
+    assignment = TMODEL.TeacherAssignment.objects.all().filter(course=course)
+    if request.method == 'POST':
         pass
-    response= render(request,'student/student_take_assignment.html',{'course':course,'assignment':assignment})
-    response.set_cookie('course_id',course.id)
+    response = render(request, 'student/student_take_assignment.html',
+                      {'course': course, 'assignment': assignment})
+    response.set_cookie('course_id', course.id)
     return response
+
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
@@ -193,21 +196,26 @@ def studentprofile(request):
 
 def studentupdate(request):
     if request.method == 'POST':
-        user_form = StudentUserForm(request.POST, instance=request.user)
+        user_form = UpdateForm(request.POST, instance=request.user)
         profile_form = StudentForm(
             request.POST, request.FILES, instance=request.user.student)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='update_student')
+           # messages.success(request, 'Your profile is updated successfully')
+            return redirect('student-profile')
 
     else:
-        user_form = StudentUserForm(instance=request.user)
+        user_form = UpdateForm(instance=request.user)
         profile_form = StudentForm(instance=request.user.student)
 
-    return render(request, 'student/update_student.html', {'user_form': user_form, 'profile_form': profile_form})
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+
+    return render(request, 'student/update_student.html', context)
 
 
 '''@login_required(login_url='studetnlogin')

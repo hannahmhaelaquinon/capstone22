@@ -52,7 +52,7 @@
                               <div class="form-group focused">
                                 <label class="form-control-label" for="input-username">Username</label>
                                 <div class="col-sm-9 text-secondary">
-                                  {{ request.user.username }}
+                                  {% render_field  user_form.username class="form-control" placeholder="Username"  %}
                                 </div>
                               </div>
                             </div>
@@ -70,7 +70,7 @@
                             <div class="form-group focused">
                               <label class="form-control-label" for="input-firstname">First Name</label>
                               <div class="col-sm-9 text-secondary">
-                                {{request.user.first_name}}
+                                {% render_field  user_form.first_name class="form-control" placeholder="First Name" %}
                               </div>
                             </div>
                           </div>
@@ -78,7 +78,7 @@
                             <div class="form-group">
                               <label class="form-control-label" for="input-lastname">Last Name</label>
                               <div class="col-sm-9 text-secondary">
-                               {{request.user.last_name}}
+                                {% render_field  user_form.last_name class="form-control" placeholder="First Name" %}
                               </div>
                             </div>
                           </div>
@@ -94,7 +94,7 @@
                             <div class="form-group focused">
                               <label class="form-control-label" for="input-city">Email</label>
                               <div class="col-sm-9 text-secondary">
-                                {{ request.user.teacher.email }}
+                                {% render_field  user_form.email class="form-control" placeholder="Email" %}
                               </div>
                             </div>
                           </div>
@@ -102,33 +102,37 @@
                             <div class="form-group focused">
                               <label class="form-control-label" for="input-city">Mobile</label>
                               <div class="col-sm-9 text-secondary">
-                                {{ request.user.teacher.mobile }}
+                                {% render_field  profile_form.mobile class="form-control" placeholder="Mobile" %}
                               </div>
                             </div>
                           </div>
                         </div>
-                          <div class="col-lg-6">
+                          <div class="col-lg-12">
                             <div class="form-group focused">
                               <label class="form-control-label" for="input-country">Address</label>
                               <div class="col-sm-9 text-secondary">
-                                {{ request.user.teacher.address }}
+                                {% render_field  profile_form.address class="form-control" placeholder="Address" %}
                               </div>
                             </div>
                           </div>
-                          <!--<div class="col-lg-12">
+                          <div class="col-lg-12">
                             <div class="form-group">
                               <label class="form-control-label" for="input-country">Profile Picture</label>
                               <br>
                               {% render_field profile_form.profile_pic class="form-control" placeholder="Profile Picture" %}
                               <br>
                             </div>
-                          </div>-->
+                          </div>
+                         
                       <hr class="my-4">
+                      <br>
                       </div>
+
                       <br><br>
                     <div class="center">
-                      <div class="col-sm-12">
-                        <a class="btn btn-info " href="{% url 'teacher-update-profile' %}">Edit</a>
+                      <div class="row mt-3">
+                        <div class="col-md-6"><a href="{% url 'profile' %}" class="btn btn-primary profile-button">Cancel</a></div>
+                      <div class="col-md-6"><input class="btn btn-primary profile-button" type="submit" value="Update"></div>
                       </div>
                   </div>
                     </form>
