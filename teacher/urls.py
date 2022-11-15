@@ -24,6 +24,8 @@ urlpatterns = [
          name='teacher-assigbnment'),
     path('teacher-add-assignment', views.teacher_add_assignment,
          name='teacher-add-assignment'),
+     path('teacher-edit-assignment', views.teacher_edit_assignment,
+         name='teacher-edit-assignment'),
 
     path('teacher-exam', views.teacher_exam_view, name='teacher-exam'),
     path('teacher-add-exam', views.teacher_add_exam_view, name='teacher-add-exam'),

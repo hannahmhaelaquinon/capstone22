@@ -86,6 +86,25 @@ def admin_view_teacher_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=True)
     return render(request, 'exam/admin_view_teacher.html', {'teachers': teachers})
 
+@login_required(login_url='adminlogin')
+def admin_add_teacher_view(request):
+    userForm = TFORM.TeacherUserForm()
+    teacherForm = TFORM.TeacherForm()
+    mydict = {'userForm': userForm, 'teacherForm': teacherForm}
+    if request.method == 'POST':
+        userForm = TFORM.TeacherUserForm(request.POST)
+        teacherForm = TFORM.TeacherForm(request.POST, request.FILES)
+        if userForm.is_valid() and teacherForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            teacher = teacherForm.save(commit=False)
+            teacher.user = user
+            teacher.save()
+            my_teacher_group = Group.objects.get_or_create(name='TEACHER')
+            my_teacher_group[0].user_set.add(user)
+        return HttpResponseRedirect('admin-view-pending-teacher')
+    return render(request, 'exam/admin_add_teacher.html', context=mydict)
 
 @login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):

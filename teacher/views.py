@@ -117,7 +117,8 @@ def teacher_add_question_view(request):
     return render(request, 'teacher/teacher_add_question.html', {'questionForm': questionForm})
 
 
-@login_required(login_url='adminlogin')
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
 def teacher_assignment(request):
     courses = QMODEL.Course.objects.all()
     assignments = TMODEL.TeacherAssignment.objects.all()
@@ -144,6 +145,27 @@ def teacher_add_assignment(request):
         return HttpResponseRedirect('/teacher/teacher-assignment')
     return render(request, 'teacher/teacher_add_assignment.html', {'assignmentForm': assignmentForm})
 
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_edit_assignment(request):
+    ass_form = TFORM.TeacherAssForm(request.POST, request.FILES)
+    context = {
+        'ass_form': ass_form,
+    }
+    if request.method == 'POST':
+        ass_form = TFORM.TeacherAssForm(request.POST, request.FILES)
+
+        if ass_form.is_valid():
+            assignment = ass_form.save()
+            course = QMODEL.Course.objects.get(id=request.POST.get('courseID'))
+            assignment.course = course
+            assignment.save()
+            return redirect('teacher-assignment')
+
+    else:
+       print("form is invalid")
+       
+    return render(request, 'teacher/teacher_edit_assignment.html',context)
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
@@ -197,7 +219,8 @@ def tprofile(request):
     teacher = models.Teacher.objects.all()
     return render(request, 'teacher/teacherprofile.html',  {'teachers': teacher})
 
-
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
 def teacherUpdate(request):
     if request.method == 'POST':
         user_form = UpdateTeacherForm(request.POST, instance=request.user)
