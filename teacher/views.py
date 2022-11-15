@@ -152,7 +152,7 @@ def teacher_view_video(request):
     context = {
         'videos': videos
     }
-    return render(request, 'teacher/tvideo.html', context)
+    return render(request, 'teacher/teachervideo.html', context)
 
 
 @login_required(login_url='teacherlogin')
@@ -184,14 +184,18 @@ def tgame(request):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def tlibrary(request):
-    return render(request, 'teacher/tlibrary.html')
+    books = QMODEL.Library1.objects.all()
+    context = {
+        'books': books
+    }
+    return render(request, 'teacher/teacherlibrary.html', context)
 
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def tprofile(request):
     teacher = models.Teacher.objects.all()
-    return render(request, 'teacher/tprofile.html',  {'teachers': teacher})
+    return render(request, 'teacher/teacherprofile.html',  {'teachers': teacher})
 
 
 def teacherUpdate(request):

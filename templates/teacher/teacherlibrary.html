@@ -27,9 +27,15 @@
 									 <a href="" class="btn btn-primary">Go</i></a>
               </form>
               <div class="row mt-3">
+                {% for b in books %}   
                 <div class="col-6 pe-1">
-                  <img src="../../../static/PNG/the-three-little-pigs-26.jpg" class="mb-2 mw-50 w-50 rounded" alt="image">
+                  {{b.Title}}
                 </div>
+                <div class="col-6 pe-1">
+                {{b.Subject}}
+                </div>
+                
+                {% endfor %}
               </div>
             </div>
           </div>

@@ -15,10 +15,9 @@ urlpatterns = [
     path('teacher-add-video/', views.teacher_add_video, name='teacher-add-video'),
     path('game/SimonSays', views.SimonGame, name='SimonSays'),
     path('game/', views.tgame, name='game'),
-    path('library/', views.tlibrary, name='library'),
-    path('profile/', views.tprofile, name='profile'),
+    path('teacherlibrary/', views.tlibrary, name='library'),
+    path('teacherprofile/', views.tprofile, name='profile'),
     path('profile-update/', views.teacherUpdate, name='teacher-update-profile'),
-
 
 
     path('teacher-assignment', views.teacher_assignment,
