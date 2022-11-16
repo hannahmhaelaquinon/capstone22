@@ -29,6 +29,8 @@ urlpatterns = [
     path('admin-teacher', views.admin_teacher_view, name='admin-teacher'),
     path('admin-view-teacher', views.admin_view_teacher_view,
          name='admin-view-teacher'),
+    path('admin-add-teacher', views.admin_add_teacher_view,
+         name='admin-add-teacher'),
     path('update-teacher/<int:pk>',
          views.update_teacher_view, name='update-teacher'),
     path('delete-teacher/<int:pk>',

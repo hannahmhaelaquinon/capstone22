@@ -15,6 +15,7 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!-- Favicon icon -->
     <link rel="icon" type="../../static/admin/image/png" sizes="16x16" href="../../static/assets/img/beslms.png">
+    <link href="../../static/admin/vendor/summernote/summernote.css" rel="stylesheet">
     <link rel="stylesheet" href="../../static/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="../../static/admin/css/style.css">
     <link rel="stylesheet" href="../../static/admin/vendor/jqvmap/css/jqvmap.min.css">
@@ -117,45 +118,72 @@
                         Main Menu
                     </li>
                     <li>
-                      <a href="/admin-dashboard" aria-expanded="false">
-							        <i class="la la-home"></i>
-							        <span class="nav-text" href="/admin-dashboard">Dashboard</span>
-						          </a>
-					          </li>
-                    <li>
-                      <a href="/admin-teacher" aria-expanded="false">
-							        <i class="la la-user"></i>
-							        <span class="nav-text" href="/admin-teacher">Teacher</span>
-						          </a>
+                        <a href="javascript:void()" aria-expanded="false">
+							<i class="la la-home"></i>
+							<span class="nav-text"  href="/admin-dashboard">Dashboard</span>
+						</a>
+					<li>
+                        <a class="ai-icon" href= "" aria-expanded="false">
+							<i class="la la-calendar"></i>
+							<span class="nav-text">Event Management</span>
+						</a>
                     </li>
-                    <li>
-                      <a href="/admin-student" aria-expanded="false">
-							        <i class="la la-home"></i>
-							        <span class="nav-text" href="/admin-student">Student</span>
-						          </a>
+					<li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-user"></i>
+							<span class="nav-text">Teacher</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'admin-teacher' %}">All Teachers</a></li>
+                            <li><a href="{% url 'admin-add-teacher' %}">Add Teacher</a></li>
+                        </ul>
                     </li>
-                    <li>
-                      <a href="/admin-course" aria-expanded="false">
-							        <i class="la la-graduation-cap"></i>
-							        <span class="nav-text" href="/admin-course">Subject</span>
-						          </a>
+					<li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-users"></i>
+							<span class="nav-text">Students</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'admin-view-student' %}">All Students</a></li>
+                            <li><a href="">Add Students</a></li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="/admin-view-video" aria-expanded="false">
-                                      <i class="la la-building"></i>
-                                      <span class="nav-text" href="/admin-view-video">Video</span>
-                                    </a>
+					<li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-graduation-cap"></i>
+                            <span class="nav-text">Subjects</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'admin-view-course' %}">All Subjects</a></li>
+                            <li><a href="{% url 'admin-add-course' %}">Add Subjects</a></li>
+                            <li><a href="">Edit Subject</a></li>
+                            <li><a href="">Grade Level</a></li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="/admin-view-library" aria-expanded="false">
-                                      <i class="la la-book"></i>
-                                      <span class="nav-text" href="/admin-view-library">Library</span>
-                                    </a>
+					<li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-book"></i>
+							<span class="nav-text">Library</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a  href="{% url 'admin-view-library' %}">All Library</a></li>
+                            <li><a  href="{% url 'admin-add-library-view' %}">Add Library</a></li>
+                            <li><a  href="{% url 'admin-edit-library' %}">Edit Library</a></li>
+                        </ul>
                     </li>
-                        
+					<li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-building"></i>
+							<span class="nav-text">Video</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'admin-view-video' %}">All Videos</a></li>
+                            <li><a href="{% url 'admin-add-video' %}">Add Video</a></li>
+                            <li><a href="">Edit Videos</a></li>
+                        </ul>
+                    </li>
 				</ul>
             </div>
-        </div>
         </div>
         <!--**********************************
             Sidebar end

@@ -7,7 +7,7 @@
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white me-2">
           <i class="mdi mdi-clipboard"></i>
-        </span> Add Assignment
+        </span> Edit Assignment
       </h3>
       <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
@@ -17,19 +17,19 @@
         </ul>
       </nav>
     </div>
-    <h2 style="text-align:center;">Add Assignment</h2>
+    <h2 style="text-align:center;">Edit Assignment</h2>
 <form method="POST" autocomplete="off" enctype="multipart/form-data"style="margin:100px;margin-top: 0px;">
     {%csrf_token%}
     <div class="form-group">
         <label for="assignment">Subject</label>
-      {% render_field assignmentForm.courseID|attr:'required:true' class="form-control"  %}
+      {% render_field ass_form.courseID class="form-control" placeholder="Username"  %}
         <br>
 
       <label for="assignment">Instruction</label>
-      {% render_field assignmentForm.instruction|attr:'required:true' class="form-control" placeholder="Example: What is the relation calculus?" %}
+      {% render_field ass_form.instruction|attr:'required:true' class="form-control" placeholder="Example: What is the relation calculus?" %}
         <br>
       <label for="assignment">Upload</label>
-        {% render_field assignmentForm.upload|attr:'' class="form-control" placeholder="" %}
+        {% render_field ass_form.upload|attr:'' class="form-control" placeholder="" %}
         </div>
         <button type="submit" class="btn btn-success" style="border-radius: 0%;">Submit Assignment</button>
     </div>

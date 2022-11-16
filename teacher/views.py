@@ -117,7 +117,8 @@ def teacher_add_question_view(request):
     return render(request, 'teacher/teacher_add_question.html', {'questionForm': questionForm})
 
 
-@login_required(login_url='adminlogin')
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
 def teacher_assignment(request):
     courses = QMODEL.Course.objects.all()
     assignments = TMODEL.TeacherAssignment.objects.all()
@@ -147,12 +148,35 @@ def teacher_add_assignment(request):
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
+def teacher_edit_assignment(request):
+    ass_form = TFORM.TeacherAssForm(request.POST, request.FILES)
+    context = {
+        'ass_form': ass_form,
+    }
+    if request.method == 'POST':
+        ass_form = TFORM.TeacherAssForm(request.POST, request.FILES)
+
+        if ass_form.is_valid():
+            assignment = ass_form.save()
+            course = QMODEL.Course.objects.get(id=request.POST.get('courseID'))
+            assignment.course = course
+            assignment.save()
+            return redirect('teacher-assignment')
+
+    else:
+        print("form is invalid")
+
+    return render(request, 'teacher/teacher_edit_assignment.html', context)
+
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
 def teacher_view_video(request):
     videos = QMODEL.Video.objects.all()
     context = {
         'videos': videos
     }
-    return render(request, 'teacher/tvideo.html', context)
+    return render(request, 'teacher/teachervideo.html', context)
 
 
 @login_required(login_url='teacherlogin')
@@ -168,6 +192,7 @@ def teacher_add_video(request):
         form = QFORM.VideoForm()
     return render(request, 'teacher/teacher_add_video.html', {"form": form, "all": all_video})
 
+
 '''
 def teacher_delete_video(request, pk):
     if request.method == 'POST':
@@ -175,6 +200,7 @@ def teacher_delete_video(request, pk):
         video.delete()
     return redirect('teacher-view-video')
 '''
+
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
@@ -206,6 +232,7 @@ def upload_book(request):
         form = QFORM.LibraryForm()
     return render(request, 'teacher/teacher_upload_book.html', {'form': form})
 
+
 '''
 def delete_book(request, pk):
     if request.method == 'POST':
@@ -214,11 +241,12 @@ def delete_book(request, pk):
     return redirect('library')
 '''
 
+
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def tprofile(request):
     teacher = models.Teacher.objects.all()
-    return render(request, 'teacher/tprofile.html',  {'teachers': teacher})
+    return render(request, 'teacher/teacherprofile.html',  {'teachers': teacher})
 
 
 @login_required(login_url='teacherlogin')

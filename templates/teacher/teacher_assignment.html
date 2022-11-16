@@ -24,7 +24,7 @@
             <div class="card-header">
                 <h4 class="card-title">Available Assignment</h4>
             <a href="/teacher/teacher-add-assignment" type="button" class="btn btn-outline-danger btn-icon-text" >
-                <i class="mdi mdi-upload btn-icon-prepend" ></i> Upload 
+                <i class="mdi mdi-upload btn-icon-prepend" ></i> Add new 
               </a>
             </div>
             <div class="card-body">
@@ -32,6 +32,7 @@
                 <table class="table table-bordered">
                 <thead>
                   <tr>
+                    <th scope="col" style = 'text-align:center;'> Assignment Id</th>
                     <th scope="col" style = 'text-align:center;'> Subject</th>
                     <th scope="col" style = 'text-align:center;'> Instruction</th>
                     <th scope="col" style = 'text-align:center;'> File</th>
@@ -40,21 +41,28 @@
                 </thead>
           <tbody>       
             <tr>
-                {% for s in  courses %}  
+              {% for a in  assignments %} 
+                    <td>{{a.id}}</td>
+                    {% for s in  courses %}  
                     <td>{{s.course_name}}</td>
-                {% endfor %}
-                {% for a in  assignments %} 
+                    {% endfor %}
+                
                     <td>{{a.instruction}}</td>   
                     <td>{{a.upload}}</td>
                     
                     
-                {% endfor %}
-                <td>
-                    <a type="button" class="btn btn-sm btn-danger">
-                    <i class="mdi mdi-border-color"></i>
-                    </a>
-                </td>
+                
+                    <td>
+                      <a type="button" class="btn btn-sm btn-primary" href="{% url 'teacher-edit-assignment' %}">
+                          <i class="mdi mdi-border-color"></i>
+                      </a>
+      
+                      <button type="button" class="btn btn-sm btn-danger" >
+                          <i class="mdi mdi-delete"></i>
+                      </button>
+                  </td>
               </tr>
+            {% endfor %}
           </tbody>
           </table>
         </div>
