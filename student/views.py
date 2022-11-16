@@ -160,13 +160,15 @@ def student_marks_view(request):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_video_view(request):
-    return render(request, 'student/svideo.html')
+    video = QMODEL.Video.objects.all()
+    return render(request, 'student/svideo.html', {'video': video})
 
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_library_view(request):
-    return render(request, 'student/slibrary.html')
+    books = QMODEL.Library.objects.all()
+    return render(request, 'student/slibrary.html', {'books': books})
 
 
 @login_required(login_url='studentlogin')
@@ -194,6 +196,8 @@ def studentprofile(request):
     return render(request, 'student/sprofile.html',  {'students': students})
 
 
+@login_required(login_url='studetnlogin')
+@user_passes_test(is_student)
 def studentupdate(request):
     if request.method == 'POST':
         user_form = UpdateForm(request.POST, instance=request.user)
@@ -216,35 +220,3 @@ def studentupdate(request):
     }
 
     return render(request, 'student/update_student.html', context)
-
-
-'''@login_required(login_url='studetnlogin')
-@user_passes_test(is_student)
-def studentupdate(request):
-    student = request.user.student
-    userForm = forms.StudentForm(instance=student)
-    context = {'userForm': userForm}
-    return render(request, 'student/update_student.html', context)
-
-
-
-@login_required(login_url='studetnlogin')
-@user_passes_test(is_student)
-def studentupdate(request, pk):
-    student = models.Student.objects.get(id=pk)
-    user = models.User.objects.get(id=student.user_id)
-    userForm = forms.StudentUserForm(instance=user)
-    studentForm = forms.StudentForm(request.FILES, instance=student)
-    mydict = {'userForm': userForm, 'studentForm': studentForm}
-    if request.method == 'POST':
-        userForm = forms.StudentUserForm(request.POST, instance=user)
-        studentForm = forms.StudentForm(
-            request.POST, request.FILES, instance=student)
-        if userForm.is_valid() and studentForm.is_valid():
-            user = userForm.save()
-            user.set_password(user.password)
-            user.save()
-            studentForm.save()
-            return redirect('update_student')
-    return render(request, 'student/update_student.html', context=mydict)
-'''

@@ -160,14 +160,21 @@ def teacher_view_video(request):
 def teacher_add_video(request):
     all_video = QMODEL.Video.objects.all()
     if request.method == "POST":
-        form = QFORM.Video_form(data=request.POST, files=request.FILES)
+        form = QFORM.VideoForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('tvideo')
+            return redirect('teacher-view-video')
     else:
-        form = QFORM.Video_form()
+        form = QFORM.VideoForm()
     return render(request, 'teacher/teacher_add_video.html', {"form": form, "all": all_video})
 
+'''
+def teacher_delete_video(request, pk):
+    if request.method == 'POST':
+        video = QMODEL.Video.objects.get(pk=pk)
+        video.delete()
+    return redirect('teacher-view-video')
+'''
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
@@ -184,8 +191,28 @@ def tgame(request):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def tlibrary(request):
-    return render(request, 'teacher/tlibrary.html')
+    books = QMODEL.Library.objects.all()
+    return render(request, 'teacher/tlibrary.html', {'books': books})
 
+
+@login_required(login_url='teacherlogin')
+def upload_book(request):
+    if request.method == 'POST':
+        form = QFORM.LibraryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('library')
+    else:
+        form = QFORM.LibraryForm()
+    return render(request, 'teacher/teacher_upload_book.html', {'form': form})
+
+'''
+def delete_book(request, pk):
+    if request.method == 'POST':
+        book = QMODEL.Library.objects.get(pk=pk)
+        book.delete()
+    return redirect('library')
+'''
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
@@ -194,6 +221,8 @@ def tprofile(request):
     return render(request, 'teacher/tprofile.html',  {'teachers': teacher})
 
 
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
 def teacherUpdate(request):
     if request.method == 'POST':
         user_form = UpdateTeacherForm(request.POST, instance=request.user)

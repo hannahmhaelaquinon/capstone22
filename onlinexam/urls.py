@@ -14,24 +14,33 @@ urlpatterns = [
     path('signin/', views.signin, name='signin'),
     path('signup/', views.signup),
 
-    #NAVBAR
-    path('',views.home_view,name='home'),
-    path('logout', LogoutView.as_view(template_name='exam/logout.html'),name='logout'),
+    # NAVBAR
+    path('', views.home_view, name='home'),
+    path('logout', LogoutView.as_view(
+        template_name='exam/logout.html'), name='logout'),
     path('contactus', views.contactus_view, name='contactus'),
-    path('afterlogin', views.afterlogin_view,name='afterlogin'),
+    path('afterlogin', views.afterlogin_view, name='afterlogin'),
 
 
-    path('adminclick', views.adminclick_view,name='adminclick'),
-    path('adminlogin', LoginView.as_view(template_name='exam/adminlogin.html'),name='adminlogin'),
-    path('admin-dashboard', views.admin_dashboard_view,name='admin-dashboard'),
-    path('admin-teacher', views.admin_teacher_view,name='admin-teacher'),
-    path('admin-view-teacher', views.admin_view_teacher_view,name='admin-view-teacher'),
-    path('update-teacher/<int:pk>', views.update_teacher_view,name='update-teacher'),
-    path('delete-teacher/<int:pk>', views.delete_teacher_view,name='delete-teacher'),
-    path('admin-view-pending-teacher', views.admin_view_pending_teacher_view,name='admin-view-pending-teacher'),
-    path('admin-view-teacher-salary', views.admin_view_teacher_salary_view,name='admin-view-teacher-salary'),
-    path('approve-teacher/<int:pk>', views.approve_teacher_view,name='approve-teacher'),
-    path('reject-teacher/<int:pk>', views.reject_teacher_view,name='reject-teacher'),
+    path('adminclick', views.adminclick_view, name='adminclick'),
+    path('adminlogin', LoginView.as_view(
+        template_name='exam/adminlogin.html'), name='adminlogin'),
+    path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),
+    path('admin-teacher', views.admin_teacher_view, name='admin-teacher'),
+    path('admin-view-teacher', views.admin_view_teacher_view,
+         name='admin-view-teacher'),
+    path('update-teacher/<int:pk>',
+         views.update_teacher_view, name='update-teacher'),
+    path('delete-teacher/<int:pk>',
+         views.delete_teacher_view, name='delete-teacher'),
+    path('admin-view-pending-teacher', views.admin_view_pending_teacher_view,
+         name='admin-view-pending-teacher'),
+    path('admin-view-teacher-salary', views.admin_view_teacher_salary_view,
+         name='admin-view-teacher-salary'),
+    path('approve-teacher/<int:pk>',
+         views.approve_teacher_view, name='approve-teacher'),
+    path('reject-teacher/<int:pk>',
+         views.reject_teacher_view, name='reject-teacher'),
 
     path('admin-student', views.admin_student_view, name='admin-student'),
     path('admin-view-student', views.admin_view_student_view,
@@ -59,15 +68,30 @@ urlpatterns = [
     path('admin-view-question', views.admin_view_question_view,
          name='admin-view-question'),
     path('view-question/<int:pk>', views.view_question_view, name='view-question'),
-    path('delete-question/<int:pk>',views.delete_question_view, name='delete-question'),
+    path('delete-question/<int:pk>',
+         views.delete_question_view, name='delete-question'),
 
-     path('admin-view-video/', views.admin_view_video,name='admin-view-video'),
-     path('admin-add-video/', views.admin_add_video,name='admin-add-video'),
+    path('admin-view-video/', views.admin_view_video, name='admin-view-video'),
+    path('admin-add-video/', views.admin_add_video, name='admin-add-video'),
+    path('admin-delete-video/<int:pk>/',
+         views.admin_delete_video, name='admin-delete-video'),
+    path('admin-update-video/<int:pk>/',
+         views.admin_update_video, name='admin-update-video'),
 
-     
-     path('admin-view-library/', views.admin_all_view_library.as_view(), name='admin-view-library'),
-     path('admin-add-library/', views.admin_add_book.as_view(), name='admin-add-library-view'),
-     path('admin-edit-library/', views.admin_edit_library.as_view(), name='admin-edit-library'),
+
+
+    path('admin-view-library/', views.admin_view_library,
+         name='admin-view-library'),
+    path('admin-upload-book/', views.upload_book, name='admin-upload-book'),
+    path('admin-delete-book/<int:pk>/',
+         views.delete_book, name='admin-delete-book'),
+    path('admin-edit-book/<int:pk>/', views.edit_book, name='admin-edit-book'),
+    path('admin-update-file/<int:pk>/',
+         views.admin_update_file, name='admin-update-file'),
+
+
+
+    #path('admin-edit-library/', views.admin_edit_library.as_view(), name='admin-edit-library'),
 
 ]
 if settings.DEBUG:
