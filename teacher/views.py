@@ -218,7 +218,7 @@ def tgame(request):
 @user_passes_test(is_teacher)
 def tlibrary(request):
     books = QMODEL.Library.objects.all()
-    return render(request, 'teacher/tlibrary.html', {'books': books})
+    return render(request, 'teacher/teacherlibrary.html', {'books': books})
 
 
 @login_required(login_url='teacherlogin')
