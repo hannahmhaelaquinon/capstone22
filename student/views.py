@@ -180,7 +180,7 @@ def student_games_view(request):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def SimonGame(request):
-    return render(request, '/SGame/index.html')
+    return render(request, 'student/SGame/index.html')
 
 
 @login_required(login_url='studentlogin')

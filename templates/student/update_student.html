@@ -5,57 +5,18 @@
 {% block content %}
 <head>
   <style media="screen">
-  body {
-    background:#011F3F;
-    
-}
+
 label{
-  color:black;
+  color:white;
   font-size: medium;
 }
-
-.form-control:focus {
-    box-shadow: none;
-    border-color: #BA68C8
-}
-
-.profile-button {
-    background: rgb(99, 39, 120);
-    box-shadow: none;
-    border: none
-}
-
-.profile-button:hover {
-    background: #682773
-}
-
-.profile-button:focus {
-    background: #682773;
-    box-shadow: none
-}
-
-.profile-button:active {
-    background: #682773;
-    box-shadow: none
-}
-
-.back:hover {
-    color: #682773;
-    cursor: pointer
-}
-
 .labels {
     font-size: 11px
 }
 
-.add-experience:hover {
-    background: #BA68C8;
-    color: #fff;
-    cursor: pointer;
-    border: solid 1px #BA68C8
-}
 
-  </style>
+
+</style>
  
 
 </head>    
@@ -68,14 +29,14 @@ label{
       {% csrf_token %}
  
 
-      <div class="container rounded bg-white mt-5 mb-5">
+      <div class="container rounded mt-5 mb-5" style="background-color: #0A065E;">
         <div class="row">
             <div class="col-md-3 border-right">
              
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ user.student.profile_pic.url }}" class="profile_image" alt="">
                   <span class="font-weight-bold">{{ request.user.first_name }}
                   {{ request.user.last_name }}
-                </span><span class="text-black-50">{{ request.user.email }}</span><span> </span></div>
+                </span><span class="text-white-50">{{ request.user.email }}</span><span> </span></div>
             </div>
             <div class="col-md-8 border-right">
                 <div class="p-5 py-5">
