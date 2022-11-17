@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import get_object_or_404, render, redirect, reverse
 from . import forms, models
 from django.views.generic import View
 from django.db.models import Sum
@@ -16,6 +16,9 @@ from student import forms as SFORM
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
+from .forms import CourseForm, VideoForm, LibraryForm
+from django.core.files.storage import FileSystemStorage
+
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -86,6 +89,45 @@ def admin_view_teacher_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=True)
     return render(request, 'exam/admin_view_teacher.html', {'teachers': teachers})
 
+@login_required(login_url='adminlogin')
+def admin_add_teacher_view(request):
+    userForm = TFORM.TeacherUserForm()
+    teacherForm = TFORM.TeacherForm()
+    mydict = {'userForm': userForm, 'teacherForm': teacherForm}
+    if request.method == 'POST':
+        userForm = TFORM.TeacherUserForm(request.POST)
+        teacherForm = TFORM.TeacherForm(request.POST, request.FILES)
+        if userForm.is_valid() and teacherForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            teacher = teacherForm.save(commit=False)
+            teacher.user = user
+            teacher.save()
+            my_teacher_group = Group.objects.get_or_create(name='TEACHER')
+            my_teacher_group[0].user_set.add(user)
+        return HttpResponseRedirect('admin-view-pending-teacher')
+    return render(request, 'exam/admin_add_teacher.html', context=mydict)
+
+@login_required(login_url='adminlogin')
+def admin_add_student_view(request):
+    userForm = SFORM.StudentUserForm()
+    studentForm = SFORM.StudentForm()
+    mydict = {'userForm': userForm, 'studentForm': studentForm}
+    if request.method == 'POST':
+        userForm = SFORM.StudentUserForm(request.POST)
+        studentForm = SFORM.StudentForm(request.POST, request.FILES)
+        if userForm.is_valid() and studentForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            student = studentForm.save(commit=False)
+            student.user = user
+            student.save()
+            my_student_group = Group.objects.get_or_create(name='STUDENT')
+            my_student_group[0].user_set.add(user)
+        return HttpResponseRedirect('admin-view-student')
+    return render(request, 'exam/admin_add_student.html', context=mydict)
 
 @login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):
@@ -232,6 +274,21 @@ def delete_course_view(request, pk):
 
 
 @login_required(login_url='adminlogin')
+def edit_course_view(request):
+    if request.method == 'POST':
+        subform = CourseForm(request.POST, instance=request.user)
+
+        if subform.is_valid():
+            subform.save()
+           # messages.success(request, 'Your profile is updated successfully')
+            return redirect('admin-view-course')
+        else:
+            subform = CourseForm(instance=request.user)
+
+        return render(request, 'exam/cousre_update.html', {'subform': subform})
+
+
+@login_required(login_url='adminlogin')
 def admin_question_view(request):
     return render(request, 'exam/admin_question.html')
 
@@ -314,6 +371,8 @@ def contactus_view(request):
             return render(request, 'exam/contactussuccess.html')
     return render(request, 'contactus.html', {'form': sub})
 
+# Video
+
 
 @login_required(login_url='adminlogin')
 def admin_view_video(request):
@@ -323,124 +382,92 @@ def admin_view_video(request):
     }
     return render(request, 'exam/admin_view_video.html', context)
 
+
 @login_required(login_url='adminlogin')
 def admin_add_video(request):
-    all_video = models.Video.objects.all()
-    if request.method == "POST":
-        form = forms.Video_form(data=request.POST, files=request.FILES)
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('admin-view-video')
     else:
-        form = forms.Video_form()
-    return render(request, 'exam/admin_add_video.html', {"form": form, "all": all_video})
+
+        form = VideoForm()
+    return render(request, 'exam/admin_add_video.html', {'form': form})
+
+
+def admin_delete_video(request, pk):
+    if request.method == 'POST':
+        video = models.Video.objects.get(pk=pk)
+        video.delete()
+    return redirect('admin-view-video')
+
+# trial
+
+
+def admin_update_video(request, pk):
+    if request.method == "POST":
+        video = request.FILES['video']
+        file_name = request.FILES['video'].name
+
+        fs = FileSystemStorage()
+        file = fs.save(video.name, video)
+        fileurl = fs.url(file)
+        report = file_name
+
+        models.Library.objects.filter(id=pk).update(video=video)
+        # messages.success(request,'File was uploaded succesfully!')
+        return redirect('admin_add_video')
+    else:
+        return render(request, 'exam/admin_update_video.html')
+
 
 # Library
-
-
-class admin_view_library(View):
-    @method_decorator(login_required(login_url='adminlogin'))
-    def get(self, request):
-        books = models.Library.objects.all()
-        subject = models.Course.objects.all()
-        context = {
-            'books': books,
-            'subjects': subject,
-        }
-        return render(request, 'exam/admin_view_library.html', context)
-
-class admin_all_view_library(View):
-    @method_decorator(login_required(login_url='adminlogin'))
-    def get(self,request):
-        book = models.Library1.objects.all()
-        return render(request, 'exam/admin_view_library.html',{ "books" : book})
-
-    def post(self,request):
-                    if request.method == 'POST':	
-                        if 'btnUpdate' in request.POST:	
-                            print('update profile button clicked')
-                            pid = request.POST.get("booking-id")			                          
-                            Title = request.POST.get("Title")			
-                            Subject = request.POST.get("Subject")
-                            Date = request.POST.get("Date")
-                            print(Date)
-                            update_Booking = models.Library1.objects.filter(id = pid).update(Title = Title, Subject = Subject, Date = Date)
-                            print(update_Booking)
-                            print('profile updated')
-                        elif 'btnDelete' in request.POST:
-                            print('delete button clicked')
-                        pid = request.POST.get("bbooking-id")
-                        pay = models.Library1.objects.filter(id = pid).delete()
-                        print('Booking deleted')
-                        # return HttpResponse ('post')
-                        return redirect('admin-view-library')
-
-class admin_add_book(View):
-    @method_decorator(login_required(login_url='adminlogin'))
-    def get(self, request):
-        return render(request, 'exam/admin_add_library.html')
-
-    def post(self, request):		
-        form = forms.LibraryForm(request.POST)	
-
-        if form.is_valid():
-            Title = request.POST.get("Title")
-            Subject = request.POST.get("Subject")
-            Date = request.POST.get("Date")
-
-            form = models.Library1(Title = Title, Subject = Subject, Date = Date)
-            form.save()
-            #return HttpResponse('Student record saved!')			
-            return redirect('admin-view-library')
-            # except:
-            # 	raise Http404
-        else:
-            print(form.errors)
-            return HttpResponse('not valid')
+@login_required(login_url='adminlogin')
+def admin_view_library(request):
+    books = models.Library.objects.all()
+    return render(request, 'exam/admin_view_library.html', {'books': books})
 
 
 @login_required(login_url='adminlogin')
-class admin_add_library_view(View):
-    def get(self, request):
-        subname = models.Course.objects.all()
-        subjects = models.Course.objects.all()
-        book = models.Library.objects.all()
-        context = {
-            'book': book,
-            'subjects': subname,
-            'subjects': subjects,
-        }
-        return render(request, 'exam/admin_add_library.html', context)
-
-    def post(self, request):
-        form = forms.LibraryForm(request.POST)
-        form = forms.LibraryForm(data=request.POST, files=request.FILES)
-        file = request.POST.get("file")
-        print(file)
-        booktitle = request.POST.get("booktitle")
-        print(booktitle)
-        book_image = request.POST.get("book_image")
-        print(book_image)
-        subname = models.Course.objects.get(
-            title=request.POST.get("subjects", None))
-        print(subname)
-
+def upload_book(request):
+    if request.method == 'POST':
+        form = LibraryForm(request.POST, request.FILES)
         if form.is_valid():
-            booktitle = request.POST.get("booktitle")
-            book_image = request.POST.get("book_image")
-            subname = models.Course.objects.get(
-                title=request.POST.get("subname"))
-            file = request.POST.get("file")
+            form.save()
+            return redirect('admin-view-library')
+    else:
+        form = LibraryForm()
+    return render(request, 'exam/admin_upload_book.html', {'form': form})
 
-        form = models.Library(booktitle=booktitle, subject=subname,
-                       book_image=book_image)
 
-        form.save()
+def delete_book(request, pk):
+    if request.method == 'POST':
+        book = models.Library.objects.get(pk=pk)
+        book.delete()
+    return redirect('admin-view-library')
 
-        # return render(request, 'admin/add-subjects.html')
+# no use for now -- edit trial
+
+
+@login_required(login_url='adminlogin')
+def edit_book(request, pk):
+    books = models.Library.objects.get(pk=pk)
+    return render(request, 'exam/admin_edit_book.html', {'pk': pk, 'books': books})
+
+
+def admin_update_file(request, pk):
+    if request.method == "POST":
+        pdf = request.FILES['pdf']
+        file_name = request.FILES['pdf'].name
+
+        fs = FileSystemStorage()
+        file = fs.save(pdf.name, pdf)
+        fileurl = fs.url(file)
+        report = file_name
+
+        models.Library.objects.filter(id=pk).update(pdf=pdf)
+        # messages.success(request,'File was uploaded succesfully!')
         return redirect('admin-view-library')
-
-class admin_edit_library(View):
-    @method_decorator(login_required(login_url='adminlogin'))
-    def get(self, request):
-        return render(request, 'exam/admin_edit_library.html')
+    else:
+        return render(request, 'exam/admin_update_book.html')

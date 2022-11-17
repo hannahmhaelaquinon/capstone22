@@ -13,9 +13,13 @@ urlpatterns = [
          name='teacher-dashboard'),
     path('teacher-video/', views.teacher_view_video, name='teacher-view-video'),
     path('teacher-add-video/', views.teacher_add_video, name='teacher-add-video'),
+    #path('<int:pk>', views.teacher_delete_video, name='teacher-delete-video'),
     path('game/SimonSays', views.SimonGame, name='SimonSays'),
-    path('game/', views.tgame, name='game'),
+    path('teachergame/', views.tgame, name='game'),
     path('teacherlibrary/', views.tlibrary, name='library'),
+    path('upload-book/', views.upload_book, name='teacher-upload-book'),
+    # path('delete-book/<int:pk>/',
+    #     views.delete_book, name='teacher-delete-book'),
     path('teacherprofile/', views.tprofile, name='profile'),
     path('profile-update/', views.teacherUpdate, name='teacher-update-profile'),
 
@@ -24,6 +28,8 @@ urlpatterns = [
          name='teacher-assigbnment'),
     path('teacher-add-assignment', views.teacher_add_assignment,
          name='teacher-add-assignment'),
+    path('teacher-edit-assignment', views.teacher_edit_assignment,
+         name='teacher-edit-assignment'),
 
     path('teacher-exam', views.teacher_exam_view, name='teacher-exam'),
     path('teacher-add-exam', views.teacher_add_exam_view, name='teacher-add-exam'),

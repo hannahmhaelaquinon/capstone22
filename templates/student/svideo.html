@@ -1,17 +1,30 @@
-{% extends 'student/studentbase.html' %}
-{% load widget_tweaks %}
-{% block content %}
+<!DOCTYPE html>
+{% include 'student/studentbase.html' %}
+<html lang="en">
 
+    <head>
+      <link rel="stylesheet" href="../../static/teacher/assets/vendors/mdi/css/materialdesignicons.min.css">
 
-{%load static%}
+      <style>
+        #overlayText
+        {
+        position:absolute;
+        top:0;
+        left:0;
+        z-index:1;
+        }
 
-<head>
-  <link rel="stylesheet" href="../../../../static/gamestyles.css">
+        #topText
+        {
+          color: black;
+          font-size: 20px;
+          align-self: center;
+        }
+      </style>
+    </head>
 
-
-</head>
-
-    <br><br>
+<body>
+    <br><br><br><br>
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
             <div class="content-wrapper">
@@ -49,8 +62,6 @@
                           </div>
                         </div>
                         {% endfor %}
-                          
-                        
                       </div>
                     </div>
 
@@ -63,7 +74,6 @@
         </div>
     </div>
 
+</body>
 
-
-
-{% endblock content %}
+</html>

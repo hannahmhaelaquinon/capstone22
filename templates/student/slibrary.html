@@ -6,9 +6,17 @@
 {%load static%}
 <head>
 
-<link rel="stylesheet" href="../../../../static/gamestyles.css">
+ 
 
 <style>
+.card {
+
+  border: 1px solid #2724dd;
+  color: rgba(250, 250, 250, 0.8);
+  margin-bottom: 2rem;
+  box-shadow: #2C3E50;
+}
+
   #overlayText
   {
   position:absolute;
@@ -52,20 +60,24 @@
             <form class="d-flex align-items-center h-20" action="#">
               <input type="text" class="form-control bg-transparent border-0" placeholder="Search books" class="mdi mdi-magnify">
             </form>
-          <div class="container">
-            <div class="row mt-3">
-              
-              
-              <div class="col-6 pe-1">
-                <img src="../../static/PNG/the-three-little-pigs-26.jpg" class="mb-2 mw-50 w-50 rounded" alt="image">
-                <div class="overlayText">
-                  <p id="topText">Three Little Pig</p>
+            {% for b in books %}
+            <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                     
+                      <div class="card" style="width: 18rem; background-color:#BDC3C7;">
+                       <a href="{{ b.pdf.url }}" target="_blank"><img src="{{ b.cover.url }}" alt="{{b.title}}" width="320" height="240" class="card-img-top"  >
+                       </a>
+                        <div class="card-body">
+                        <h5 class="card-title">{{b.title}}</h5>
+                      
+                      </div>
+                     </div>
+                   </div>    
+                 </div>
                 </div>
-              
-
+                {% endfor %}        
               </div>
-              </div>
-            </div>
             </div>
           </div>
         </div>
