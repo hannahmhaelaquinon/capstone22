@@ -3,10 +3,17 @@
 {%load static%}
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <style>
+    label{
+        color: black;
+    }
+    .container{
+      padding:10px;
+        box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+      }
 
+</style>
 
 </head>
 
@@ -15,6 +22,7 @@
 
   <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
     {% csrf_token %}
+   <div class = container>
     <h2 style="text-align: center;">Course: {{course.course_name}}</h2>
     {% for q in questions %}
     <h3 class="text-danger">{{ forloop.counter }}. {{q.question}}</h3><h4 style="text-align: right;">[{{q.marks}} Marks]</h4>
@@ -54,8 +62,11 @@
           </div>
 
         {% endfor %}
-        <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Answers">  
-    </form>
+        <div style="padding:5px;">
+        <input class="btn btn-success btn-md" style="border-radius: 0%;"  type="submit" value="Submit Answers">  
+      </div>
+      </div>
+      </form>
   </div>
 
 <script> 

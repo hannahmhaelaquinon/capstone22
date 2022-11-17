@@ -63,7 +63,7 @@
                                         <!-- <td scope="col" style = 'text-align:center;'></td>-->
                                         </td>
                                         <td  scope="col" style = 'text-align:center;'> 
-                                            <a type="button" class="btn btn-sm btn-primary" href="{% url 'admin-update-file' b.pk %}" ><!--/admin-edit-book/pk -->
+                                            <a type="button" class="btn btn-secondary" href="#" data-toggle="modal" data-target="#newModal-{{b.id}}"><!--/admin-edit-book/pk -->
                                                     <i class="la la-pencil"></i>
                                             </a>
                             
@@ -73,68 +73,66 @@
                                         </td>
                                     </tr>
                                     
-                                    <!-- Modal VIEW -->
-                                   <div class="modal fade" id="newModal-{{b.id}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                  <div class="modal-content">
-                                                    <div class="modal-header" style="background-color:#6db33f">
-                                                      <h5 class="modal-title", style="font-size: large; font-family: Trirong;">VIEW DETAILS</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                    </div>
-                                                    <form id="updateForm" method="post"  action="">
-                                                    {% csrf_token %}
-                                                    <div class="modal-body">
-                                                      <input type="text" name="booking-id" value = {{b.id}} hidden>
-                                                      <div class="row" text-align ="center">
-                                                        <div class="col-12" id="startup-tab-1">
-                                                            
-                                                          <!--<div class="row">
-                                                                <div class="col-xl-12 col-xxl-12 col-sm-12">
-                                                             <div class="card">
-                                                                <div class="card-header">
-                                                                    <h5 class="card-title">Book Details</h5> 
-                                                                </div> 
-                                                             <div class = "row" >
-
-                                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Title</label>
-                                                                        <input type="text" class="form-control" name="Title" value="{{b.title}}">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Subject</label>
-                                                                        <input type="text" class="form-control" name="Subject" value="{{b.subject}}">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label">Date</label>
-                                                                        <input type="text" class="form-control" name="Date" value="{{b.date}}">
-                                                                    </div>
-                                                                </div>
-                                                               
-                                                                
-                                                                 </div>
-                                                             </div>
-                                                             </div>
-
-                                                          </div>-->
-                                                        </div>
-                                                      </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit"  class="btn btn-primary">UPDATE</button>                             
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>                       
-                                                    </div>
+                                    <!-- Modal VIEW-->
+                                    <div class="modal fade" id="newModal-{{b.id}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header" style="background-color:#e2c0bb">
+                                            <h5 class="modal-title">VIEW DETAILS</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <form id="updateForm" method="post" >
+                                          {% csrf_token %}
+                                          <div class="modal-body">
+                                            <input type="text" name="booking-id" value = {{b.id}} hidden>
+                                            <div class="row">
+                                              <div class="col-12" id="startup-tab-1">
+                                                  <div class = "row">
+                  
+                                                    
+                                                </div>
+                                                  <div class = "row">
+                                                  <div class = "col-sm-6">
+                                                    <label>Title</label>
+                                                    <input type="text" class="form-control" id="id-noChildren" placeholder="Number of Children"  name="title" value ={{b.title}}>
                                                   </div>
-                                                </form>
+                                                  <div class = "col-sm-6">
+                                                    <label>Subject</label>
+                                                    <input type="text" class="form-control" id="id-add-city" placeholder="Number of Adult"  name="subject" value ={{b.subject}}>
+                                                  </div>
+                                                </div>
+
+                                                <div class = "row">
+                                                  <div class = "col-sm-6">
+                                                    <label>Image</label>
+                                                    <img src="{{ b.cover.url }}" alt="{{b.title}}" height="40px" width="40px" />
+                                                  </div>
+                                                  <div class = "col-sm-6">
+                                                    <label>File</label>
+                                                    <input type = "file" id="library" name="pdf" placeholder="Report Attachment" enctype="multipart/form-data"></div>
+                                                  </div>
+                                                </div>
+
+                                                <div class = "row">
+                                                  <div class = "col-sm-6">
+                                                    <label>Date</label>
+                                                    <input type="text" class="form-control" id="id-bdate" name="date" value = {{b.date}}>
+                                                  </div>
+                                                  
+                                                </div>
+
+                                              </div>
                                             </div>
+                                          </div>
+                                          <div class="modal-footer">  
+                                              <button class="btn btn-secondary"   type="submit" id = "btnUpdate" name = "btnUpdate" class="button">UPDATE</button>                                  
+                                              <button class="btn btn-primary" type="button" class="button btn-secondary" data-dismiss="modal">CLOSE</button>                          
+                                          </div>
                                         </div>
+                                      </form>
+                                      </div>
                                     </div>
                     
                                     <!-- Modal DELETE-->
