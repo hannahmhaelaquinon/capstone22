@@ -440,6 +440,31 @@ def upload_book(request):
         form = LibraryForm()
     return render(request, 'exam/admin_upload_book.html', {'form': form})
 
+def post(self,request):
+					if request.method == 'POST':	
+						if 'btnUpdate' in request.POST:	
+							print('update profile button clicked')
+							pid = request.POST.get("pid")			
+							title = request.POST.get("title")
+							subject = request.POST.get("subject")
+							cover = request.POST.get("cover")
+							pdf = request.POST.get("pdf")
+							date = request.POST.get("date")
+							print(date)
+				# email = request.POST.get("student-email")
+				# phone = request.POST.get("student-phone")
+						# 	update_Booking = Booking.objects.filter(id = pid).update(book_name = book_name, book_date = book_date, book_no_children = book_no_children, book_no_adult = book_no_adult, 
+						# 	book_depart = book_depart, book_return = book_return)
+						# 	print(update_Booking)
+						# 	print('profile updated')
+						# elif 'btnDelete' in request.POST:
+						# 	print('delete button clicked')
+						# pid = request.POST.get("bbooking-id")
+						# pay = Booking.objects.filter(id = pid).delete()
+						# print('Booking deleted')
+						# return HttpResponse ('post')
+						# return redirect('my_dashboard_view')
+	
 
 def delete_book(request, pk):
     if request.method == 'POST':
