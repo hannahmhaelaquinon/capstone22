@@ -40,7 +40,9 @@ def teacher_signup_view(request):
             teacher.save()
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
-        return HttpResponseRedirect('teacherlogin')
+            return HttpResponseRedirect('teacherlogin')
+        else:
+            messages.info(request, 'Username or Password is incorrect')
     return render(request, 'teacher/teachersignup.html', context=mydict)
 
 

@@ -138,7 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 LOGIN_REDIRECT_URL = '/afterlogin'
-
+#CONTACT US
 # for contact us give your gmail id and password
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
