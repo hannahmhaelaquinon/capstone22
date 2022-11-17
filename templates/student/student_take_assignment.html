@@ -3,13 +3,6 @@
 {% load widget_tweaks %}
 {%load static%}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
-</head>
 
 
 <div class="jumbotron my-4">
@@ -19,12 +12,17 @@
     <h2 style="text-align: center;">Subject: {{course.course_name}}</h2>
     {% for a in assignment %}
     <h3 class="text-decoration">Instruction: {{a.instruction}}</h3>
-    <h3 class="text-primary">File: {{a.upload}}</h3>
+    <h3 class="text-primary">File: {{a.upload}}
+      <a href="{{ a.upload.url }}" class="btn btn-primary btn-sm" target="_blank">
+          Download File
+      </a>
+    </h3>
     <label for="assignment">Upload</label>
         {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %}
         </div>
-        {% endfor %}
-        <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Assignment">  
+        <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Assignment"> 
+        
+        {% endfor %} 
     </form>
   </div>
 
