@@ -88,7 +88,7 @@ def admin_teacher_view(request):
 def admin_view_teacher_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=True)
     return render(request, 'exam/admin_view_teacher.html', {'teachers': teachers})
-
+#Register/Sign in teacher
 @login_required(login_url='adminlogin')
 def admin_add_teacher_view(request):
     userForm = TFORM.TeacherUserForm()
@@ -108,7 +108,7 @@ def admin_add_teacher_view(request):
             my_teacher_group[0].user_set.add(user)
         return HttpResponseRedirect('admin-view-pending-teacher')
     return render(request, 'exam/admin_add_teacher.html', context=mydict)
-
+#Register/Sign in student
 @login_required(login_url='adminlogin')
 def admin_add_student_view(request):
     userForm = SFORM.StudentUserForm()
@@ -357,7 +357,7 @@ def admin_check_marks_view(request, pk):
 def aboutus_view(request):
     return render(request, 'exam/aboutus.html')
 
-
+#Contact
 def contactus_view(request):
     sub = forms.ContactusForm()
     if request.method == 'POST':
