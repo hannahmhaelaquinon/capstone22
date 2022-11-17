@@ -110,6 +110,26 @@ def admin_add_teacher_view(request):
     return render(request, 'exam/admin_add_teacher.html', context=mydict)
 
 @login_required(login_url='adminlogin')
+def admin_add_student_view(request):
+    userForm = SFORM.StudentUserForm()
+    studentForm = SFORM.StudentForm()
+    mydict = {'userForm': userForm, 'studentForm': studentForm}
+    if request.method == 'POST':
+        userForm = SFORM.StudentUserForm(request.POST)
+        studentForm = SFORM.StudentForm(request.POST, request.FILES)
+        if userForm.is_valid() and studentForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            student = studentForm.save(commit=False)
+            student.user = user
+            student.save()
+            my_student_group = Group.objects.get_or_create(name='STUDENT')
+            my_student_group[0].user_set.add(user)
+        return HttpResponseRedirect('admin-view-student')
+    return render(request, 'exam/admin_add_student.html', context=mydict)
+
+@login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):
     teacher = TMODEL.Teacher.objects.get(id=pk)
     user = TMODEL.User.objects.get(id=teacher.user_id)
