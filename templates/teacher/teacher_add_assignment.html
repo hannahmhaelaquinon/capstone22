@@ -22,13 +22,16 @@
     {%csrf_token%}
     <div class="form-group">
         <label for="assignment">Subject</label>
+        english
       {% render_field assignmentForm.courseID|attr:'required:true' class="form-control"  %}
         <br>
 
       <label for="assignment">Instruction</label>
+      follow the data
       {% render_field assignmentForm.instruction|attr:'required:true' class="form-control" placeholder="Example: What is the relation calculus?" %}
         <br>
       <label for="assignment">Upload</label>
+      dhbhabd
         {% render_field assignmentForm.upload|attr:'' class="form-control" placeholder="" %}
         </div>
         <button type="submit" class="btn btn-success" style="border-radius: 0%;">Submit Assignment</button>

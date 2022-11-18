@@ -56,13 +56,13 @@ def afterlogin_view(request):
     else:
         return redirect('admin-dashboard')
 
-
+#Redirect to admin login page
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return HttpResponseRedirect('adminlogin')
 
-
+#Shows admin dashboard with all teachers and pending teachers and students
 @login_required(login_url='adminlogin')
 def admin_dashboard_view(request):
     dict = {
@@ -73,7 +73,7 @@ def admin_dashboard_view(request):
     }
     return render(request, 'exam/admin_dashboard.html', context=dict)
 
-
+#Views all teacher created when clicked on the navbar
 @login_required(login_url='adminlogin')
 def admin_teacher_view(request):
     dict = {
@@ -83,11 +83,12 @@ def admin_teacher_view(request):
     }
     return render(request, 'exam/admin_teacher.html', context=dict)
 
-
+#Single teacher vew
 @login_required(login_url='adminlogin')
 def admin_view_teacher_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=True)
     return render(request, 'exam/admin_view_teacher.html', {'teachers': teachers})
+
 #Register/Sign in teacher
 @login_required(login_url='adminlogin')
 def admin_add_teacher_view(request):
@@ -108,6 +109,7 @@ def admin_add_teacher_view(request):
             my_teacher_group[0].user_set.add(user)
         return HttpResponseRedirect('admin-view-pending-teacher')
     return render(request, 'exam/admin_add_teacher.html', context=mydict)
+
 #Register/Sign in student
 @login_required(login_url='adminlogin')
 def admin_add_student_view(request):
@@ -129,6 +131,7 @@ def admin_add_student_view(request):
         return HttpResponseRedirect('admin-view-student')
     return render(request, 'exam/admin_add_student.html', context=mydict)
 
+#Update teacher data
 @login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):
     teacher = TMODEL.Teacher.objects.get(id=pk)
@@ -148,7 +151,7 @@ def update_teacher_view(request, pk):
             return redirect('admin-view-teacher')
     return render(request, 'exam/update_teacher.html', context=mydict)
 
-
+#Delete a teacher from the form
 @login_required(login_url='adminlogin')
 def delete_teacher_view(request, pk):
     teacher = TMODEL.Teacher.objects.get(id=pk)
@@ -157,13 +160,14 @@ def delete_teacher_view(request, pk):
     teacher.delete()
     return HttpResponseRedirect('/admin-view-teacher')
 
-
-@login_required(login_url='adminlogin')
+#Views all pending teachers
+@login_required(login_url='adminlogin') 
 def admin_view_pending_teacher_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=False)
     return render(request, 'exam/admin_view_pending_teacher.html', {'teachers': teachers})
 
 
+#Approves teacher and redirects to salary page
 @login_required(login_url='adminlogin')
 def approve_teacher_view(request, pk):
     teacherSalary = forms.TeacherSalaryForm()
@@ -179,7 +183,7 @@ def approve_teacher_view(request, pk):
         return HttpResponseRedirect('/admin-view-pending-teacher')
     return render(request, 'exam/salary_form.html', {'teacherSalary': teacherSalary})
 
-
+#Deletes the teachers pending request
 @login_required(login_url='adminlogin')
 def reject_teacher_view(request, pk):
     teacher = TMODEL.Teacher.objects.get(id=pk)
@@ -188,13 +192,13 @@ def reject_teacher_view(request, pk):
     teacher.delete()
     return HttpResponseRedirect('/admin-view-pending-teacher')
 
-
+#Views teacher salary
 @login_required(login_url='adminlogin')
 def admin_view_teacher_salary_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=True)
     return render(request, 'exam/admin_view_teacher_salary.html', {'teachers': teachers})
 
-
+#Views all student on admin view
 @login_required(login_url='adminlogin')
 def admin_student_view(request):
     dict = {
@@ -202,13 +206,13 @@ def admin_student_view(request):
     }
     return render(request, 'exam/admin_student.html', context=dict)
 
-
+#View Single student data
 @login_required(login_url='adminlogin')
 def admin_view_student_view(request):
     students = SMODEL.Student.objects.all()
     return render(request, 'exam/admin_view_student.html', {'students': students})
 
-
+#Update Student data
 @login_required(login_url='adminlogin')
 def update_student_view(request, pk):
     student = SMODEL.Student.objects.get(id=pk)
@@ -228,7 +232,7 @@ def update_student_view(request, pk):
             return redirect('admin-view-student')
     return render(request, 'exam/update_student.html', context=mydict)
 
-
+#Delete student data
 @login_required(login_url='adminlogin')
 def delete_student_view(request, pk):
     student = SMODEL.Student.objects.get(id=pk)
@@ -238,6 +242,7 @@ def delete_student_view(request, pk):
     return HttpResponseRedirect('/admin-view-student')
 
 
+#aView all subjects created
 @login_required(login_url='adminlogin')
 def admin_course_view(request):
     total_subject = models.Course.objects.all().count()
@@ -247,6 +252,7 @@ def admin_course_view(request):
     return render(request, 'exam/admin_course.html', context)
 
 
+#Add a new course
 @login_required(login_url='adminlogin')
 def admin_add_course_view(request):
     courseForm = forms.CourseForm()
@@ -260,19 +266,20 @@ def admin_add_course_view(request):
     return render(request, 'exam/admin_add_course.html', {'courseForm': courseForm})
 
 
+#View a course
 @login_required(login_url='adminlogin')
 def admin_view_course_view(request):
     courses = models.Course.objects.all()
     return render(request, 'exam/admin_view_course.html', {'courses': courses})
 
-
+#Delete course
 @login_required(login_url='adminlogin')
 def delete_course_view(request, pk):
     course = models.Course.objects.get(id=pk)
     course.delete()
     return HttpResponseRedirect('/admin-view-course')
 
-
+#Edit Course data
 @login_required(login_url='adminlogin')
 def edit_course_view(request):
     if request.method == 'POST':
@@ -287,12 +294,12 @@ def edit_course_view(request):
 
         return render(request, 'exam/cousre_update.html', {'subform': subform})
 
-
+#View all available question
 @login_required(login_url='adminlogin')
 def admin_question_view(request):
     return render(request, 'exam/admin_question.html')
 
-
+#Add a new question
 @login_required(login_url='adminlogin')
 def admin_add_question_view(request):
     questionForm = forms.QuestionForm()
@@ -308,13 +315,13 @@ def admin_add_question_view(request):
         return HttpResponseRedirect('/admin-view-question')
     return render(request, 'exam/admin_add_question.html', {'questionForm': questionForm})
 
-
+#View a specific question
 @login_required(login_url='adminlogin')
 def admin_view_question_view(request):
     courses = models.Course.objects.all()
     return render(request, 'exam/admin_view_question.html', {'courses': courses})
 
-
+#
 @login_required(login_url='adminlogin')
 def view_question_view(request, pk):
     questions = models.Question.objects.all().filter(course_id=pk)

@@ -42,13 +42,14 @@
           <tbody>       
             <tr>
               {% for a in  assignments %} 
-                    <td>{{a.id}}</td>
+                    <td>{{a.id}} </td>
+                    
                     {% for s in  courses %}  
                     <td>{{s.course_name}}</td>
                     {% endfor %}
                 
-                    <td>{{a.instruction}}</td>   
-                    <td>{{a.upload}}</td>
+                    <td>{{a.instruction}}</td> 
+                    <td>{{a.upload}}  </td>
                     
                     
                 
