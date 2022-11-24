@@ -81,6 +81,35 @@ def teacher_add_exam_view(request):
         return HttpResponseRedirect('/teacher/teacher-view-exam')
     return render(request, 'teacher/teacher_add_exam.html', {'courseForm': courseForm})
 
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_assign_quiz(request):
+    assignForm = forms.TeacherAssignForm()
+    if request.method == 'POST':
+        assignForm = forms.TeacherAssignForm(request.POST)
+        if assignForm.is_valid():
+            assign = assignForm.save(commit=False)
+            course = QMODEL.Course.objects.get(id=request.POST.get('courseID'))
+            student = QMODEL.Student.objects.get(id=request.POST.get('studentID'))
+            assign.course = course
+            assign.student = student
+            assign.save()
+            assignForm.save()
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/teacher/teacher-view-exam')
+    return render(request, 'teacher/teacher_assign_quiz.html', {'assignForm': assignForm})
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_view_answer(request):
+    courses = QMODEL.Course.objects.all()
+    questions = QMODEL.Question.objects.all()
+    context = {
+        'courses': courses,
+        'questions': questions
+    }
+    return render(request, 'teacher/teacher_view_answer.html', context)
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)

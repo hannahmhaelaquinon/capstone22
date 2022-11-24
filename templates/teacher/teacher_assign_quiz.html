@@ -7,7 +7,7 @@
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white me-2">
           <i class="mdi mdi-home"></i>
-        </span> Add Quiz
+        </span> Assign Quiz
       </h3>
       <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
@@ -17,19 +17,17 @@
         </ul>
       </nav>
     </div>
-<h2 style="text-align:center; ">Add Quiz Info</h2>
+<h2 style="text-align:center; ">Assign Quiz Info</h2>
 <form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
     {%csrf_token%}
     <div class="form-group">
 
       <label for="course_name">Subject Name</label>
-      {% render_field courseForm.course_name class="form-control" placeholder="Example: Databases" %}
+      {% render_field assignForm.courseID|attr:'required:true' class="form-control"  %}
 
-      <label for="question_number">Total Question</label>
-      {% render_field courseForm.question_number class="form-control" placeholder="Example: 10" %}
+      <label for="question_number">Student</label>
+        {% render_field assignForm.studentID|attr:'required:true' class="form-control"  %}
 
-      <label for="total_marks">Total Marks</label>
-      {% render_field courseForm.total_marks class="form-control" placeholder="Example: 100" %}
     </div>
     
 

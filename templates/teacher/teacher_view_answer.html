@@ -7,7 +7,7 @@
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white me-2">
           <i class="mdi mdi-help-circle"></i>
-        </span> Exam
+        </span> Answers
       </h3>
       <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
@@ -22,31 +22,31 @@
         <div id="list-view" class="tab-pane fade active show col-lg-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Available Subject</h4>
+              <h4 class="card-title">Quiz Answer</h4>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col" style = 'text-align:center;'> Subject</th>
-                    <th scope="col" style = 'text-align:center;'> Total Question</th>
-                    <th scope="col" style = 'text-align:center;'> Total Marks</th>
+                    <th scope="col" style = 'text-align:center;'> Question</th>
+                    <th scope="col" style = 'text-align:center;'> Answer</th>
                     <th scope="col" style = 'text-align:center;'> Action</th>
             </tr>
           </thead>
-          <tbody>              
-            {% for s in courses %}   
-    
-            <tr> 
-                    <td>{{s.course_name}}</td>   
-                    <td>{{s.question_number}}</td>   
-                    <td>{{s.total_marks}}</td>
+          <tbody>                 
+                {% for q in questions %} 
+            <tr>
+                        
+                    <td>{{q.question}}}</td>   
+                    <td>{{q.answer}}</td>
+                    
                     <td>
-                      <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-exam' s.id  %}">
-                        <i class="mdi mdi-delete"></i>
+                      <a type="button" class="btn btn-sm btn-danger"  href="{% url 'see-question' q.id  %}">
+                        <i class="mdi mdi-border-color"></i>
                       </a>
                   </td>
+                  
               </tr>
               {% endfor %}
           </tbody>
