@@ -295,9 +295,14 @@
               </div>
               <div>
                 <br> 
-                  {% for message in messages %}
-                    <p id="messages" style="color:red">{{message}}</p>
+                  
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                  {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
                   {% endfor %}
+                </div>
+                {% endif %}
                 <br>
               </div>
             </div>
