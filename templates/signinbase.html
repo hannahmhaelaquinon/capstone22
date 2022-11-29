@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Signin</title>
   <meta content="" name="description">
@@ -25,6 +25,14 @@
 
   <!-- Template Main CSS File -->
   <link href="../static/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: TheEvent - v4.7.0
+  * Template URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+ 
   <style>
     
     .split {
@@ -70,7 +78,6 @@
 
 
     .container{
-        margin: auto;
         margin-top: 100px;
         width: 800px;
         height:500px;
@@ -314,14 +321,6 @@
           display: none;
         }
       }
-    .jumbotron {
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-
-    .jumbotron h1 {
-      text-align: center;
-    }
   </style>
 </head>
 <body>
@@ -337,41 +336,22 @@
           <li><a class="nav-link scrollto" href="../#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="../#about">About</a></li>          
           <li><a class="nav-link scrollto" href="../#courses">Courses</a></li>
-          <li><a class="nav-link scrollto" href="../#contact">Contact</a></li>
-          <li><a class="nav-link scrollto active" href="{% url 'signin' %}">Sign In</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'contactus'%}">Contact</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'signin'%}">Sign In</a></li>
           <li><a class="nav-link scrollto" href="{% url 'adminclick' %}">Admin</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 		</div>
 	</header>
-	
-    <!--Start of Forms-->
-    <div class="container">
-      <div class="forms">
-        <div class="form-content">
-          <div class="login-form">
-                  <!--Left Side Content-->
-                  
-                  <div class="split left">
-                      <div class="centered">
-                      <div>
-                          <button class="button button1"><a href="/teacher/teachersignup">Create Account</a></button>
-                      </div>
-                      </div>
-                  </div>
-                  <!--Right Side Content-->
-                  <div class="split right">
-                      <div class="centered">
-                      <div>
-                          <button class="button button2"><a href="/teacher/teacherlogin">Login Now</a></button>
-                      </div>
-                      </div>
-                  </div>
-        </div>
-        </div>
-      </div>
-</div>
+     <!--**********************************
+            Content body start
+        ***********************************-->
+        {% block content %}
+
+        {% endblock %}
+        <!--**********************************
+            Content body end
+        ***********************************-->
 </body>
 </html>
-
