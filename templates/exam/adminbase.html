@@ -118,7 +118,7 @@
                         Main Menu
                     </li>
                     <li>
-                        <a href="javascript:void()" aria-expanded="false">
+                        <a href="{% url 'admin-dashboard'%}" aria-expanded="false">
 							<i class="la la-home"></i>
 							<span class="nav-text"  href="{% url 'admin-dashboard'%}">Dashboard</span>
 						</a>
@@ -148,13 +148,23 @@
                             <li><a href="{% url 'admin-add-student' %}">Add Students</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-graduation-cap"></i>
+                            <span class="nav-text">Levels</span>
+						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'admin-view-course' %}">Kindergarten</a></li>
+                            <li><a href="{% url 'admin-elementary' %}">Elementary</a></li>
+                        </ul>
+                    </li>
 					<li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
 							<i class="la la-graduation-cap"></i>
                             <span class="nav-text">Subjects</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{% url 'admin-view-course' %}">All Subjects</a></li>
+                            <li><a href="{% url 'admin-section' %}">All Subjects</a></li>
                             <li><a href="{% url 'admin-add-course' %}">Add Subjects</a></li>
                             <li><a href="">Edit Subject</a></li>
                             <li><a href="">Grade Level</a></li>

@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from . import models
 #from .models import Video, Library1
 
+class SectionForm(forms.ModelForm):
+    class Meta:
+        model = models.Section
+        fields = '__all__'
+
 
 class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)

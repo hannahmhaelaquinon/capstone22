@@ -17,7 +17,7 @@ class StudentUserForm(forms.ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['address', 'mobile', 'profile_pic']
+        fields = ['address', 'mobile',  'gradelevels','profile_pic']
 
 
 class UpdateForm(forms.ModelForm):

@@ -6,7 +6,18 @@ class Student(models.Model):
     profile_pic= models.ImageField(upload_to='profile_pic/Student/',null=True,blank=True)
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20,null=False)
-   
+    
+    level = {
+        ('Kindergarten', 'Kindergarten'),
+        ('Grade 1', 'Grade 1'),
+        ('Grade 2', 'Grade 2'),
+        ('Grade 3', 'Grade 3'),
+        ('Grade 4', 'Grade 4'),
+        ('Grade 5', 'Grade 5'),
+        ('Grade 6', 'Grade 6'),
+    }
+    gradelevels = models.TextField(max_length=20, blank=True, choices=level)
+    
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name

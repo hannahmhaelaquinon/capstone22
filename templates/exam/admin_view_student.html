@@ -43,6 +43,7 @@
                                       
                                       <th scope="col" style = 'text-align:center;'>Student ID</th>
                                       <th scope="col" style = 'text-align:center;'> Name</th>
+                                      <th scope="col" style = 'text-align:center;'> Level</th>
                                       <th scope="col" style = 'text-align:center;'> Photo</th>
                                       <th scope="col" style = 'text-align:center;'> Contact</th>
                                       <th scope="col" style = 'text-align:center;'> Address</th>
@@ -54,7 +55,8 @@
                                   {% for s in students %}   
                                   <tr>
                                       <td  style = 'text-align:center;'>{{ s.id }}</td>   
-                                      <td  style = 'text-align:center;'>{{ s.get_name}}</td>   
+                                      <td  style = 'text-align:center;'>{{ s.get_name}}</td>
+                                      <td  style = 'text-align:center;'>{{ s.gradelevels}}</td>      
                                       <td> <img src="{{ s.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
                                       <td  style = 'text-align:center;'>{{ s.mobile }}</td>
                                       <td  style = 'text-align:center;'>{{ s.address }}</td>

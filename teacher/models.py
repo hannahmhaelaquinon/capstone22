@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from exam.models import Course
 from exam.models import Student
 
 class Teacher(models.Model):
@@ -18,6 +17,14 @@ class Teacher(models.Model):
         return self
     def __str__(self):
         return self.user.first_name
+
+class Course(models.Model):
+    course_name = models.CharField(max_length=50)
+    question_number = models.PositiveIntegerField()
+    total_marks = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.course_name
 
 class TeacherAssignment(models.Model):
     course=models.ForeignKey(Course,on_delete=models.CASCADE)

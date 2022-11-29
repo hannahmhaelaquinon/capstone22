@@ -18,7 +18,7 @@ from .forms import TeacherForm, TeacherUserForm, UpdateTeacherForm
 # for showing signup/login button for teacher
 
 
-def teacherclick_view(request):
+def teacherclick_view(request,):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request, 'teacher/teacherclick.html')
@@ -52,10 +52,10 @@ def is_teacher(user):
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
     dict = {
-
-        'total_course': QMODEL.Course.objects.all().count(),
-        'total_question': QMODEL.Question.objects.all().count(),
-        'total_student': SMODEL.Student.objects.all().count()
+        
+        'total_assigned_student': SMODEL.Student.objects.filter(id=request.user.id).count(),
+        'total_assigned_subject': QMODEL.Subject.objects.filter(id=request.user.id).count(),
+        'total_question': QMODEL.Question.objects.all().count()
     }
     return render(request, 'teacher/teacher_dashboard.html', context=dict)
 
