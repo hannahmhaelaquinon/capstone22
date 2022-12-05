@@ -289,6 +289,7 @@ def admin_grade1(request):
     return render(request, 'exam/admin_grade1.html', context)
 
 
+
 @login_required(login_url='adminlogin')
 def admin_view_section(request, pk):
     sections = models.Section.objects.get(id=pk)
@@ -301,6 +302,11 @@ def admin_view_section(request, pk):
     }
     return render(request, 'exam/admin_view_section.html', context)
 
+@login_required(login_url='adminlogin')
+def delete_section_view(request, pk):
+    section = models.Section.objects.get(id=pk)
+    section.delete()
+    return HttpResponseRedirect('/admin-grade1')
 
 # aView all subjects created
 @login_required(login_url='adminlogin')
@@ -310,6 +316,7 @@ def admin_section_view(request):
         'section': section,
     }
     return render(request, 'exam/admin_sections.html', context)
+
 
 @login_required(login_url='adminlogin')
 def admin_add_levels(request):

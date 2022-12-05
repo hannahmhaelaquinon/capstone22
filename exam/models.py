@@ -1,6 +1,5 @@
 from django.db import models
 from unittest.util import _MAX_LENGTH
-from django.db import models
 from .validators import file_size
 from django.core.validators import FileExtensionValidator
 from student.models import Student
