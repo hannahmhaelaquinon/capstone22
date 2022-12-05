@@ -51,13 +51,26 @@ def is_teacher(user):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
-    dict = {
-        
-        'total_assigned_student': SMODEL.Student.objects.filter(id=request.user.id).count(),
-        'total_assigned_subject': QMODEL.Subject.objects.filter(id=request.user.id).count(),
-        'total_question': QMODEL.Question.objects.all().count()
+    sections = QMODEL.Section.objects.filter(id=request.user.id)
+    course_id_list = []
+    for section in sections:
+        section = QMODEL.Section.objects.get(id=section.sect_id.id)
+        course_id_list.append(section.id)
+
+    final_course = []
+    # Removing Duplicate Course Id
+    for id in course_id_list:
+        if id not in final_course:
+            final_course.append(id)
+    
+    students_count = SMODEL.Student.objects.filter(id__in=final_course).count()
+    subject_count = sections.count()
+    context={
+        "students_count": students_count,
+        "course_id_list": course_id_list,
+        "subject_count": subject_count
     }
-    return render(request, 'teacher/teacher_dashboard.html', context=dict)
+    return render(request, 'teacher/teacher_dashboard.html', context)
 
 
 @login_required(login_url='teacherlogin')
