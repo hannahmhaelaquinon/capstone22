@@ -60,6 +60,15 @@ urlpatterns = [
     path('delete-student/<int:pk>',
          views.delete_student_view, name='delete-student'),
 
+     path('admin-elementary', views.admin_elementary, name='admin-elementary'),
+     path('admin-grade1', views.admin_grade1, name='admin-grade1'),
+     
+
+     path('admin-section', views.admin_section_view, name='admin-section'),
+     path('admin-add-section', views.admin_add_section, name='admin-add-section'),
+     path('admin-view-section/<int:pk>', views.admin_view_section, name='admin-view-section'),
+
+
     path('admin-course', views.admin_course_view, name='admin-course'),
     path('admin-add-course', views.admin_add_course_view, name='admin-add-course'),
     path('admin-view-course', views.admin_view_course_view,

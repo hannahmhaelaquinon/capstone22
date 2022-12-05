@@ -254,7 +254,6 @@ def update_student_view(request, pk):
             request.POST, request.FILES, instance=student)
         if userForm.is_valid() and studentForm.is_valid():
             user = userForm.save()
-            user.set_password(user.password)
             user.save()
             studentForm.save()
             return redirect('admin-view-student')
@@ -272,7 +271,67 @@ def delete_student_view(request, pk):
     return HttpResponseRedirect('/admin-view-student')
 
 
+@login_required(login_url='adminlogin')
+def admin_elementary(request):
+    dict = {
+        'total_section_grade1': models.Section.objects.all().count(),
+        'total_question': models.Question.objects.all().count()
+    }
+    return render(request, 'exam/admin_elementary.html', context=dict)
+
+
+@login_required(login_url='adminlogin')
+def admin_grade1(request):
+    section = models.Section.objects.all()
+    context = {
+        'section': section
+    }
+    return render(request, 'exam/admin_grade1.html', context)
+
+
+@login_required(login_url='adminlogin')
+def admin_view_section(request, pk):
+    sections = models.Section.objects.get(id=pk)
+    teacher = models.Teacher.objects.all()
+    student = models.Student.objects.all()
+    context = {
+        'sections': sections,
+        'teacher': teacher,
+        'student': student,
+    }
+    return render(request, 'exam/admin_view_section.html', context)
+
+
 # aView all subjects created
+@login_required(login_url='adminlogin')
+def admin_section_view(request):
+    section = models.Section.objects.all()
+    context = {
+        'section': section,
+    }
+    return render(request, 'exam/admin_sections.html', context)
+
+
+@login_required(login_url='adminlogin')
+def admin_add_section(request):
+    student = SMODEL.Student.objects.all()
+    if request.method == 'POST':
+        secForm = forms.SectionForm(request.POST)
+        if secForm.is_valid():
+            secForm.save()
+            return redirect('admin-grade1')
+    else:
+
+        secForm = forms.SectionForm()
+    context = {
+        'student': student,
+        'secForm': secForm
+    }
+    return render(request, 'exam/admin_add_sections.html', context)
+
+# aView all subjects created
+
+
 @login_required(login_url='adminlogin')
 def admin_course_view(request):
     total_subject = models.Course.objects.all().count()
