@@ -65,6 +65,7 @@ urlpatterns = [
      
 
      path('admin-section', views.admin_section_view, name='admin-section'),
+     path('admin-add-level', views.admin_add_levels, name='admin-add-level'),
      path('admin-add-section', views.admin_add_section, name='admin-add-section'),
      path('admin-view-section/<int:pk>', views.admin_view_section, name='admin-view-section'),
 

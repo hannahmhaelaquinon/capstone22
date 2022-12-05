@@ -280,19 +280,33 @@ def admin_section_view(request):
     return render(request, 'exam/admin_sections.html', context)
 
 @login_required(login_url='adminlogin')
+def admin_add_levels(request):
+    if request.method == 'POST':
+        levForm = forms.LevelForm(request.POST)
+        if levForm.is_valid():
+            levForm.save()
+            return redirect('admin-grade1')
+    else:
+        levForm = forms.LevelForm()
+    context = {
+        'levForm' : levForm
+    }
+    return render(request, 'exam/admin_add_level.html', context)
+    
+
+@login_required(login_url='adminlogin')
 def admin_add_section(request):
-    student= SMODEL.Student.objects.all()
+    section = models.Levels.objects.all()
     if request.method == 'POST':
         secForm = forms.SectionForm(request.POST)
         if secForm.is_valid():
             secForm.save()
             return redirect('admin-grade1')
     else:
-
         secForm = forms.SectionForm()
     context = {
-        'student': student,
-        'secForm' : secForm
+        'secForm' : secForm,
+        'section' : section
     }
     return render(request, 'exam/admin_add_sections.html', context)
 

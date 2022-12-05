@@ -9,6 +9,12 @@ class SectionForm(forms.ModelForm):
         fields = '__all__'
 
 
+class LevelForm(forms.ModelForm):
+    class Meta:
+        model = models.Levels
+        fields = '__all__'
+
+
 class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)
     Email = forms.EmailField()
