@@ -52,14 +52,14 @@ def student_dashboard_view(request):
         'total_question': QMODEL.Question.objects.all().count(),
         'total_assignment': TMODEL.TeacherAssignment.objects.all().count(),
     }
-    return render(request, 'student/student_dashboard.html', context=dict)
+    return render(request, 'student/student_dashboard.html', {'context': dict, 'navbar': 'student-dashboard'})
 
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_assignment(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'student/student_assignment.html', {'courses': courses})
+    return render(request, 'student/student_assignment.html', {'courses': courses, 'navbar': 'student-assignment'})
 
 
 @login_required(login_url='studentlogin')
@@ -79,7 +79,7 @@ def student_take_assignment(request, pk):
 @user_passes_test(is_student)
 def student_exam_view(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'student/student_exam.html', {'courses': courses})
+    return render(request, 'student/student_exam.html', {'courses': courses, 'navbar': 'student-exam'})
 
 
 @login_required(login_url='studentlogin')
@@ -161,20 +161,20 @@ def student_marks_view(request):
 @user_passes_test(is_student)
 def student_video_view(request):
     video = QMODEL.Video.objects.all()
-    return render(request, 'student/svideo.html', {'video': video})
+    return render(request, 'student/svideo.html', {'video': video, 'navbar': 'student-video'})
 
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_library_view(request):
     books = QMODEL.Library.objects.all()
-    return render(request, 'student/slibrary.html', {'books': books})
+    return render(request, 'student/slibrary.html', {'books': books, 'navbar': 'student-library'})
 
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_games_view(request):
-    return render(request, 'student/SGame/sgamehome.html')
+    return render(request, 'student/SGame/sgamehome.html', {'navbar': 'student-games'})
 
 
 @login_required(login_url='studentlogin')

@@ -68,19 +68,30 @@
     }
     </style>
   </head>
-<br><br>
-
-  <div class="container">
+  <div class="content-body">
+    <div class="container-fluid">            
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Questions</h4>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
+                </ol>
+            </div>
+        </div>
     <div class="row">
       <div class="col-md-4 col-xl-6">
         <a href="admin-add-question" style="text-decoration: none;color:white;">
-        <div class="card bg-c-blue order-card">
-          <div class="card-block">
-            <h6 class="m-b-20"> Add Question </h6>
-            <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
+          <div class="card bg-c-blue order-card">
+            <div class="card-block">
+              <h6 class="m-b-20"> Add Question </h6>
+              <h2 class="text-right"><i class="fas fa-plus f-left"></i></h2>
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
       </div>
   
       <div class="col-md-4 col-xl-6">
@@ -99,11 +110,7 @@
      
     </div>
   </div>
-
-
-<br><br><br><br><br><br><br><br><br><br>
-
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  </div>
 
 
 {% endblock content %}
