@@ -7,7 +7,7 @@
 
 <div class="jumbotron my-4">
 
-  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST">
+  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <h2 style="text-align: center;">Subject: {{course.course_name}}</h2>
     {% for a in assignment %}
@@ -17,11 +17,19 @@
           Download File
       </a>
     </h3>
-    <label for="assignment">Upload</label>
-        {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %}
-        </div>
+    <div>
+      <label type="file">Upload</label>
+    
+        {% comment %} {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %} {% endcomment %}
+      
+    </div>
+    {% comment %} <label type="file">Upload</label>
+    
+        {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %} {% endcomment %}
+        <div>
         <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Assignment"> 
-        
+        </div>
+        <br>
         {% endfor %} 
     </form>
   </div>
