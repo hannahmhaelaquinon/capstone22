@@ -4,7 +4,7 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
     <style type="text/css">
       a:link {
         text-decoration: none;
@@ -79,7 +79,7 @@
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../admin-dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
                 </ol>
             </div>
         </div>
@@ -87,7 +87,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 col-xl-6">
-        <a href="admin-add-course" style="text-decoration: none;color:white;">
+        <a href="{% url 'admin-add-course' %}" style="text-decoration: none;color:white;">
         <div class="card bg-c-blue order-card">
           <div class="card-block">
             <h6 class="m-b-20"> Add Subject</h6>
@@ -98,7 +98,7 @@
       </div>
   
       <div class="col-md-4 col-xl-6">
-        <a href="admin-view-course" style="text-decoration: none;color:white;">
+        <a href="{% url 'admin-view-course' %}" style="text-decoration: none;color:white;">
         <div class="card bg-c-gtx order-card">
           <div class="card-block">
             <h6 class="m-b-20">View Subject</h6>

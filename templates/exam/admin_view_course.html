@@ -1,8 +1,8 @@
 {% extends 'exam/adminbase.html' %}
 {% block content %}
 {%load static%}
-
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">">
+<!-- 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">"> -->
 
 <div class="content-body">
   <div class="container-fluid">            
@@ -14,7 +14,7 @@
           </div>
           <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="../admin-dashboard">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
                   <li class="breadcrumb-item active"><a href="../admin-course">Subject</a></li>
                   <li class="breadcrumb-item active"><a href="javascript:void(0);">View Subject</a></li>
               </ol>
