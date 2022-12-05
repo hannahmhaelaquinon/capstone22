@@ -62,10 +62,10 @@ def teacher_dashboard_view(request):
     for id in course_id_list:
         if id not in final_course:
             final_course.append(id)
-    
+
     students_count = SMODEL.Student.objects.filter(id__in=final_course).count()
     subject_count = sections.count()
-    context={
+    context = {
         "students_count": students_count,
         "course_id_list": course_id_list,
         "subject_count": subject_count
@@ -92,6 +92,7 @@ def teacher_add_exam_view(request):
         return HttpResponseRedirect('/teacher/teacher-view-exam')
     return render(request, 'teacher/teacher_add_exam.html', {'courseForm': courseForm})
 
+
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_assign_quiz(request):
@@ -101,7 +102,8 @@ def teacher_assign_quiz(request):
         if assignForm.is_valid():
             assign = assignForm.save(commit=False)
             course = QMODEL.Course.objects.get(id=request.POST.get('courseID'))
-            student = QMODEL.Student.objects.get(id=request.POST.get('studentID'))
+            student = QMODEL.Student.objects.get(
+                id=request.POST.get('studentID'))
             assign.course = course
             assign.student = student
             assign.save()
@@ -110,6 +112,7 @@ def teacher_assign_quiz(request):
             print("form is invalid")
         return HttpResponseRedirect('/teacher/teacher-view-exam')
     return render(request, 'teacher/teacher_assign_quiz.html', {'assignForm': assignForm})
+
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
@@ -121,6 +124,7 @@ def teacher_view_answer(request):
         'questions': questions
     }
     return render(request, 'teacher/teacher_view_answer.html', context)
+
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
@@ -235,13 +239,11 @@ def teacher_add_video(request):
     return render(request, 'teacher/teacher_add_video.html', {"form": form, "all": all_video})
 
 
-'''
 def teacher_delete_video(request, pk):
     if request.method == 'POST':
         video = QMODEL.Video.objects.get(pk=pk)
         video.delete()
     return redirect('teacher-view-video')
-'''
 
 
 @login_required(login_url='teacherlogin')
