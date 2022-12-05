@@ -94,7 +94,9 @@
             <div class="card bg-c-4 order-card">
               <div class="card-block">
                 <h1 class="m-b-20">{{s.section}}</h1>
-                
+                <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-section' s.id  %}">
+                  <i class="la la-trash-o"></i>
+              </a>
               </div>
             </div>
           </a>

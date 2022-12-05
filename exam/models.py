@@ -1,17 +1,24 @@
 from django.db import models
 from unittest.util import _MAX_LENGTH
-from django.db import models
 from .validators import file_size
 from django.core.validators import FileExtensionValidator
 from student.models import Student
 from teacher.models import *
 
+class Levels(models.Model):
+    level = models.CharField(max_length=50)
+
+    class meta:
+        db_table = 'Level'
+
 class Section(models.Model):
     section = models.CharField(max_length=50)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    level = models.ForeignKey(Levels, on_delete=models.CASCADE)
 
     class meta:
         db_table = 'Section'
+
 
 
 class Question(models.Model):
