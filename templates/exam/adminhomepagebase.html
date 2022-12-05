@@ -1,3 +1,4 @@
+{% url 'adminclick' as adminclick %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -270,7 +271,7 @@
           <li><a class="nav-link scrollto" href="../#contact">Contact</a></li>
           <li><a class="nav-link scrollto " href="{% url 'signin' %}">Sign In</a></li>
           <!-- <li><a class="nav-link scrollto  " href="#">Admin</a></li> -->
-          <li><a class="nav-link scrollto" href="{% url 'adminclick' %}">Admin</a></li>
+          <li><a class="nav-link scrollto  {% if request.path == 'adminclick' %} active{% endif %}" href="{% url 'adminclick' %}">Admin</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
