@@ -289,6 +289,7 @@ def admin_grade1(request):
     return render(request, 'exam/admin_grade1.html', context)
 
 
+
 @login_required(login_url='adminlogin')
 def admin_view_section(request, pk):
     sections = models.Section.objects.get(id=pk)
@@ -301,6 +302,11 @@ def admin_view_section(request, pk):
     }
     return render(request, 'exam/admin_view_section.html', context)
 
+@login_required(login_url='adminlogin')
+def delete_section_view(request, pk):
+    section = models.Section.objects.get(id=pk)
+    section.delete()
+    return HttpResponseRedirect('/admin-grade1')
 
 # aView all subjects created
 @login_required(login_url='adminlogin')
@@ -313,19 +319,33 @@ def admin_section_view(request):
 
 
 @login_required(login_url='adminlogin')
+def admin_add_levels(request):
+    if request.method == 'POST':
+        levForm = forms.LevelForm(request.POST)
+        if levForm.is_valid():
+            levForm.save()
+            return redirect('admin-grade1')
+    else:
+        levForm = forms.LevelForm()
+    context = {
+        'levForm' : levForm
+    }
+    return render(request, 'exam/admin_add_level.html', context)
+    
+
+@login_required(login_url='adminlogin')
 def admin_add_section(request):
-    student = SMODEL.Student.objects.all()
+    student= SMODEL.Student.objects.all()
     if request.method == 'POST':
         secForm = forms.SectionForm(request.POST)
         if secForm.is_valid():
             secForm.save()
             return redirect('admin-grade1')
     else:
-
         secForm = forms.SectionForm()
     context = {
         'student': student,
-        'secForm': secForm
+        'secForm' : secForm
     }
     return render(request, 'exam/admin_add_sections.html', context)
 
