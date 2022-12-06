@@ -93,9 +93,9 @@
                               </video>
                           </td>
                           <td>
-                            <button type="button" class="btn btn-sm btn-danger" href="">
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal-{{v.id}}">
                               <i class="la la-trash-o"></i>
-                            </button>
+                          </button>
                          </td>
                        </tr>
                     <!-- Modal DELETE-->
@@ -108,7 +108,7 @@
                                   <span aria-hidden="true">&times;</span>
                                   </button>
                               </div>
-                              <form id="deleteForm" method="post" action="#">
+                              <form id="deleteForm" method="post" action="{% url 'admin-delete-video' v.pk %}">
                                   {% csrf_token %} 
 
                                   <div class="modal-body">                       
@@ -123,7 +123,7 @@
                               </form>
                           </div>
                       </div>
-                    </div>
+                  </div>
                     {% endfor %}
                     </tbody>
                     </table>
