@@ -335,7 +335,6 @@ def admin_add_levels(request):
 
 @login_required(login_url='adminlogin')
 def admin_add_section(request):
-    student= SMODEL.Student.objects.all()
     if request.method == 'POST':
         secForm = forms.SectionForm(request.POST)
         if secForm.is_valid():
@@ -344,7 +343,6 @@ def admin_add_section(request):
     else:
         secForm = forms.SectionForm()
     context = {
-        'student': student,
         'secForm' : secForm
     }
     return render(request, 'exam/admin_add_sections.html', context)

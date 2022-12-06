@@ -14,7 +14,6 @@ class Levels(models.Model):
 class Section(models.Model):
     section = models.CharField(max_length=50)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    level = models.ForeignKey(Levels, on_delete=models.CASCADE)
 
     class meta:
         db_table = 'Section'
