@@ -347,9 +347,7 @@ def admin_add_section(request):
     }
     return render(request, 'exam/admin_add_sections.html', context)
 
-# aView all subjects created
-
-
+# View all subjects created
 @login_required(login_url='adminlogin')
 def admin_course_view(request):
     total_subject = models.Course.objects.all().count()
@@ -377,7 +375,7 @@ def admin_add_course_view(request):
 @login_required(login_url='adminlogin')
 def admin_view_course_view(request):
     courses = models.Course.objects.all()
-    return render(request, 'exam/admin_view_course.html', {'courses': courses})
+    return render(request, 'exam/admin_subjects.html', {'courses': courses})
 
 # Delete course
 
