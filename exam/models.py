@@ -74,3 +74,7 @@ class Library(models.Model):
 
     class meta:
         db_table = 'Library'
+
+# class Subject(models.Model):
+#     name = models.CharField(max_length=50)
+#     description
