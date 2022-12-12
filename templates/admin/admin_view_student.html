@@ -1,0 +1,133 @@
+{% extends 'admin/adminbase.html' %}
+{% block content %}
+{%load static%}
+<div class="content-body">
+    <div class="container-fluid">            
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>All Student</h4>
+                </div>
+            </div>
+           <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'admin-student' %}">Students</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0);">All Students</a></li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="row tab-content">
+                  <div id="list-view" class="tab-pane fade active show col-lg-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <h4 class="card-title">All Students  </h4>
+                          </div>
+
+                          <div class="card-header">
+                            <h4 class="card-title"> </h4>
+                            <a href = "{% url 'admin-add-student' %}" class="btn btn-primary" >+ Add new</a>
+                        </div>
+                          
+                          <div class="card-header">
+                              <button type="button" class="btn btn-rounded btn-danger"><span class="btn-icon-left text-danger"><i class="fa fa-download color-danger" id="btnPDF"></i>
+                              </span>PDF</button>
+                          </div>
+                          <div class="card-body">
+                            <div class="table-responsive">
+                            <table id="example3" class="display" style="min-width: 845px">
+                              <thead>
+                                  <tr>
+                                      
+                                      <th scope="col" style = 'text-align:center;'>Student ID</th>
+                                      <th scope="col" style = 'text-align:center;'> Name</th>
+                                      <th scope="col" style = 'text-align:center;'> Level</th>
+                                      <th scope="col" style = 'text-align:center;'> Photo</th>
+                                      <th scope="col" style = 'text-align:center;'> Contact</th>
+                                      <th scope="col" style = 'text-align:center;'> Address</th>
+                                      <th scope="col" style = 'text-align:center;'> Action</th>
+                                          
+                                  </tr>
+                              </thead>
+                              <tbody>              
+                                  {% for s in student %}   
+                                  <tr>
+                                      <td  style = 'text-align:center;'>{{ s.id }}</td>   
+                                      <td  style = 'text-align:center;'>{{ s.get_name}}</td>
+                                      <td  style = 'text-align:center;'>{{ s.level.level}}</td>      
+                                      <td> <img src="{{ s.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
+                                      <td  style = 'text-align:center;'>{{ s.mobile }}</td>
+                                      <td  style = 'text-align:center;'>{{ s.address }}</td>
+                                      <td  style = 'text-align:center;'>
+                                        <a type="button" class="btn btn-sm btn-primary" href="{% url 'update-student' s.id  %}">
+                                            <i class="la la-pencil"></i>
+                                        </a>
+                                        
+                                        <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-student' s.id  %}">
+                                            <i class="la la-trash-o"></i>
+                                        </a>
+                                        <br>
+                                        <br>
+                                    </td>
+                                  </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+    var date_input=$('input[name="date"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    };
+    date_input.datepicker(options);
+    })
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css"></script>
+<script src="../../static/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../../static/admin/js/plugins-init/datatables.init.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script type="text/javascript">
+$("body").on("click", "#btnPDF", function () {
+    html2canvas($('#example3')[0], {
+        onrendered: function (canvas) {
+            var data = canvas.toDataURL();
+            var docDefinition = {
+                content: [{
+                    image: data,
+                    width: 500
+                }]
+            };
+            pdfMake.createPdf(docDefinition).download("teacher-list.pdf");
+        }
+    });
+});

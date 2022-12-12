@@ -1,0 +1,76 @@
+{% extends 'admin/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{%load static%}
+<div class="content-body">
+  <div class="container-fluid">            
+      <div class="row page-titles mx-0">
+          <div class="col-sm-6 p-md-0">
+              <div class="welcome-text">
+                  <h4>Sections</h4>
+              </div>
+          </div>
+          <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
+                  <li class="breadcrumb-item active"><a href="javascript:void(0);">Levels</a></li>
+                  <li class="breadcrumb-item active"><a href="javascript:void(0);">All Sections</a></li>
+              </ol>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="row tab-content">
+                <div id="list-view" class="tab-pane fade active show col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title"> </h4>
+                            <a href = "{% url 'admin-add-section' %}" class="btn btn-primary" >+ Add new</a>
+                        </div>
+                        <div class="card-header">
+                            <button type="button" class="btn btn-rounded btn-danger"><span class="btn-icon-left text-danger"><i class="fa fa-download color-danger" id="btnPDF"></i>
+                            </span>PDF</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example3" class="display" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style = 'text-align:center;'> ID </th>
+                                            <th scope="col" style = 'text-align:center;'> Assigned Teacher</th>
+                                            <th scope="col" style = 'text-align:center;'> Level</th>
+                                            <th scope="col" style = 'text-align:center;'> Section</th>
+                                            <th scope="col" style = 'text-align:center;'> Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>              
+                                        {% for s in sections %}  
+                                        <tr>
+                                            <td>{{ s.id }}</td>   
+                                            <td>{{ s.teacher.get_name }}</td>
+                                            <td>{{ s.level.level}}</td>      
+                                            <td >{{ s.section }}</td>
+                                            <td>
+                                                <a type="button" class="btn btn-sm btn-primary" href="{% url 'update-student' s.id  %}">
+                                                    <i class="la la-pencil"></i>
+                                                </a>
+                                
+                                                <a type="button" class="btn btn-sm btn-danger" href="{% url 'delete-student' s.id  %}">
+                                                    <i class="la la-trash-o"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock content %}

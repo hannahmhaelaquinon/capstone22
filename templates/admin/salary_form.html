@@ -1,0 +1,30 @@
+{% extends 'admin/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="content-body">
+  <div class="container-fluid">            
+      <div class="row page-titles mx-0">
+          <div class="col-sm-6 p-md-0">
+              <div class="welcome-text">
+                  <h4>Salary</h4>
+              </div>
+          </div>
+          <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
+              </ol>
+          </div>
+      </div>
+<h3 style="text-align:center">Please Enter Salary Amount:</h3>
+<form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
+    {%csrf_token%}
+    <div class="form-group">
+      <label for="salary">Salary (per month)</label>
+      {% render_field teacherSalary.salary class="form-control" placeholder="3660" %}
+    </div>
+    
+
+    <button type="submit" class="btn btn-success" style="border-radius: 0%;">Approve</button>
+  </form>
+<br><br><br>
+{% endblock content %}

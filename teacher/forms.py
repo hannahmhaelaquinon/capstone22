@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
-from exam import models as QMODEL
 from .models import Teacher
 
 
@@ -41,8 +40,8 @@ class TeacherAssignForm(forms.ModelForm):
     courseID = forms.ModelChoiceField(queryset=models.Course.objects.all(
     ), empty_label="Course Name", to_field_name="id")
 
-    studentID = forms.ModelChoiceField(queryset=models.Student.objects.all(
-    ), empty_label="Student Name", to_field_name="id")
+   # studentID = forms.ModelChoiceField(queryset=models.Student.objects.all(
+  #  ), empty_label="Student Name", to_field_name="id")
 
     class Meta:
         model = models.TeacherAssignQuiz

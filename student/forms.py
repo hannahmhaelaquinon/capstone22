@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
-from exam import models as QMODEL
+from admins import models as QMODEL
 from .models import Student
 
 
@@ -17,7 +17,7 @@ class StudentUserForm(forms.ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['address', 'mobile',  'gradelevels','profile_pic']
+        fields = ['address', 'mobile',  'level','profile_pic']
 
 
 class UpdateForm(forms.ModelForm):

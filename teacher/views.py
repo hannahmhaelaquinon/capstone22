@@ -7,9 +7,9 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from datetime import date, timedelta
-from exam import models as QMODEL
+from admins import models as QMODEL
 from student import models as SMODEL
-from exam import forms as QFORM
+from admins import forms as QFORM
 from teacher import forms as TFORM
 from teacher import models as TMODEL
 from django.contrib import messages
@@ -51,10 +51,10 @@ def is_teacher(user):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
-    sections = QMODEL.Section.objects.filter(id=request.user.id)
+    sections = QMODEL.Section.objects.filter(id=request.user.teacher.id)
     course_id_list = []
     for section in sections:
-        section = QMODEL.Section.objects.get(id=section.sect_id.id)
+        section = QMODEL.Section.objects.get(id=section.id)
         course_id_list.append(section.id)
 
     final_course = []

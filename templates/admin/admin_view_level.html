@@ -1,0 +1,84 @@
+{% extends 'admin/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<style type="text/css">
+  a:link {
+    text-decoration: none;
+  }
+
+  .order-card {
+    color: rgb(255, 255, 255);
+  }
+
+  .bg-c-1 {
+    background: #FD0100;
+  }
+
+  .bg-c-2 {
+    background:#F76915;
+  }
+
+  .bg-c-3 {
+    background: #EEDE04;
+  }
+
+  .bg-c-4 {
+    background: #A0D636;
+  }
+  .bg-c-5 {
+    background: #2FA236;
+  }
+  .bg-c-6 {
+    background: #333ED4;
+  }
+
+  .card {
+    
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card .card-block {
+    padding: 25px;
+  }
+
+  .order-card i {
+    font-size: 26px;
+  }
+
+  .f-left {
+    float: left;
+  }
+
+  .f-right {
+    float: right;
+  }
+  header {
+  left: 0px;
+  right: 0px;
+}
+</style>
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="row">
+      {% for s in level %}  
+      <div class="col-md-4 col-xl-6">
+        <a href="{% url 'admin-level'%}" style="text-decoration: none;color:white;">
+        <div class="card bg-c-6 order-card">
+          <div class="card-block">
+            <h4 class="m-b-20"style="text-decoration: none;color:white;">{{s.level}}</h4>
+            <a type="button" class="btn btn-sm btn-light"  href="{% url 'delete-section' s.id  %}">
+              <i class="la la-trash-o"></i>
+          </a>
+          </div>
+        </div>
+      </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

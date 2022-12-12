@@ -1,0 +1,45 @@
+{% include 'admin/adminbase.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- row -->
+<div class="content-body">
+    <div class="container-fluid">
+            
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Add Library Assets</h4>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'admin-view-library' %}">Library</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'admin-upload-book' %}">Add Library</a></li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Add Library Assets</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy}}
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-primary btn-user" >Upload Book</button>
+                                <a type = "button" class="btn btn-secondary btn-user" id="id_registration" href="{% url 'admin-view-library' %}" >Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

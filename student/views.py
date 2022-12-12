@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from datetime import date, timedelta
-from exam import models as QMODEL
+from admins import models as QMODEL
 from teacher import models as TMODEL
 from teacher import forms as TFORM                              
 from .forms import StudentForm, StudentUserForm, UpdateForm
