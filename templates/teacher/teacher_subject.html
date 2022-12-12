@@ -6,8 +6,8 @@
     <div class="page-header">
       <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white me-2">
-          <i class="mdi mdi-help-circle"></i>
-        </span> Quiz
+          <i class="mdi mdi-book-multiple-variant"></i>
+        </span> Subject
       </h3>
       <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
@@ -22,33 +22,39 @@
         <div id="list-view" class="tab-pane fade active show col-lg-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Available Quiz</h4>
+                <h4 class="card-title">Subjects</h4>
+            <a href="/teacher/teacher-add-subject" type="button" class="btn btn-outline-danger btn-icon-text" >
+                <i class="mdi mdi-upload btn-icon-prepend" ></i> Add new 
+              </a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col" style = 'text-align:center;'> Quiz Name</th>
-                    <th scope="col" style = 'text-align:center;'> Total Question</th>
-                    <th scope="col" style = 'text-align:center;'> Total Marks</th>
+                    <th scope="col" style = 'text-align:center;'> Subject Id</th>
+                    <th scope="col" style = 'text-align:center;'> Subject</th>
+                    <th scope="col" style = 'text-align:center;'> Description</th>
                     <th scope="col" style = 'text-align:center;'> Action</th>
-            </tr>
-          </thead>
-          <tbody>              
-            {% for s in courses %}   
-    
-            <tr> 
-                    <td>{{s.course_name}}</td>   
-                    <td>{{s.question_number}}</td>   
-                    <td>{{s.total_marks}}</td>
+                </tr>
+                </thead>
+          <tbody>       
+            <tr>
+              {% for s in  subjects %} 
+                    <td>{{s.id}} </td>
+                    <td>{{s.subject}}</td>
+                    <td>{{s.description}}</td> 
                     <td>
-                      <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-exam' s.id  %}">
-                        <i class="mdi mdi-delete"></i>
+                      <a type="button" class="btn btn-sm btn-primary" href="{% url 'teacher-edit-assignment' %}">
+                          <i class="mdi mdi-border-color"></i>
                       </a>
+      
+                      <button type="button" class="btn btn-sm btn-danger" >
+                          <i class="mdi mdi-delete"></i>
+                      </button>
                   </td>
               </tr>
-              {% endfor %}
+            {% endfor %}
           </tbody>
           </table>
         </div>

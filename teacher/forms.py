@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from . import models
 from .models import Teacher
 
+class SubjectForm(forms.ModelForm):
+    class Meta:
+        model = models.Subject
+        fields = '__all__'
+
 
 class TeacherUserForm(forms.ModelForm):
     class Meta:
@@ -26,8 +31,8 @@ class UpdateTeacherForm(forms.ModelForm):
 
 
 class TeacherAssForm(forms.ModelForm):
-    courseID = forms.ModelChoiceField(queryset=models.Course.objects.all(
-    ), empty_label="Course Name", to_field_name="id")
+    subjectID = forms.ModelChoiceField(queryset=models.Subject.objects.all(
+    ), empty_label="Subject Name", to_field_name="id")
 
     class Meta:
         model = models.TeacherAssignment
@@ -40,8 +45,8 @@ class TeacherAssignForm(forms.ModelForm):
     courseID = forms.ModelChoiceField(queryset=models.Course.objects.all(
     ), empty_label="Course Name", to_field_name="id")
 
-   # studentID = forms.ModelChoiceField(queryset=models.Student.objects.all(
-  #  ), empty_label="Student Name", to_field_name="id")
+    subjectID = forms.ModelChoiceField(queryset=models.Subject.objects.all(
+    ), empty_label="Subject Name", to_field_name="id")
 
     class Meta:
         model = models.TeacherAssignQuiz

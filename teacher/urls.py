@@ -11,6 +11,12 @@ urlpatterns = [
     path('teachersignup', views.teacher_signup_view, name='teachersignup'),
     path('teacher-dashboard', views.teacher_dashboard_view,
          name='teacher-dashboard'),
+
+     path('teacher-subject', views.teacher_subject,
+         name='teacher-subject'),
+     path('teacher-add-subject', views.teacher_add_subject,
+         name='teacher-add-subject'),
+
     path('teacher-video/', views.teacher_view_video, name='teacher-view-video'),
     path('teacher-add-video/', views.teacher_add_video, name='teacher-add-video'),
     #path('<int:pk>', views.teacher_delete_video, name='teacher-delete-video'),

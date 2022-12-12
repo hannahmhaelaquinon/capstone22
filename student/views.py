@@ -59,20 +59,20 @@ def student_dashboard_view(request):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_assignment(request):
-    courses = QMODEL.Course.objects.all()
-    return render(request, 'student/student_assignment.html', {'courses': courses, 'navbar': 'student-assignment'})
+    subject = QMODEL.Subject.objects.all()
+    return render(request, 'student/student_assignment.html', {'subject': subject, 'navbar': 'student-assignment'})
 
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_take_assignment(request, pk):
-    course = QMODEL.Course.objects.get(id=pk)
-    assignment = TMODEL.TeacherAssignment.objects.all().filter(course=course)
+    subject = QMODEL.Subject.objects.get(id=pk)
+    assignment = TMODEL.TeacherAssignment.objects.all().filter(subject=subject)
     if request.method == 'POST':
         pass
     response = render(request, 'student/student_take_assignment.html',
-                      {'course': course, 'assignment': assignment})
-    response.set_cookie('course_id', course.id)
+                      {'subject': subject, 'assignment': assignment})
+    response.set_cookie('subject_id', subject.id)
     return response
 
 

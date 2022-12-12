@@ -51,26 +51,47 @@ def is_teacher(user):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
-    sections = QMODEL.Section.objects.filter(id=request.user.teacher.id)
-    course_id_list = []
+    sections = QMODEL.Section.objects.filter(teacher=request.user.teacher.id)
+    section_id_list = []
     for section in sections:
         section = QMODEL.Section.objects.get(id=section.id)
-        course_id_list.append(section.id)
+        section_id_list.append(section.id)
 
-    final_course = []
+    final_section = []
     # Removing Duplicate Course Id
-    for id in course_id_list:
-        if id not in final_course:
-            final_course.append(id)
+    for id in section_id_list:
+        if id not in final_section:
+            final_section.append(id)
 
-    students_count = SMODEL.Student.objects.filter(id__in=final_course).count()
-    subject_count = sections.count()
+    students_count = SMODEL.Student.objects.filter(id__in=final_section).count()
+    section_count = sections.count()
+    level_count = sections.count()
     context = {
         "students_count": students_count,
-        "course_id_list": course_id_list,
-        "subject_count": subject_count
+        "section_id_list": section_id_list,
+        "section_count": section_count
     }
     return render(request, 'teacher/teacher_dashboard.html', context)
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_subject(request):
+    subjects = QMODEL.Subject.objects.all()
+    return render(request, 'teacher/teacher_subject.html', {'subjects': subjects})
+
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def teacher_add_subject(request):
+    subjectForm = forms.SubjectForm()
+    if request.method == 'POST':
+        subjectForm = forms.SubjectForm(request.POST)
+        if subjectForm.is_valid():
+            subject = subjectForm.save(commit=False)
+            subject.save()
+        else:
+            print("form is invalid")
+        return HttpResponseRedirect('/teacher/teacher-subject')
+    return render(request, 'teacher/teacher_add_subject.html', {'subjectForm': subjectForm})
 
 
 @login_required(login_url='teacherlogin')
@@ -102,10 +123,10 @@ def teacher_assign_quiz(request):
         if assignForm.is_valid():
             assign = assignForm.save(commit=False)
             course = QMODEL.Course.objects.get(id=request.POST.get('courseID'))
-            student = QMODEL.Student.objects.get(
-                id=request.POST.get('studentID'))
+            subject = QMODEL.Subject.objects.get(
+                id=request.POST.get('subjectID'))
             assign.course = course
-            assign.student = student
+            assign.subject = subject
             assign.save()
             assignForm.save()
         else:
@@ -183,8 +204,8 @@ def teacher_add_assignment(request):
         assignmentForm = TFORM.TeacherAssForm(request.POST, request.FILES)
         if assignmentForm.is_valid():
             assignment = assignmentForm.save(commit=False)
-            course = QMODEL.Course.objects.get(id=request.POST.get('courseID'))
-            assignment.course = course
+            subject = QMODEL.Subject.objects.get(id=request.POST.get('subjectID'))
+            assignment.subject = subject
             assignment.save()
         else:
             print("form is invalid")
