@@ -7,6 +7,9 @@ from teacher.models import *
 class Levels(models.Model):
     level = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.level
+    
     class meta:
         db_table = 'Level'
 
@@ -14,6 +17,15 @@ class Section(models.Model):
     section = models.CharField(max_length=50)
     level = models.ForeignKey(Levels, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    
+    @property
+    def get_name(self):
+        return self.level.level
+    @property
+    def get_instance(self):
+        return self
+    def __str__(self):
+        return self.level.level
 
     class meta:
         db_table = 'Section'
