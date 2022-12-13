@@ -8,6 +8,7 @@ class Student(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20,null=False)
     level = models.ForeignKey(Levels, on_delete=models.CASCADE)
+    bmi = models.CharField(max_length=20,null=True,blank=True)
     
     @property
     def get_name(self):
