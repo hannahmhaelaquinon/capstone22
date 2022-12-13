@@ -73,11 +73,14 @@
               <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{% url 'admin-dashboard' %}">Home</a></li>
                   <li class="breadcrumb-item active"><a href="javascript:void(0);">Grade</a></li>
-                  <li class="breadcrumb-item active"><a href="javascript:void(0);">Grade 1</a></li>
+                  {% comment %} <li class="breadcrumb-item active"><a href="javascript:void(0);">Grade 1</a></li> {% endcomment %}
               </ol>
           </div>
       </div>
-
+      <div class="card-header">
+        <h4 class="card-title"> </h4>
+        <a href = "{% url 'admin-add-level' %}" class="btn btn-primary" >+ Add new</a>
+    </div>
       <div class="row">
           {% for s in level %}  
           <div class="col-md-4 col-xl-6">
@@ -85,7 +88,7 @@
             <div class="card bg-c-4 order-card">
               <div class="card-block">
                 <h1 class="m-b-20">{{s.level}}</h1>
-                <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-section' s.id  %}">
+                <a type="button" class="btn btn-sm btn-danger"  href="{% url 'delete-level' s.id  %}">
                   <i class="la la-trash-o"></i>
               </a>
               </div>

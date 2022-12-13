@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 class Subject(models.Model):
     subject = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.subject
 
 class Teacher(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -33,6 +36,15 @@ class TeacherAssignment(models.Model):
     subject=models.ForeignKey(Subject,on_delete=models.CASCADE)
     instruction= models.CharField(max_length=500)
     upload =  models.FileField(upload_to='documents/')
+    
+    @property
+    def get_name(self):
+        return self.subject.subject
+    @property
+    def get_instance(self):
+        return self
+    def __str__(self):
+        return self.subject.subject
 
 class TeacherAssignQuiz(models.Model):
     course=models.ForeignKey(Course,on_delete=models.CASCADE)

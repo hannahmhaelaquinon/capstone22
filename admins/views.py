@@ -326,6 +326,13 @@ def admin_view_levels(request):
     }
     return render(request, 'admin/admin_view_level.html', context)
 
+
+@login_required(login_url='adminlogin')
+def admin_delete_levels(request, pk):
+    level = models.Levels.objects.get(id=pk)
+    level.delete()
+    return HttpResponseRedirect('/admin-view-level')
+
 @login_required(login_url='adminlogin')
 def admin_add_section(request):
     if request.method == 'POST':
