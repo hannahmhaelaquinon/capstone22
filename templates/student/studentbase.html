@@ -33,8 +33,7 @@
     <!-- Template Main CSS File -->
     <link href="/static/assets/css/style.css" rel="stylesheet">
   
-     <!-- Template Main CSS File -->
-     <link href="/static/assets/css/style.css" rel="stylesheet">
+
   
      
   
@@ -55,8 +54,17 @@
       <nav id="navbar" class="navbar order-last order-lg-0" style="margin-right:50px;">
         <ul>
          <li><a class="nav-link scrollto {% if navbar == 'student-dashboard' %}active{% endif %} " href="{% url 'student-dashboard' %}">Home</a></li>
-            <li><a class="nav-link scrollto {% if navbar == 'student-assignment' %}active{% endif %} " href="{% url 'student-assignment' %}">Assignment</a></li>
-         <div class="dropdown">
+         <li><a class="nav-link scrollto {% if navbar == 'student-assignment' %}active{% endif %} " href="{% url 'student-assignment' %}">Assignment</a></li>
+         <li><a class="nav-link scrollto {% if navbar == 'student-exam' %}active{% endif %} " href="{% url 'student-exam' %} ">Exam</a></li>
+         <li><a class="nav-link scrollto  {% if navbar == 'student-marks' %}active{% endif %} " href="{% url 'student-marks' %}">Marks</a></li>
+         <li><a class="nav-link scrollto {% if navbar == 'student-video' %}active{% endif %}" href="{% url 'student-video' %}">Video</a></li>
+         <li><a class="nav-link scrollto {% if navbar == 'student-exam' %}active{% endif %}" href="{% url 'student-library' %}">Library</a></li>
+         <li><a class="nav-link scrollto {% if navbar == 'student-exam' %}active{% endif %}" href="{% url 'student-games' %}">Games</a></li>
+         <li><a class="nav-link scrollto {% if navbar == 'student-profile' %}active{% endif %}" href="{% url 'student-profile' %}">Profile</a></li>
+         <li><a  class="nav-link scrollto {% if navbar == 'student-bmi' %}active{% endif %}" href="{% url 'student-bmi' %}">BMI</a></li>
+         <li><a class="nav-link scrollto " href="/logout">Logout</a></li> 
+       
+         <!-- <div class="dropdown">
           <li><a class="nav-link scrollto  dropdown-toggle  {% if navbar == 'student-exam' %}active{% endif %} ||  {% if navbar == 'student-marks' %}active{% endif %} "  data-toggle="dropdown">Exam
           <span class="caret"></span></a></li>
           <ul class="dropdown-menu"style="width:1px;" >
@@ -84,7 +92,7 @@
                 <li><a class="nav-link scrollto " href="/logout">Logout</a></li>    
               </ul>
             </div>
-           
+            -->
            
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
