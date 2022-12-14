@@ -30,8 +30,7 @@
               <div class="button input-box">
                 <input type="submit" value="Submit">
               </div>
-              <div>
-                <br> 
+              <div> 
                   
                 {% if form.non_field_errors %}
                 <div class="alert alert-danger" role="alert">
@@ -40,10 +39,12 @@
                   {% endfor %}
                 </div>
                 {% endif %}
-                <br>
               </div>
             </div>
+            <p style ="color: black; text-align:center;">Request Assistance?<a href="{% url 'contactus'   %}">&nbsp;Click Here!<a></p>
           </form>
+        
+          
           <div>
             <div class="title">Other Sign-In Options</div>
             <div>
