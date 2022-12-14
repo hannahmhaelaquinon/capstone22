@@ -48,10 +48,9 @@ def is_student(user):
 @user_passes_test(is_student)
 def student_dashboard_view(request):
     dict = {
-
-        'total_course': QMODEL.Course.objects.all().count(),
+        'total_course': QMODEL.Subject.objects.all().count(),
         'total_question': QMODEL.Question.objects.all().count(),
-        'total_assignment': TMODEL.TeacherAssignment.objects.all().count(),
+        'total_assignment': TMODEL.TeacherAssignment.objects.all().count()
     }
     return render(request, 'student/student_dashboard.html', {'context': dict, 'navbar': 'student-dashboard'})
 

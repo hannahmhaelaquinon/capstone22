@@ -38,6 +38,59 @@
 
 .embed-responsive-1by1::before {
   padding-top: 100%; }
+
+  a:link {
+    text-decoration: none;
+  }
+
+  .order-card {
+    color: rgb(255, 255, 255);
+  }
+
+  .bg-c-blue {
+    background: #04868f;
+  }
+
+  .bg-c-gtx {
+    background:#57717d;
+  }
+  .bg-c-yellow {
+    background: #F56565;
+  }
+
+  .bg-c-pink {
+    background: #663a30;
+  }
+
+
+  .card {
+    
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card .card-block {
+    padding: 25px;
+  }
+
+  .order-card i {
+    font-size: 26px;
+  }
+
+  .f-left {
+    float: left;
+  }
+
+  .f-right {
+    float: right;
+  }
+  header {
+  left: 0px;
+  right: 0px;
+}
 </style>
 <div class="main-panel">
         <div class="content-wrapper">
@@ -66,62 +119,27 @@
                         {{form.as_p}}
                            <a href="{% url 'teacher-add-video' %}" class="btn btn-primary">Upload</i></a>
                     </form>
-                    <div class="table-responsive">
-                      <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col" style = 'text-align:center;'> ID</th>
-                          <th scope="col" style = 'text-align:center;'> Caption</th>
-                          <th scope="col" style = 'text-align:center;'> Video</th>
-                          <th scope="col" style = 'text-align:center;'> Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>              
-                  {% for v in videos %}   
-          
-                        <tr>
-                          <td>{{v.id}}</td>   
-                          <td>{{v.caption}}</td>   
-                          <td><video class="embed-responsive embed-responsive-16by9" controls="controls">
-                              <source src="{{v.video.url}}" type="video/mp4"/>
-                              </video>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal-{{v.id}}">
-                              <i class="la la-trash-o"></i>
-                          </button>
-                         </td>
-                       </tr>
-                    <!-- Modal DELETE-->
-                    <div class="modal fade" id="exampleModal-{{v.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                              <div class="modal-header" style="background-color:#6db33f">
-                                  <h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                  </button>
+                    <br>
+                    <div class="content-body">
+                      <div class="container-fluid">
+                        <div class="row">
+                          {% for v in videos %}   
+                          <div class="col-md-6 col-xl-6">
+                            <a href="#" style="text-decoration: none;color:white;">
+                            <div class="card bg-c-blue order-card">
+                              <div class="card-block">
+                                <h6 class="m-b-20"><video class="embed-responsive embed-responsive-1by1" controls="controls">
+                                  <source src="{{v.video.url}}" type="video/mp4"/>
+                                  </video></h6>
+                                <h3 class="text-center">{{v.caption}}</h3>
+                                <!--button type="button" class="btn btn-sm btn-primary">
+                                  <i class="mdi mdi-delete"></i>
+                              </button-->
                               </div>
-                              <form id="deleteForm" method="post" action="{% url 'admin-delete-video' v.pk %}">
-                                  {% csrf_token %} 
-
-                                  <div class="modal-body">                       
-                                      <input type="text" name="vvideo-Id" value = {{v.id}} hidden>
-                                      Are you sure you want to delete this record?
-                                  </div>
-
-                                  <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                                      <button type="submit" id = "btnDelete" name = "btnDelete" class="btn btn-primary">YES</button>
-                                  </div>
-                              </form>
+                            </div>
+                          </a>
                           </div>
-                      </div>
-                  </div>
-                    {% endfor %}
-                    </tbody>
-                    </table>
-                   </div>
+                          {% endfor %}
                  </div>
                </div>
              </div>

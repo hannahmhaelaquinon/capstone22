@@ -519,7 +519,7 @@ def admin_add_video(request):
     else:
 
         form = VideoForm()
-    return render(request, 'exam/admin_add_video.html', {'form': form})
+    return render(request, 'admin/admin_add_video.html', {'form': form})
 
 
 def admin_delete_video(request, pk):

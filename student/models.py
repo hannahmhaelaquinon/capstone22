@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from admins.models import Levels
+from teacher.models import *
 
 class Student(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)

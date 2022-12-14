@@ -245,7 +245,6 @@ def teacher_view_video(request):
     }
     return render(request, 'teacher/teachervideo.html', context)
 
-
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_add_video(request):
