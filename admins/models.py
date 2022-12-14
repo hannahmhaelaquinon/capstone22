@@ -3,15 +3,8 @@ from unittest.util import _MAX_LENGTH
 from .validators import file_size
 from django.core.validators import FileExtensionValidator
 from teacher.models import *
+from student.models import *
 
-class Levels(models.Model):
-    level = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.level
-    
-    class meta:
-        db_table = 'Level'
 
 class Section(models.Model):
     section = models.CharField(max_length=50)
@@ -44,11 +37,11 @@ class Question(models.Model):
     answer = models.CharField(max_length=200, choices=cat)
 
 
-#class Result(models.Model):
-  #  student = models.ForeignKey(Student, on_delete=models.CASCADE)
-  #  exam = models.ForeignKey(Course, on_delete=models.CASCADE)
-  #  marks = models.PositiveIntegerField()
-  #  date = models.DateTimeField(auto_now=True)
+class Result(models.Model):
+   student = models.ForeignKey(Student, on_delete=models.CASCADE)
+   exam = models.ForeignKey(Course, on_delete=models.CASCADE)
+   marks = models.PositiveIntegerField()
+   date = models.DateTimeField(auto_now=True)
 
 
 class Video(models.Model):
