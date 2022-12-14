@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from . import models
 from admins import models as QMODEL
-from .models import Student
+from .models import Student, Levels
 
 
 class StudentUserForm(forms.ModelForm):
@@ -13,11 +13,15 @@ class StudentUserForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
-
+class LevelForm(forms.ModelForm):
+    class Meta:
+        model = models.Levels
+        fields = '__all__' 
+        
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['address', 'mobile', 'profile_pic', 'level','bmi']
+        fields = ['address', 'mobile', 'profile_pic','bmi']
 
 
 class UpdateForm(forms.ModelForm):

@@ -1,7 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-from admins.models import Levels
 from teacher.models import *
+
+class Levels(models.Model):
+    level = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.level
+    
+    class meta:
+        db_table = 'Level'
 
 class Student(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
