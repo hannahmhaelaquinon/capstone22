@@ -235,6 +235,14 @@ def teacher_edit_assignment(request):
 
     return render(request, 'teacher/teacher_edit_assignment.html', context)
 
+@login_required(login_url='teacherlogin')
+@user_passes_test(is_teacher)
+def delete_assignment_view(request, pk):
+    assignment = QMODEL.TeacherAssignment.objects.get(id=pk)
+    course = QMODEL.Course.objects.filter(course=request.course_name)
+    assignment.delete() 
+    course.delete()
+    return HttpResponseRedirect('teacher-assignment')
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)

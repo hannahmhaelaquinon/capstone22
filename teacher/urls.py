@@ -31,11 +31,12 @@ urlpatterns = [
 
 
     path('teacher-assignment', views.teacher_assignment,
-         name='teacher-assigbnment'),
+         name='teacher-assignment'),
     path('teacher-add-assignment', views.teacher_add_assignment,
          name='teacher-add-assignment'),
     path('teacher-edit-assignment', views.teacher_edit_assignment,
          name='teacher-edit-assignment'),
+    path('delete-assignment-view/<int:pk>', views.delete_assignment_view, name='delete-assignment'),
 
     path('teacher-exam', views.teacher_exam_view, name='teacher-exam'),
     path('teacher-add-exam', views.teacher_add_exam_view, name='teacher-add-exam'),
