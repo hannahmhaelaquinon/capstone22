@@ -28,3 +28,8 @@ class UpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username']
+
+class StudentAssForm(forms.ModelForm):
+    class Meta:
+        model = models.StudentAssSubmit
+        fields = ['upload']

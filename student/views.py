@@ -9,7 +9,7 @@ from datetime import date, timedelta
 from admins import models as QMODEL
 from teacher import models as TMODEL
 from teacher import forms as TFORM                              
-from .forms import StudentForm, StudentUserForm, UpdateForm
+from .forms import StudentForm, StudentUserForm, UpdateForm, StudentAssForm
 from django.contrib import messages
 
 
@@ -67,13 +67,28 @@ def student_assignment(request):
 def student_take_assignment(request, pk):
     subject = QMODEL.Subject.objects.get(id=pk)
     assignment = TMODEL.TeacherAssignment.objects.all().filter(subject=subject)
+  #  assignment = models.StudentAssSubmit.objects.all()
+    assignment_form = forms.StudentAssForm()
+    #mydict = {'assignment_form': assignment_form,}
     if request.method == 'POST':
-        pass
-    response = render(request, 'student/student_take_assignment.html',
-                      {'subject': subject, 'assignment': assignment})
+        # assignment_form = StudentAssForm(
+        #     request.POST, request.FILES)
+        assignment_form = forms.StudentAssForm(request.POST, request.FILES)
+        if assignment_form.is_valid():
+            assignment_form.save(commit=True)
+        return redirect('student-assignment-submit')
+    else: 
+        assignment_form = StudentAssForm()
+        
+    response = render (request, 'student/student_take_assignment.html',
+                      {'subject': subject, 'assignment': assignment,'assignment_form': assignment_form})
     response.set_cookie('subject_id', subject.id)
     return response
 
+@login_required(login_url='studentlogin')
+@user_passes_test(is_student)
+def student_assignment_submit(request):
+    return render(request, 'student/ass_submitted.html')
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)

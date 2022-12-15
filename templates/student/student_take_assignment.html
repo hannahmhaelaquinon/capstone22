@@ -7,8 +7,7 @@
 
 <div class="jumbotron my-4">
 
-  <form class="form" autocomplete="off" onsubmit="return saveAns()"  action="/student/calculate-marks" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+ 
     <h2 style="text-align: center;">Subject: {{subject.subject}}</h2>
     {% for a in assignment %}
     <h3 class="text-decoration">Instruction: {{a.instruction}}</h3>
@@ -17,22 +16,27 @@
           Download File
       </a>
     </h3>
+    {% endfor %} 
+
+    <form class="form" autocomplete="off" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+    <!-- <h2>Upload</h2> -->
     <div>
       <label type="file">Upload</label>
-    
-        {% comment %} {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %} {% endcomment %}
-      
+     <!-- {% render_field assignment_form.upload|attr:'required:true' class="form-control" placeholder="" %}  -->
+     {% render_field assignment_form.upload class="form-control" placeholder="File" %}
+
     </div>
-    {% comment %} <label type="file">Upload</label>
-    
-        {% render_field assignmentForm.upload|attr:'required:true' class="form-control" placeholder="" %} {% endcomment %}
-        <div>
+    <!-- <div class="col-md-12"><label class="instruction">Comment</label>
+      {% render_field assignment_form.instruction class="form-control" placeholder="Comment" %}
+    </div> -->
+      <div>
         <input class="btn btn-success btn-lg" style="border-radius: 0%;"  type="submit" value="Submit Assignment"> 
-        </div>
+      </div>
         <br>
-        {% endfor %} 
-    </form>
-  </div>
+        
+  </form>
+</div>
 
 <script> 
     function saveAns(){  

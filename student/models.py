@@ -27,3 +27,8 @@ class Student(models.Model):
         return self
     def __str__(self):
         return self.user.first_name
+
+class StudentAssSubmit(models.Model):
+    #student = models.ForeignKey(Student,on_delete=models.CASCADE)
+    #instruction = models.ForeignKey(TeacherAssignment, on_delete=models.CASCADE)
+    upload =  models.FileField(upload_to='documents/submission/')
