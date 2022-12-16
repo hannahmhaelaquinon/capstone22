@@ -51,8 +51,11 @@ class VideoForm(forms.ModelForm):
         model = models.Video
         fields = '__all__'
 
-
+class DateInput(forms.DateInput):
+    input_type = 'date'
+    
 class LibraryForm(forms.ModelForm):
     class Meta:
         model = models.Library
         fields = '__all__'
+        widgets ={'date':DateInput()}
