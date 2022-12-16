@@ -54,7 +54,7 @@ class Video(models.Model):
 
     def delete(self, *args, **kwargs):
         self.video.delete()
-       # self.cover.delete()
+        self.cover.delete()
         super().delete(*args, **kwargs)
 
     class meta:
