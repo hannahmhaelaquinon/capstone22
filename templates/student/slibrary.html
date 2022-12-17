@@ -1,92 +1,85 @@
-{% extends 'student/studentbase.html' %}
-{% load widget_tweaks %}
-{% block content %}
+<!DOCTYPE html>
+{% include 'student/studentbase.html' %}
+<html lang="en">
 
-
-{%load static%}
-<head>
-
- 
-
-<style>
-.card {
-  color: rgba(250, 250, 250, 0.8);
-  margin-bottom: 2rem;
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-}
-
-  #overlayText
-  {
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:1;
-  }
-
-  #topText
-  {
-    color: black;
-    font-size: 20px;
-    align-self: center;
-  }
-</style>
-</head>
-
-<!-- partial -->
-<br><br>
-<div class="main-panel">
-  <div class="content-wrapper">
-    <div class="page-header">
-      <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white me-2">
-          <i class="mdi mdi-gamepad"></i>
-        </span> Library
-      </h3>
-      <nav aria-label="breadcrumb">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
-            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <head>
     
-    <div class="row">
-      <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <form class="d-flex align-items-center h-20" action="#">
-              <input type="text" class="form-control bg-transparent border-0" placeholder="Search books" class="mdi mdi-magnify">
-            </form>
-            {% for b in books %}
-            <div class="container">
-                  <div class="row">
-                    <div class="col-md-12">
-                     
-                      <div class="card" style="width: 18rem; background-color:#BDC3C7;">
-                       <a href="{{ b.pdf.url }}" target="_blank"><img src="{{ b.cover.url }}" alt="{{b.title}}" width="320" height="240" class="card-img-top"  >
-                       </a>
-                        <div class="card-body">
-                        <h5 class="card-title">{{b.title}}</h5>
-                      
-                      </div>
-                     </div>
-                   </div>    
-                 </div>
-                </div>
-                {% endfor %}        
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-  <!-- content-wrapper ends -->
-  <!-- partial:../../partials/_footer.html -->
-  <br>
 
-{% endblock %}
-<!--**********************************
-    Content body end
-***********************************-->
+      <style>
+        .card{
+          box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+        }
+        #overlayText
+        {
+        position:absolute;
+        top:0;
+        left:0;
+        z-index:1;
+        }
+
+        #topText
+        {
+          color: black;
+          font-size: 20px;
+          align-self: center;
+        }
+      </style>
+    </head>
+
+<body>
+    <br><br><br><br>
+    <div class="container-fluid page-body-wrapper">
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <h3 class="page-title">
+                  <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-video"></i>
+                  </span> Library
+                </h3>
+                <nav aria-label="breadcrumb">
+                  <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                      <span>Overview</span> <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                  </ul>
+                </nav>
+              
+              <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                        <form class="d-flex align-items-center h-20" action="#">
+                          <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects" class="mdi mdi-magnify">
+                        </form>
+
+                      <div class="container">
+                        <div class="row">
+
+                          {% for b in books %}
+                          <div class="col-4 pe-1">
+                            <div class="card" style="width: 18rem; background-color:#BDC3C7;">
+                              <a href="{{ b.pdf.url }}" target="_blank"><img src="{{ b.cover.url }}" alt="{{b.title}}" width="320" height="240" class="card-img-top"  >
+                              </a>
+                               <div class="card-body">
+                               <h5 class="card-title">{{b.title}}</h5>
+                               </div>
+                            </div>
+                          </div>
+                          {% endfor %}
+                        </div>
+                      </div>
+
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

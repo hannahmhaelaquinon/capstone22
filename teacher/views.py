@@ -51,6 +51,7 @@ def is_teacher(user):
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
+    # subject_count = QMODEL.Subject.objects.all().count()
     sections = QMODEL.Section.objects.filter(teacher=request.user.teacher.id)
     section_id_list = []
     for section in sections:
@@ -69,7 +70,8 @@ def teacher_dashboard_view(request):
     context = {
         "students_count": students_count,
         "section_id_list": section_id_list,
-        "section_count": section_count
+        "section_count": section_count,
+        "subject": SMODEL.Subject.objects.all().count()
     }
     return render(request, 'teacher/teacher_dashboard.html', context)
 
